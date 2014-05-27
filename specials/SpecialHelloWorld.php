@@ -16,11 +16,13 @@ class SpecialHelloWorld extends SpecialPage {
 	 * @param string $sub: The subpage string argument (if any).
 	 *  [[Special:HelloWorld/subpage]].
 	 */
+	
 	public function execute( $sub ) {
-		$out = $this->getOutput();
+		global $wgOut;
+//		$out = $this->getOutput();
+	
+//		$out->setPageTitle("PeerEvaluation test page");
 
-		$out->setPageTitle("PeerEvaluation test page");
-
-		$out->addWikiMsg("PeerEvaluation test page");
+		$wgOut->addHTML("PeerEvaluation test page");
 	}
 }

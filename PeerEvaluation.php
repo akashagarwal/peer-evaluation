@@ -24,10 +24,10 @@ $wgExtensionCredits['other'][] = array(
 /* Setup */
 
 // Register files
-$wgAutoloadClasses['PeerEvaluationHooks'] = __DIR__ . '/PeerEvaluation.hooks.php';
-$wgAutoloadClasses['SpecialHelloWorld'] = __DIR__ . '/specials/SpecialHelloWorld.php';
-$wgMessagesDirs['PeerEvaluation'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['PeerEvaluationAlias'] = __DIR__ . '/PeerEvaluation.i18n.alias.php';
+$wgAutoloadClasses['PeerEvaluationHooks'] = dirname(__FILE__). '/PeerEvaluation.hooks.php';
+$wgAutoloadClasses['SpecialHelloWorld'] = dirname(__FILE__). '/specials/SpecialHelloWorld.php';
+$wgMessagesDirs['PeerEvaluation'] = dirname(__FILE__). '/i18n';
+$wgExtensionMessagesFiles['PeerEvaluationAlias'] = dirname(__FILE__). '/PeerEvaluation.i18n.alias.php';
 
 // Register hooks
 #$wgHooks['NameOfHook'][] = 'PeerEvaluationHooks::onNameOfHook';
@@ -49,7 +49,7 @@ $wgResourceModules['ext.PeerEvaluation.foo'] = array(
 	'dependencies' => array(
 	),
 
-	'localBasePath' => __DIR__,
+	'localBasePath' => dirname(__FILE__),
 );
 
 
