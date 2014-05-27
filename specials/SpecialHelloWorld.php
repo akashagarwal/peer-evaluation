@@ -1,6 +1,6 @@
 <?php
 /**
- * HelloWorld SpecialPage for BoilerPlate extension
+ * HelloWorld SpecialPage for PeerEvaluation extension
  *
  * @file
  * @ingroup Extensions
@@ -19,8 +19,8 @@ class SpecialHelloWorld extends SpecialPage {
 	public function execute( $sub ) {
 		$out = $this->getOutput();
 
-		$out->setPageTitle( $this->msg( 'boilerplate-helloworld' ) );
+		$out->setPageTitle("PeerEvaluation test page");
 
-		$out->addWikiMsg( 'boilerplate-helloworld-intro' );
+		$out->addWikiMsg("PeerEvaluation test page");
 	}
 }

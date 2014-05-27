@@ -1,5 +1,5 @@
 /**
- * JavaScript for Foo in BoilerPlate.
+ * JavaScript for Foo in PeerEvaluation.
  */
 
 ( function ( mw, $ ) {

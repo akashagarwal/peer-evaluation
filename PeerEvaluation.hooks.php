@@ -6,6 +6,6 @@
  * @ingroup Extensions
  */
 
-class BoilerPlateHooks {
+class PeerEvaluationHooks {
 
 }
