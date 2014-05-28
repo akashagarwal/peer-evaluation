@@ -18,7 +18,7 @@ class SpecialSubmitActivity extends SpecialPage {
 	 */
 	
 	public function execute( $sub ) {
-		global $wgOut,$wgUser;
+		global $wgOut,$wgUser,$wgRequest;
 //		$out = $this->getOutput();
 	
 //		$out->setPageTitle("PeerEvaluation test page");
@@ -47,18 +47,39 @@ class SpecialSubmitActivity extends SpecialPage {
 			
 //		$wgOut->addHTML("Success: Your course page is it ".$title->getFullURL());
 
-		$wgOut->addHTML("Success<br/>");
+
+		if (!$wgRequest->wasPosted())
+		{
+		$form =' <form action="./Special:SubmitActivity" method="post">
+Activity : <select name="Activity_id">
+<option value="1">Copyright_MCQ_e-learning_activity</option>
+<option value="2">Learning_reflection</option> 
+</select>
+<br>
+URL of the blog : <input type="text" name="URL"><br>
+Title : <input type="text" name="Title"><br>
+Comment : <input type="text" name="Comment"><br>
+<input type="checkbox" name="OptedIn" value="true"> Opt in for Evaluation <br>
+<input type="submit" value="Submit">
+</form>';
+		$wgOut->addHTML($form);
+		return;
+		}
+ 
+
 		$dbw = wfGetDB( DB_MASTER );
 
 
 		$dbw->insert(
 			'pe_Activities',
-			array('userid' => $wgUser->getId(), 'URL' => 'dsfjkds', 'Title' => '1', 'Comment' => '1', 'OptedIn' => true, 'Activity_id' => '1'),
+			array('userid' => $wgUser->getId(), 'URL' => $wgRequest->getText('URL') , 'Title' => $wgRequest->getText('Title') , 'Comment' => $wgRequest->getText('Comment')  , 'OptedIn' => $wgRequest->getBool('OptedIn',$default = false), 'Activity_id' => $wgRequest->getInt('Activity_id')),
 			$fname = 'Database::insert', $options = array()
-			);
+		);
+
+		$wgOut->addHTML("Activity Successfully Registereed<br/>");
 
 
-
+	
 
 			
 
