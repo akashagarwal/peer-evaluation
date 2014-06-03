@@ -52,8 +52,13 @@ class SpecialEvaluate extends SpecialPage {
 			$options = array( '' )
 			);
 
+
 			$activity=$activity->fetchObject();
 
+			if ($activity->userId == $wgUser->getId())
+			{
+				$wgOut->addHTML('<h3> Please note : Although self evaluation is recommended as it will help you to know what to expect from peers and also aid you in evaluating others, it may or may not be considered as a parcipation metric. </h3> ');
+			}
 //			$wgOut->addHTML($activity->Title);
 			$wgOut->addHTML('<h1> Details of the Activity </h1> <br>');
 
@@ -128,6 +133,10 @@ class SpecialEvaluate extends SpecialPage {
 
 			$activity=$activity->fetchObject();
 
+			if ($activity->userId == $wgUser->getId())
+			{
+				$wgOut->addHTML('<h3> Please note : Although self evaluation is recommended as it will help you to know what to expect from peers and also aid you in evaluating others, it may or may not be considered as a parcipation metric. </h3> ');
+			}
 //			$wgOut->addHTML($activity->Title);
 			$wgOut->addHTML('<h1> Details of the Activity </h1> <br>');
 
@@ -228,7 +237,6 @@ class SpecialEvaluate extends SpecialPage {
 		$wgOut->addHTML("Evaluation successfully submitted<br/>");
 
 	}
-
 
 
 	}
