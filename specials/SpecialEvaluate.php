@@ -27,7 +27,7 @@ class SpecialEvaluate extends SpecialPage {
 
 		$id=$wgRequest->getInt('id',$default=0);
 		$Activity_id=$wgRequest->getInt('Activity_id',$default=0);
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_MASTER );
 
 		if (!$wgUser->isLoggedIn())
 		{
@@ -189,7 +189,7 @@ class SpecialEvaluate extends SpecialPage {
 				</textarea>
 				<br>
 
-				<input type="hidden" name="Activity_id"  value="1" />
+				<input type="hidden" name="Activity_id"  value="2" />
 				<input type="hidden" name="id"  value="'.$id.'" />
 				<input type="hidden" name="LearnerId"  value="'.$activity->userId.'" />
 				<input type="submit" value="Submit">
@@ -200,6 +200,36 @@ class SpecialEvaluate extends SpecialPage {
 			$wgOut->addHTML($form);
 
 		}
+
+	else if ($Activity_id == 1)
+	{
+		$date = date('Y-m-d H:i:s');
+
+		$dbr->insert(
+		'pe_Evaluations_Activity1',
+		array('ActivityId' => $wgRequest->getText('Activity_id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
+		$fname = 'Database::insert', $options = array()
+		);
+
+		$wgOut->addHTML("Evaluation successfully submitted<br/>");
+
+	}
+
+	else if ($Activity_id == 2)
+	{
+		$date = date('Y-m-d H:i:s');
+
+		$dbr->insert(
+		'pe_Evaluations_Activity2',
+		array('ActivityId' => $wgRequest->getText('Activity_id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'q4' => $wgRequest->getText('q4'), 'q4_comment' => $wgRequest->getText('q4_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
+		$fname = 'Database::insert', $options = array()
+		);
+
+		$wgOut->addHTML("Evaluation successfully submitted<br/>");
+
+	}
+
+
 
 	}
 }
