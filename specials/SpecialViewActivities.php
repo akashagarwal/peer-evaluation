@@ -43,7 +43,7 @@ class SpecialViewActivities extends SpecialPage {
 			{
 				$wgOut->addHTML('<a href="./Special:ViewActivities?id=1&sort=1">Sort by time</a> <br>');
 				$res = $dbr->select(
-				'Activities',
+				'pe_Activities',
 				array( '*'),
 				$conds = 'Activity_id=1',
 				$fname = __METHOD__,
@@ -55,7 +55,7 @@ class SpecialViewActivities extends SpecialPage {
 			{
 				$wgOut->addHTML('<a href="./Special:ViewActivities?id=1">Sort by number of Evaluations</a> <br>');
 				$res = $dbr->select(
-				'Activities',
+				'pe_Activities',
 				array( '*'),
 				$conds = 'Activity_id=1',
 				$fname = __METHOD__,
@@ -113,7 +113,7 @@ class SpecialViewActivities extends SpecialPage {
 			{
 				$wgOut->addHTML('<a href="./Special:ViewActivities?id=2&sort=1">Sort by time</a> <br>');
 				$res = $dbr->select(
-				'Activities',
+				'pe_Activities',
 				array( '*'),
 				$conds = 'Activity_id=2',
 				$fname = __METHOD__,
@@ -125,7 +125,7 @@ class SpecialViewActivities extends SpecialPage {
 			{
 				$wgOut->addHTML('<a href="./Special:ViewActivities?id=2">Sort by number of Evaluations</a> <br>');
 				$res = $dbr->select(
-				'Activities',
+				'pe_Activities',
 				array( '*'),
 				$conds = 'Activity_id=2',
 				$fname = __METHOD__,

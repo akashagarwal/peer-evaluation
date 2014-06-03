@@ -45,7 +45,7 @@ class SpecialEvaluate extends SpecialPage {
 		{
 
 			$activity = $dbr->select(
-			'Activities',
+			'pe_Activities',
 			array( '*'),
 			$conds = 'id='.$id,
 			$fname = __METHOD__,
@@ -124,7 +124,7 @@ class SpecialEvaluate extends SpecialPage {
 		{
 
 			$activity = $dbr->select(
-			'Activities',
+			'pe_Activities',
 			array( '*'),
 			$conds = 'id='.$id,
 			$fname = __METHOD__,

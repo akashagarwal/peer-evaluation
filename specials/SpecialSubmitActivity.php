@@ -72,7 +72,7 @@ class SpecialSubmitActivity extends SpecialPage {
 		$date = date('Y-m-d H:i:s');
 
 		$dbw->insert(
-			'Activities',
+			'pe_Activities',
 			array('userid' => $wgUser->getId(), 'URL' => $wgRequest->getText('URL') , 'Title' => $wgRequest->getText('Title') , 'Comment' => $wgRequest->getText('Comment')  , 'OptedIn' => $wgRequest->getBool('OptedIn',$default = false), 'Activity_id' => $wgRequest->getInt('Activity_id'), 'Timestamp' => $date),
 			$fname = 'Database::insert', $options = array()
 		);
