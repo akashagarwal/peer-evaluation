@@ -51,17 +51,17 @@ class SpecialSubmitActivity extends SpecialPage {
 		if (!$wgRequest->wasPosted())
 		{
 		$form =' <form action="./Special:SubmitActivity" method="post">
-Activity : <select name="Activity_id">
-<option value="1">Copyright_MCQ_e-learning_activity</option>
-<option value="2">Learning_reflection</option> 
-</select>
-<br>
-URL of the blog : <input type="text" name="URL"><br>
-Title : <input type="text" name="Title"><br>
-Comment : <input type="text" name="Comment"><br>
-<input type="checkbox" name="OptedIn" value="true"> Opt in for Evaluation <br>
-<input type="submit" value="Submit">
-</form>';
+			Activity : <select name="Activity_id">
+			<option value="1">Copyright_MCQ_e-learning_activity</option>
+			<option value="2">Learning_reflection</option> 
+			</select>
+			<br>
+			URL of the blog : <input type="text" name="URL"><br>
+			Title : <input type="text" name="Title"><br>
+			Comment : <input type="text" name="Comment"><br>
+			<input type="checkbox" name="OptedIn" value="true"> Opt in for Evaluation <br>
+			<input type="submit" value="Submit">
+			</form>';
 		$wgOut->addHTML($form);
 		return;
 		}
@@ -78,11 +78,7 @@ Comment : <input type="text" name="Comment"><br>
 		);
 
 		$wgOut->addHTML("Activity Successfully Registereed<br/>");
-
-
-	
-
-			
-
+		$wgOut->addHTML(" <h1><a href='./Special:ViewActivities'> Click Here to view all submitted Activities </a></h1><br/>");
+		
 	}
 }

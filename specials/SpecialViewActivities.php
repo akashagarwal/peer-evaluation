@@ -30,8 +30,8 @@ class SpecialViewActivities extends SpecialPage {
 
 		if ( $id=="0")
 		{
-			$wgOut->addHTML('<a href="./Special:ViewActivities?id=1">Copyright_MCQ_e-learning_activity</a> <br>');
-			$wgOut->addHTML('<a href="./Special:ViewActivities?id=2">Learning_reflection</a>');
+			$wgOut->addHTML('<h1><a href="./Special:ViewActivities?id=1">Copyright_MCQ_e-learning_activity</a> </h1> <br>');
+			$wgOut->addHTML('<h1><a href="./Special:ViewActivities?id=2">Learning_reflection</a> </h1>');
 		}
 		$dbr = wfGetDB( DB_SLAVE );
 
@@ -67,6 +67,7 @@ class SpecialViewActivities extends SpecialPage {
 				<table border="1" >
 				<tr>
 				  <td>Title</td>
+				  <td>Submitted by</td>
 				  <td>URL</td>		
 				  <td>Comment</td>
 				  <td>Opted in for Evaluation</td>
@@ -79,9 +80,19 @@ class SpecialViewActivities extends SpecialPage {
 			$wgOut->addHTML($table);
 			foreach( $res as $row ) 
 			{
+				$user = $dbr->select(
+				'user',
+				array( '*'),
+				$conds = 'user_id='.$row->userId,
+				$fname = __METHOD__,
+				$options = array('')
+				);
+
+				$user=$user->fetchObject();
 			$table='
 				<tr>
-				  <td>'.$row->Title.'</td>
+				  <td> <a href="./Special:Evaluate?id='.$row->id.'&Activity_id=1"> '.$row->Title.' </a> </td>
+				  <td> <a href="./User:'.$user->user_name.'">'. $user->user_name .' </a></td>
 				  <td>'.$row->URL.'</td>		
 				  <td>'.$row->Comment.'</td>
 				  <td>'.($row->OptedIn ? "Yes" :"No").'</td>
@@ -126,6 +137,7 @@ class SpecialViewActivities extends SpecialPage {
 				<table border="1" >
 				<tr>
 				  <td>Title</td>
+				  <td>Submitted by</td>
 				  <td>URL</td>		
 				  <td>Comment</td>
 				  <td>Opted in for Evaluation</td>
@@ -138,9 +150,19 @@ class SpecialViewActivities extends SpecialPage {
 			$wgOut->addHTML($table);
 			foreach( $res as $row ) 
 			{
+				$user = $dbr->select(
+				'user',
+				array( '*'),
+				$conds = 'user_id='.$row->userId,
+				$fname = __METHOD__,
+				$options = array('')
+				);
+
+				$user=$user->fetchObject();
 			$table='
 				<tr>
-				  <td>'.$row->Title.'</td>
+				  <td> <a href="./Special:Evaluate?id='.$row->id.'&Activity_id=2"> '.$row->Title.' </a> </td>
+				  <td> <a href="./User:'.$user->user_name.'">'. $user->user_name .' </a></td>
 				  <td>'.$row->URL.'</td>		
 				  <td>'.$row->Comment.'</td>
 				  <td>'.($row->OptedIn ? "Yes" :"No").'</td>
