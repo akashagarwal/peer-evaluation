@@ -6,19 +6,20 @@
  *
  * @file
  * @ingroup Extensions
- * @author John Doe, 2014
+ * @author Akash Agarwal, 2014
  * @license GNU General Public Licence 2.0 or later
  */
 
 $wgExtensionCredits['other'][] = array(
-	'path' => __FILE__,
-	'name' => 'PeerEvaluation',
-	'author' => array(
-		'Akash Agarwal',
-	),
-	'version'  => 'Alpha',
-	'url' => 'https://www.wikieducator.org/Extension:PeerEvaluation',
-	'descriptionmsg' => 'Prototype extension for PeerEvaluation',
+        'path' => __FILE__,
+        'name' => 'PeerEvaluation',
+        'author' => array(
+                '[http://wikieducator.org/User:Akash_Agarwal Akash Agarwal]',
+        ),  
+        'version'  => '0.1 Alpha',
+        'url' => 'https://www.wikieducator.org/Extension:PeerEvaluation',
+        'description' => 'Prototype extension for PeerEvaluation',
+
 );
 
 /* Setup */
