@@ -69,10 +69,11 @@ Comment : <input type="text" name="Comment"><br>
 
 		$dbw = wfGetDB( DB_MASTER );
 
+		$date = date('Y-m-d H:i:s');
 
 		$dbw->insert(
-			'pe_Activities',
-			array('userid' => $wgUser->getId(), 'URL' => $wgRequest->getText('URL') , 'Title' => $wgRequest->getText('Title') , 'Comment' => $wgRequest->getText('Comment')  , 'OptedIn' => $wgRequest->getBool('OptedIn',$default = false), 'Activity_id' => $wgRequest->getInt('Activity_id')),
+			'Activities',
+			array('userid' => $wgUser->getId(), 'URL' => $wgRequest->getText('URL') , 'Title' => $wgRequest->getText('Title') , 'Comment' => $wgRequest->getText('Comment')  , 'OptedIn' => $wgRequest->getBool('OptedIn',$default = false), 'Activity_id' => $wgRequest->getInt('Activity_id'), 'Timestamp' => $date),
 			$fname = 'Database::insert', $options = array()
 		);
 
