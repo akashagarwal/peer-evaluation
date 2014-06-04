@@ -2,7 +2,7 @@
 /**
  * PeerEvaluation extension.
  *
- * For more info see http://mediawiki.org/wiki/Extension:PeerEvaluation
+ * For more info see http://wikieducator.org/Extension:PeerEvaluation
  *
  * @file
  * @ingroup Extensions
@@ -17,7 +17,7 @@ $wgExtensionCredits['other'][] = array(
                 '[http://wikieducator.org/User:Akash_Agarwal Akash Agarwal]',
         ),  
         'version'  => '0.1 Alpha',
-        'url' => 'https://www.wikieducator.org/Extension:PeerEvaluation',
+        'url' => 'http://wikieducator.org/Extension:PeerEvaluation',
         'description' => 'Prototype extension for PeerEvaluation',
 
 );

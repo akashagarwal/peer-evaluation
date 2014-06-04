@@ -1,6 +1,6 @@
 <?php
 /**
- * HelloWorld SpecialPage for PeerEvaluation extension
+ * Submit Activity SpecialPage for PeerEvaluation extension
  *
  * @file
  * @ingroup Extensions

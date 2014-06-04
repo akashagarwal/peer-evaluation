@@ -22,6 +22,8 @@ class SpecialHelloWorld extends SpecialPage {
 //		$out = $this->getOutput();
 	
 //		$out->setPageTitle("PeerEvaluation test page");
+		$dbr = wfGetDB( DB_MASTER );
+
 
 		$wgOut->addHTML("PeerEvaluation test page");
 	}

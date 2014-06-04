@@ -1,6 +1,6 @@
 <?php
 /**
- * HelloWorld SpecialPage for PeerEvaluation extension
+ * Evaluate SpecialPage for PeerEvaluation extension
  *
  * @file
  * @ingroup Extensions
@@ -214,11 +214,30 @@ class SpecialEvaluate extends SpecialPage {
 	{
 		$date = date('Y-m-d H:i:s');
 
+		$dbr->begin();
 		$dbr->insert(
 		'pe_Evaluations_Activity1',
 		array('ActivityId' => $wgRequest->getText('id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
 		$fname = 'Database::insert', $options = array()
 		);
+
+		$activity = $dbr->select(
+			'pe_Activities',
+			array( '*'),
+			$conds = 'id='.$wgRequest->getText('id'),
+			$fname = __METHOD__,
+			$options = array( '' )
+			);
+		$dbr->commit();
+
+		$activity=$activity->fetchObject();
+
+		$dbr->begin();
+		$EvalNum=$activity->EvalNum+1;
+
+		$dbr->query("UPDATE  `my_wiki`.`pe_Activities` SET  `EvalNum` =  ".$EvalNum." WHERE  `pe_Activities`.`id` =".$wgRequest->getText('id').";
+");
+		$dbr->commit();
 
 		$wgOut->addHTML("Evaluation successfully submitted<br/>");
 
@@ -227,12 +246,31 @@ class SpecialEvaluate extends SpecialPage {
 	else if ($Activity_id == 2)
 	{
 		$date = date('Y-m-d H:i:s');
+		$dbr->begin();
 
 		$dbr->insert(
 		'pe_Evaluations_Activity2',
 		array('ActivityId' => $wgRequest->getText('id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'q4' => $wgRequest->getText('q4'), 'q4_comment' => $wgRequest->getText('q4_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
 		$fname = 'Database::insert', $options = array()
 		);
+
+		$activity = $dbr->select(
+			'pe_Activities',
+			array( '*'),
+			$conds = 'id='.$wgRequest->getText('id'),
+			$fname = __METHOD__,
+			$options = array( '' )
+			);
+		$dbr->commit();
+
+		$activity=$activity->fetchObject();
+
+		$dbr->begin();
+		$EvalNum=$activity->EvalNum+1;
+
+		$dbr->query("UPDATE  `my_wiki`.`pe_Activities` SET  `EvalNum` =  ".$EvalNum." WHERE  `pe_Activities`.`id` =".$wgRequest->getText('id').";
+");
+		$dbr->commit();
 
 		$wgOut->addHTML("Evaluation successfully submitted<br/>");
 
