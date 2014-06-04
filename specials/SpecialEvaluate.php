@@ -235,8 +235,7 @@ class SpecialEvaluate extends SpecialPage {
 		$dbr->begin();
 		$EvalNum=$activity->EvalNum+1;
 
-		$dbr->query("UPDATE  `my_wiki`.`pe_Activities` SET  `EvalNum` =  ".$EvalNum." WHERE  `pe_Activities`.`id` =".$wgRequest->getText('id').";
-");
+		$dbr->query("UPDATE  `wikiedu`.`mw_pe_Activities` SET  `EvalNum` =  ".$EvalNum." WHERE  `mw_pe_Activities`.`id` =".$wgRequest->getText('id').";");
 		$dbr->commit();
 
 		$wgOut->addHTML("Evaluation successfully submitted<br/>");
@@ -268,8 +267,7 @@ class SpecialEvaluate extends SpecialPage {
 		$dbr->begin();
 		$EvalNum=$activity->EvalNum+1;
 
-		$dbr->query("UPDATE  `my_wiki`.`pe_Activities` SET  `EvalNum` =  ".$EvalNum." WHERE  `pe_Activities`.`id` =".$wgRequest->getText('id').";
-");
+		$dbr->query("UPDATE  `wikiedu`.`mw_pe_Activities` SET  `EvalNum` =  ".$EvalNum." WHERE  `mw_pe_Activities`.`id` =".$wgRequest->getText('id').";");
 		$dbr->commit();
 
 		$wgOut->addHTML("Evaluation successfully submitted<br/>");
