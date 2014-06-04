@@ -216,7 +216,7 @@ class SpecialEvaluate extends SpecialPage {
 
 		$dbr->insert(
 		'pe_Evaluations_Activity1',
-		array('ActivityId' => $wgRequest->getText('Activity_id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
+		array('ActivityId' => $wgRequest->getText('id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
 		$fname = 'Database::insert', $options = array()
 		);
 
@@ -230,7 +230,7 @@ class SpecialEvaluate extends SpecialPage {
 
 		$dbr->insert(
 		'pe_Evaluations_Activity2',
-		array('ActivityId' => $wgRequest->getText('Activity_id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'q4' => $wgRequest->getText('q4'), 'q4_comment' => $wgRequest->getText('q4_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
+		array('ActivityId' => $wgRequest->getText('id') ,'LearnerId' => $wgRequest->getText('LearnerId'),'EvaluatorId' => $wgUser->getId(),'Related' => $wgRequest->getText('Related'),'Related_comment' => $wgRequest->getText('Related_comment'), 'q1' => $wgRequest->getText('q1'), 'q1_comment' => $wgRequest->getText('q1_comment'), 'q2' => $wgRequest->getText('q2'), 'q2_comment' => $wgRequest->getText('q2_comment'), 'q3' => $wgRequest->getText('q3'), 'q3_comment' => $wgRequest->getText('q3_comment'),'q4' => $wgRequest->getText('q4'), 'q4_comment' => $wgRequest->getText('q4_comment'),'Other_Comments' => $wgRequest->getText('Other_comments'),  'Timestamp' => $date),
 		$fname = 'Database::insert', $options = array()
 		);
 

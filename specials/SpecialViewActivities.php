@@ -45,7 +45,7 @@ class SpecialViewActivities extends SpecialPage {
 				$res = $dbr->select(
 				'pe_Activities',
 				array( '*'),
-				$conds = 'Activity_id=1',
+				$conds = 'Activity_id=1 and OptedIn=1 ',
 				$fname = __METHOD__,
 				$options = array( 'ORDER BY' => 'EvalNum ASC' )
 				);
@@ -57,7 +57,7 @@ class SpecialViewActivities extends SpecialPage {
 				$res = $dbr->select(
 				'pe_Activities',
 				array( '*'),
-				$conds = 'Activity_id=1',
+				$conds = 'Activity_id=1 and OptedIn=1',
 				$fname = __METHOD__,
 				$options = array( 'ORDER BY' => 'Timestamp DESC' )
 				);
@@ -105,17 +105,72 @@ class SpecialViewActivities extends SpecialPage {
 			}
 			$wgOut->addHTML("</table>");
 
-		}
+			$res = $dbr->select(
+			'pe_Activities',
+			array( '*'),
+			$conds = 'Activity_id=1 and OptedIn=0',
+			$fname = __METHOD__,
+			$options = array( 'ORDER BY' => 'Timestamp DESC' )
+			);
+		
+			
+			$table='
+				<table border="1" >
+				<tr>
+				  <td>Title</td>
+				  <td>Submitted by</td>
+				  <td>URL</td>		
+				  <td>Comment</td>
+				  <td>Opted in for Evaluation</td>
+				  <td>Number of Evaluations</td>
+				  <td>Submission Time</td>
+				</tr>
+				';
 
+			$wgOut->addHTML(" <h1> Activities not available for evaluation </h1> <br>");
+			$wgOut->addHTML($table);
+			foreach( $res as $row ) 
+			{
+				$user = $dbr->select(
+				'user',
+				array( '*'),
+				$conds = 'user_id='.$row->userId,
+				$fname = __METHOD__,
+				$options = array('')
+				);
+
+				$user=$user->fetchObject();
+			$table='
+				<tr>
+				  <td> '.$row->Title.'  </td>
+				  <td> <a href="./User:'.$user->user_name.'">'. $user->user_name .' </a></td>
+				  <td>'.$row->URL.'</td>		
+				  <td>'.$row->Comment.'</td>
+				  <td>'.($row->OptedIn ? "Yes" :"No").'</td>
+				  <td>'.$row->EvalNum.'</td>
+				  <td>'.$row->Timestamp.'</td>
+				</tr>
+				';
+			$wgOut->addHTML($table);
+
+			}
+			$wgOut->addHTML("</table>");
+
+
+
+
+
+		}
 		if ($id == 2)
 		{
+
 			if ($sort==0)
 			{
 				$wgOut->addHTML('<a href="./Special:ViewActivities?id=2&sort=1">Sort by time</a> <br>');
 				$res = $dbr->select(
 				'pe_Activities',
 				array( '*'),
-				$conds = 'Activity_id=2',
+				$conds = 'Activity_id=2 and OptedIn=1 ',
 				$fname = __METHOD__,
 				$options = array( 'ORDER BY' => 'EvalNum ASC' )
 				);
@@ -127,7 +182,7 @@ class SpecialViewActivities extends SpecialPage {
 				$res = $dbr->select(
 				'pe_Activities',
 				array( '*'),
-				$conds = 'Activity_id=2',
+				$conds = 'Activity_id=2 and OptedIn=1',
 				$fname = __METHOD__,
 				$options = array( 'ORDER BY' => 'Timestamp DESC' )
 				);
@@ -174,8 +229,60 @@ class SpecialViewActivities extends SpecialPage {
 
 			}
 			$wgOut->addHTML("</table>");
+
+			$res = $dbr->select(
+			'pe_Activities',
+			array( '*'),
+			$conds = 'Activity_id=2 and OptedIn=0',
+			$fname = __METHOD__,
+			$options = array( 'ORDER BY' => 'Timestamp DESC' )
+			);
+		
 			
+			$table='
+				<table border="1" >
+				<tr>
+				  <td>Title</td>
+				  <td>Submitted by</td>
+				  <td>URL</td>		
+				  <td>Comment</td>
+				  <td>Opted in for Evaluation</td>
+				  <td>Number of Evaluations</td>
+				  <td>Submission Time</td>
+				</tr>
+				';
+
+			$wgOut->addHTML(" <h1> Activities not available for evaluation </h1> <br>");
+			$wgOut->addHTML($table);
+			foreach( $res as $row ) 
+			{
+				$user = $dbr->select(
+				'user',
+				array( '*'),
+				$conds = 'user_id='.$row->userId,
+				$fname = __METHOD__,
+				$options = array('')
+				);
+
+				$user=$user->fetchObject();
+			$table='
+				<tr>
+				  <td> '.$row->Title.'  </td>
+				  <td> <a href="./User:'.$user->user_name.'">'. $user->user_name .' </a></td>
+				  <td>'.$row->URL.'</td>		
+				  <td>'.$row->Comment.'</td>
+				  <td>'.($row->OptedIn ? "Yes" :"No").'</td>
+				  <td>'.$row->EvalNum.'</td>
+				  <td>'.$row->Timestamp.'</td>
+				</tr>
+				';
+			$wgOut->addHTML($table);
+
+			}
+			$wgOut->addHTML("</table>");
 		}
+
+
 
 	}
 }
