@@ -77,13 +77,9 @@ $wgResourceModules['ext.PeerEvaluation.foo'] = array(
 $wgAutoloadClasses['Poll'] = dirname(__FILE__). '/poll_body.php';
 $wgHooks['ParserFirstCallInit'][] = 'Poll::onParserInit';
 
-$wgResourceModules['ext.poll'] = array(
-        'localBasePath' => __DIR__,
-        'remoteExtPath' => 'Poll',
-        'styles' => 'resources/poll.css',
-        'scripts' => 'resources/poll.js',
-);
-$wgAjaxExportList[] = 'Poll::submitVote';
+$wgAutoloadClasses['TagSubmitActivity'] = dirname(__FILE__). '/tags/SubmitActivity_body.php';
+$wgHooks['ParserFirstCallInit'][] = 'TagSubmitActivity::onParserInit';
+
 
 
 

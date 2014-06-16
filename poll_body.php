@@ -5,15 +5,15 @@ class Poll {
                 global $wgOut;
 //                $wgOut->addModules( 'ext.poll' );
 //		$wgOut->addScriptFile('/extensions/PeerEvaluation/resources/jquery.min.js');
-		$wgOut->addScriptFile('/extensions/PeerEvaluation/resources/poll.js');
-		$wgOut->addStyle('/extensions/PeerEvaluation/resources/poll.css');
+		$wgOut->addScriptFile('/core/extensions/PeerEvaluation/resources/poll.js');
+		$wgOut->addStyle('/core/extensions/PeerEvaluation/resources/poll.css');
                 return true;
         }
         static function pollRender( $input, array $args, Parser $parser ) {
                 global $wgUser;
 //		$ret = '<script type="text/javascript" src="/extensions/PeerEvaluation/resources/jquery.min.js"></script>';
 //		$ret .= '<script type="text/javascript" src="/extensions/PeerEvaluation/resources/poll.js"></script>';
-                $ret .= $wgUser->getName ().'<br>';
+                $ret = $wgUser->getName ().'<br>';
                 $ret .= '<div id="thetable">';
                 $ret .= '<table class="wtable">';
                 $ret .= '<tr>';

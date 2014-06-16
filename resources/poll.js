@@ -17,7 +17,9 @@ function change()
 						    document.getElementById("thetable").innerHTML=xmlhttp.responseText;
 				        }
 			      }
-	xmlhttp.open("GET","/extensions/PeerEvaluation/resources/test.php",true);
+	feedback=document.getElementById("inp001").value;
+	//console.log(feedback+"Yes");
+	xmlhttp.open("GET","/core/extensions/PeerEvaluation/resources/test.php?feedback="+feedback,true);
 	xmlhttp.send();
 
 }
