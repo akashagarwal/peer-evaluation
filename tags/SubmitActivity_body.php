@@ -10,13 +10,13 @@ class TagSubmitActivity {
         }
         static function submitactivityRender( $input, array $args, Parser $parser ) {
             $ret="<div id='t1content'>";
-            global $wgOut,$wgUser,$wgRequest;
+            global $wgOut,$wgRequest;
 //      $out = $this->getOutput();
     
 //      $out->setPageTitle("PeerEvaluation test page");
 
 //      $wgOut->addHTML("PeerEvaluation test page");
-
+/*
             if (!$wgUser->isLoggedIn())
             {
                 $ret.="Please Login and return back to this page.";
@@ -33,7 +33,7 @@ class TagSubmitActivity {
                 $ret+="You are not registered for OCL4eD. Please register and come back to this page.";
                 return $ret;
             }
-            
+  */          
                 
     //      $wgOut->addHTML("Success: Your course page is it ".$title->getFullURL());
 
