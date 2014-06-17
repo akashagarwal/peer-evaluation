@@ -68,7 +68,7 @@ $wgResourceModules['ext.PeerEvaluation.foo'] = array(
 	'messages' => array(
 	),
 	'dependencies' => array(
-	),
+	),     
 
 	'localBasePath' => dirname(__FILE__),
 );
@@ -83,7 +83,8 @@ $wgHooks['ParserFirstCallInit'][] = 'TagSubmitActivity::onParserInit';
 
 //API's 
 
-$wgAPIModules['apisampleoutput'] = 'ApiSample';
+$wgAutoloadClasses['apiSubmitActivity'] = dirname(__FILE__). '/apis/SubmitActivity.php';
+$wgAPIModules['apiSubmitActivity'] = 'apiSubmitActivity';
 
 
 class ApiSample extends ApiQueryBase {
@@ -111,7 +112,7 @@ class ApiSample extends ApiQueryBase {
         }
         // Top level
         $this->getResult()->addValue( null, $this->getModuleName(), array ( 'apiresponses' => 'are as follows' ) );
-/*
+
         // Deliver a facial expression in reply
         $this->getResult()->addValue( null, $this->getModuleName()
             , array ( 'nonverbalresponse' => array ( 'emoticon' => $emoticon ) ) );
@@ -123,7 +124,7 @@ class ApiSample extends ApiQueryBase {
                 'yourlife' => 'You will become a successful MediaWiki hacker, which will serve you well '
                     .'in your life' ,
                 'eternity' => 'Eventually all life will be destroyed in the heat death' ) ) );
-*/
+
         return true;
     }
  
@@ -160,6 +161,7 @@ class ApiSample extends ApiQueryBase {
         return __CLASS__ . ': 0';
     }
 }
+
 
 
 /* Configuration */

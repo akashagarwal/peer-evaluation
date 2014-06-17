@@ -43,7 +43,8 @@ class TagSubmitActivity {
                 <option value="1">Copyright_MCQ_e-learning_activity</option>
                 <option value="2">Learning_reflection</option> 
                 </select>
-                URL of the blog : <input type="text" name="URL" id="url">
+                URL of the blog : <input type="text" name="URL" id="url" onblur="urlFunction()">
+                <b id="urlerror" > </b>
                 Title : <input type="text" name="Title" id="title">
                 Comment : <input type="text" name="Comment" id="comment">
                 <input type="checkbox" name="OptedIn" value="true" id="optin"> Opt in for Evaluation
