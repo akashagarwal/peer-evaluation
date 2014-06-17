@@ -85,19 +85,20 @@ $wgHooks['ParserFirstCallInit'][] = 'TagSubmitActivity::onParserInit';
 
 $wgAPIModules['apisampleoutput'] = 'ApiSample';
 
-class ApiSample extends ApiBase {
-    public function execute() {
-        // Get specific parameters
-        // Using ApiMain::getVal makes a record of the fact that we've
-        // used all the allowed parameters. Not doing this would add a
-        // warning ("Unrecognized parameter") to the returned data.
-        // If the warning doesn't bother you, you can use 
-        // $params = $this->extractRequestParams();
-        // to get all parameters as an associative array (e. g. $params[ 'face' ])
-        $face = $this->getMain()->getVal('face');
+
+class ApiSample extends ApiQueryBase {
+    public function __construct( $query, $moduleName ) {
+        parent :: __construct( $query, $moduleName, '' );
+    }
  
-        // Default response is a wink ;)
-        $emoticon = ';)';
+    public function execute() {
+
+        global $wgUser;
+        $user = $wgUser->getId();
+        $params = $this->extractRequestParams();
+
+	$face=$params['face'];
+	$emoticon = ';)';
         $result = $this->getResult();
         // Other responses depend on the value of the face parameter
         switch ( $face ) {
@@ -109,7 +110,8 @@ class ApiSample extends ApiBase {
                 break;
         }
         // Top level
-        $this->getResult()->addValue( null, $this->getModuleName(), array ( 'apiresponses' => 'are as follows. Yo!!' ) );
+        $this->getResult()->addValue( null, $this->getModuleName(), array ( 'apiresponses' => 'are as follows' ) );
+/*
         // Deliver a facial expression in reply
         $this->getResult()->addValue( null, $this->getModuleName()
             , array ( 'nonverbalresponse' => array ( 'emoticon' => $emoticon ) ) );
@@ -121,40 +123,43 @@ class ApiSample extends ApiBase {
                 'yourlife' => 'You will become a successful MediaWiki hacker, which will serve you well '
                     .'in your life' ,
                 'eternity' => 'Eventually all life will be destroyed in the heat death' ) ) );
+*/
         return true;
     }
  
-    // Description
-    public function getDescription() {
-         return 'Get both nonverbal and verbal responses to your input.';
-     }
+    protected function getDB() {
+        return wfGetDB( DB_MASTER );
+    }
  
-    // Face parameter.
     public function getAllowedParams() {
-        return array_merge( parent::getAllowedParams(), array(
-            'face' => array (
-                ApiBase::PARAM_TYPE => 'string',
-                ApiBase::PARAM_REQUIRED => true
-            ),
-        ) );
+        return array (
+            'll' => null,
+            'vote' => null
+        );
     }
  
-    // Describe the parameter
     public function getParamDescription() {
-        return array_merge( parent::getParamDescription(), array(
-            'face' => 'The face you want to make to the API (e.g. o_O)'
-        ) );
+        return array (
+            'll' => 'SHA1 hash of poll question',
+            'vote' => "pairs of question:vote separated by '|'"
+        );
     }
  
-     // Get examples
-     public function getExamples() {
-         return array(
-             'api.php?action=apisampleoutput&face=O_o&format=xml'
-             => 'Get a sideways look (and the usual predictions)'
-         );
+    public function getDescription() {
+        return 'Poll voting and statistics defined by WEPoll';
+    }
+ 
+    protected function getExamples() {
+        return array (
+            'api.php?action=wepoll&poll=1234ab&povote=0:1|1:2',
+            'api.php?action=wepoll&poll=1234ab'
+        );
+    }
+ 
+    public function getVersion() {
+        return __CLASS__ . ': 0';
     }
 }
-
 
 
 /* Configuration */
