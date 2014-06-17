@@ -28,7 +28,7 @@ function submit()
 	activityid=document.getElementById("activityid").value;
 	optin=document.getElementById("optin").checked;
 	console.log(url+"Yes");
-	xmlhttp.open("GET","/core/api.php?action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml",true);
+	xmlhttp.open("GET","/api.php?action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml",true);
 	xmlhttp.send();
 
 }

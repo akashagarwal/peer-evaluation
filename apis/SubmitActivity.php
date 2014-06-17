@@ -67,6 +67,10 @@ class apiSubmitActivity extends ApiQueryBase {
             'api.php?action=apiSubmitActivity&url=www.myreflections.blogspot.com&title=Myrefole&comment=yesitworks&activityid=1&optin=true&format=xml',
         );
     }
+        public function getVersion() {
+		        return __CLASS__ . ': 0';
+			    }
+
 }
 
 ?>

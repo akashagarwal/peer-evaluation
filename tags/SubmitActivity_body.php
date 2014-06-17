@@ -3,7 +3,7 @@ class TagSubmitActivity {
         static function onParserInit( Parser $parser ) {
                 $parser->setHook( 'submitactivity', array( __CLASS__, 'submitactivityRender' ) );
                 global $wgOut   ;
-        		$wgOut->addScriptFile('/core/extensions/PeerEvaluation/resources/submitactivity.js');
+        		$wgOut->addScriptFile('/extensions/PeerEvaluation/resources/submitactivity.js');
 //		$wgOut->addStyle('/core/extensions/PeerEvaluation/resources/poll.css');
 
                 return true;
