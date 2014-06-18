@@ -26,7 +26,7 @@ class apiSubmitActivity extends ApiQueryBase {
         );
 
         $result->addValue(null, $this->getModuleName(),array('success' => "
-            Activity Successfully Registereed<br/>
+            Activity Successfully Registered<br/>
             <h1><a href='./Special:ViewActivities'> Click Here to view all submitted Activities </a></h1><br/>"));
 
 

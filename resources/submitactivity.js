@@ -23,12 +23,26 @@ function submit()
 		}
 	}
 	url=document.getElementById("url").value;
+    if (url == null || url == "") {
+        alert("URL must be filled out");
+        return false;
+    }
+
 	title=document.getElementById("title").value;
+    if (title == null || title == "") {
+        alert("Title must be filled out");
+        return false;
+    }
 	comment=document.getElementById("comment").value;
+
 	activityid=document.getElementById("activityid").value;
+    if (activityid == null || activityid == "") {
+        alert("You must choose an activity.");
+        return false;
+    }
 	optin=document.getElementById("optin").checked;
 	console.log(url+"Yes");
-	xmlhttp.open("GET","/api.php?action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml",true);
+	xmlhttp.open("GET","/core/api.php?action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml",true);
 	xmlhttp.send();
 
 }
@@ -50,8 +64,13 @@ function urlFunction()
 		url="http://" + url;
 		document.getElementById("url").value=url;
 	}
-	content="<iframe  width='100%' src="+url+"></iframe><br>";
+	content="<iframe  width='100%' height='300	' src="+url+"></iframe><br>";
 	content+="<p>Please ensure that the URL contains the blog post specified and not the home page of the blog or the edit page.<br>If you can see your post above then the URL is correct otherwise click <a href="+url+" target='_blank'> here </a> to check if you reach the correct post. </p>";
 	document.getElementById("urlerror").innerHTML=content;
-
 }
+
+$(document).ready(function(){
+  $("button").click(function(){
+    $(this).effect( "highlight", {color: 'blue'}, 3000 );
+  });
+});

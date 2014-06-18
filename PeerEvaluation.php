@@ -78,6 +78,8 @@ $wgResourceModules['ext.PeerEvaluation.foo'] = array(
 $wgAutoloadClasses['TagSubmitActivity'] = dirname(__FILE__). '/tags/SubmitActivity_body.php';
 $wgHooks['ParserFirstCallInit'][] = 'TagSubmitActivity::onParserInit';
 
+$wgAutoloadClasses['TagViewActivity'] = dirname(__FILE__). '/tags/ViewActivity_body.php';
+$wgHooks['ParserFirstCallInit'][] = 'TagViewActivity::onParserInit';
 
 //API's 
 
