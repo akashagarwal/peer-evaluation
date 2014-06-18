@@ -8,7 +8,7 @@ class TagSubmitActivity {
             $ret='<script src="/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
 
             $ret.="<div id='t1content'>";
-//      $wgOut->addHTML("Success: Your course page is it ".$title->getFullURL());
+
 //             <option value="1">Copyright_MCQ_e-learning_activity</option>
 //             <option value="2">Learning_reflection</option> 
 
