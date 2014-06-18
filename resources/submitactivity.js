@@ -42,7 +42,7 @@ function submit()
     }
 	optin=document.getElementById("optin").checked;
 	console.log(url+"Yes");
-	xmlhttp.open("GET","/core/api.php?action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml",true);
+	xmlhttp.open("GET","/api.php?action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml",true);
 	xmlhttp.send();
 
 }
@@ -69,8 +69,3 @@ function urlFunction()
 	document.getElementById("urlerror").innerHTML=content;
 }
 
-$(document).ready(function(){
-  $("button").click(function(){
-    $(this).effect( "highlight", {color: 'blue'}, 3000 );
-  });
-});

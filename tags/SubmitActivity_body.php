@@ -2,42 +2,15 @@
 class TagSubmitActivity {
         static function onParserInit( Parser $parser ) {
                 $parser->setHook( 'submitactivity', array( __CLASS__, 'submitactivityRender' ) );
-//		$wgOut->addStyle('/core/extensions/PeerEvaluation/resources/poll.css');
-
                 return true;
         }
         static function submitactivityRender( $input, array $args, Parser $parser ) {
-            $ret='<script src="/core/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
+            $ret='<script src="/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
 
             $ret.="<div id='t1content'>";
- //           global $wgOut,$wgRequest;
-//      $out = $this->getOutput();
-    
-//      $out->setPageTitle("PeerEvaluation test page");
-
-//      $wgOut->addHTML("PeerEvaluation test page");
-/*
-            if (!$wgUser->isLoggedIn())
-            {
-                $ret.="Please Login and return back to this page.";
-                return $ret;
-            }
-            $username=$wgUser->getName();
-            
-
-            $userCoursePage="User:".$username."/OCL4Ed 14.02";
-            $title=Title::newFromText($userCoursePage);
-
-            if (!$title->exists())
-            {
-                $ret+="You are not registered for OCL4eD. Please register and come back to this page.";
-                return $ret;
-            }
-  */          
-                
-    //      $wgOut->addHTML("Success: Your course page is it ".$title->getFullURL());
- //               <option value="1">Copyright_MCQ_e-learning_activity</option>
-   //             <option value="2">Learning_reflection</option> 
+//      $wgOut->addHTML("Success: Your course page is it ".$title->getFullURL());
+//             <option value="1">Copyright_MCQ_e-learning_activity</option>
+//             <option value="2">Learning_reflection</option> 
 
 
             $ret .=' <div id="form">
