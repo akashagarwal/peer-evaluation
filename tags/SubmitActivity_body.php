@@ -5,10 +5,10 @@ class TagSubmitActivity {
                 return true;
         }
         static function submitactivityRender( $input, array $args, Parser $parser ) {
-            $ret='<script src="/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
+            $ret='<script src="/core/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
 
             $ret.="<div id='t1content'>";
-
+            
 //             <option value="1">Copyright_MCQ_e-learning_activity</option>
 //             <option value="2">Learning_reflection</option> 
 

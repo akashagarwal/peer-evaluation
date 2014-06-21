@@ -1,48 +1,57 @@
-function myFunction1()
-{
-document.getElementById("c1").style.display="block";
-document.getElementById("c2").style.display="none";
-document.getElementById("c3").style.display="none";
-document.getElementById("c4").style.display="none";
-document.getElementById("c5").style.display="none";
+$ ( document ).ready ( function() {
 
-}
-function myFunction2()
-{
-document.getElementById("c1").style.display="none";
-document.getElementById("c2").style.display="block";
-document.getElementById("c3").style.display="none";
-document.getElementById("c4").style.display="none";
-document.getElementById("c5").style.display="none";
 
-}
+	$(".getActivities").click ( function()  {
+		$id=$(this).attr('id');
+		$.get("/core/api.php?action=apiGetActivities&id="+$id+"&format=json",function(data,status){
+			$text=data['apiGetActivities']['success']
 
-function myFunction3()
-{
-document.getElementById("c1").style.display="none";
-document.getElementById("c2").style.display="none";
-document.getElementById("c3").style.display="block";
-document.getElementById("c4").style.display="none";
-document.getElementById("c5").style.display="none";
+			$('#t1content').html($text);
 
-}
+			$(".title").click ( function()  {
+				$id=$(this).attr('id');
+				$.get("/core/api.php?action=apiGetEvaluationForm&id="+$id+"&format=json",function(data,status){
+					$text2=data['apiGetEvaluationForm']['success'];
 
-function myFunction4()
-{
-document.getElementById("c1").style.display="none";
-document.getElementById("c2").style.display="none";
-document.getElementById("c3").style.display="none";
-document.getElementById("c4").style.display="block";
-document.getElementById("c5").style.display="none";
+					if ( !$text2 ) {
+						$('#t1content').html("Activity Not Currently avalable for Evaluation");
+						return;
+					};
+					$('#mcontent').html($text2);
+					$('#formcontent').hide();
 
-}
+					$('.Related').focus(function(){
+						if ( $(this).val() == 1 )
+							$('#formcontent').show();
+						if ( $(this).val() == 0 )
+							$('#formcontent').hide();
+					} );
 
-function myFunction5()
-{
-document.getElementById("c1").style.display="none";
-document.getElementById("c2").style.display="none";
-document.getElementById("c3").style.display="none";
-document.getElementById("c4").style.display="none";
-document.getElementById("c5").style.display="block";
+					$("#submitform").click ( function()  {
+						var inp={};
+						inp.related = $('input[name=Related]:checked').val();
+						inp.related_comment = $('textarea#Related_comment').val();
+						inp.id = $('#actid').val();
 
-}
+						formcontent=$ ('#formcontent').children('#ques');
+
+						formcontent.each(function() {
+							name=$(this).attr('name');
+							inp[name]=$('input[name='+name+']:checked').val();
+							inp['c'+name]=$('textarea#c'+name).val();
+						} );
+
+						$('#mcontent').html(inp.id);
+
+					} );
+
+				} );
+
+			} )
+  		} );
+
+		$( '#t1content' ).html( "Getting the latest activities for you..." );
+	} )	
+
+
+} )

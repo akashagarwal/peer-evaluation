@@ -86,7 +86,11 @@ $wgHooks['ParserFirstCallInit'][] = 'TagViewActivity::onParserInit';
 $wgAutoloadClasses['apiSubmitActivity'] = dirname(__FILE__). '/apis/SubmitActivity.php';
 $wgAPIModules['apiSubmitActivity'] = 'apiSubmitActivity';
 
+$wgAutoloadClasses['apiGetActivities'] = dirname(__FILE__). '/apis/GetActivities.php';
+$wgAPIModules['apiGetActivities'] = 'apiGetActivities';
 
+$wgAutoloadClasses['apiGetEvaluationForm'] = dirname(__FILE__). '/apis/GetEvaluationForm.php';
+$wgAPIModules['apiGetEvaluationForm'] = 'apiGetEvaluationForm';
 
 
 /* Configuration */
