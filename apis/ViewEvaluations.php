@@ -31,6 +31,7 @@ class apiViewEvaluations extends ApiQueryBase {
         $data.='
             <table border="1" >
             <tr>
+              <td>Activity </td>
               <td>Title</td>
               <td>Submitted by</td>
               <td>URL</td>      
@@ -69,6 +70,18 @@ class apiViewEvaluations extends ApiQueryBase {
             );
 
             $activity=$activity->fetchObject();
+
+            $activity_cd= $dbr->select(
+                'pe_cd_Activities',
+                array( '*'),
+                $conds = 'id='.$activity->Activity_id,
+                $fname = __METHOD__,
+                $options = array( '' )
+            );
+
+            $activity_cd=$activity_cd->fetchObject();
+
+
 /*
             $data.='Title : ' . $activity->Title . '<br>';
             $data.='URL : ' . $activity->URL . '<br>';            
@@ -76,6 +89,7 @@ class apiViewEvaluations extends ApiQueryBase {
             $data.=$evaluater->user_name . '<br>';
 */
             $data.= '<tr>
+              <td> '. $activity_cd->title .' </td>
               <td>  <a class="title" name='.$row->id.'>'.$activity->Title.' </a> </td>
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
               <td>'.$activity->URL.'</td>        

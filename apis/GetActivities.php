@@ -11,7 +11,70 @@ class apiGetActivities extends ApiQueryBase {
         {
             $dbr = wfGetDB( DB_SLAVE );
 
-            $ret='<div id="c'.$id.'">';
+            $ret='<div id="c'.$id.'"> <br>';
+
+            $activity_cd= $dbr->select(
+                'pe_cd_Activities',
+                array( '*'),
+                $conds = 'id='.$id,
+                $fname = __METHOD__,
+                $options = array( '' )
+            );
+            $activity_cd=$activity_cd->fetchObject();
+
+            if (!$activity_cd->pe_flag) {
+                $res = $dbr->select(
+                    'pe_Activities',
+                    array( '*'),
+                    $conds = 'Activity_id='.$id,
+                    $fname = __METHOD__,
+                    $options = array( 'ORDER BY' => 'EvalNum ASC' )
+                );
+
+
+                $table='
+                    <table border="1" class="prettytable sortable" >
+                    <tr>
+                    <td>Title</td>
+                    <td>Submitted by</td>
+                    <td>URL</td>      
+                    <td>Comment</td>
+                    <td>Opted in for Evaluation</td>
+                    <td>Number of Evaluations</td>
+                    <td>Submission Time</td>
+                    </tr>
+                    ';
+
+                $ret.=$table;
+                foreach ( $res as $row ) {
+                    $user = $dbr->select(
+                            'user',
+                            array( '*'),
+                            $conds = 'user_id='.$row->userId,
+                            $fname = __METHOD__,
+                            $options = array('')
+                            );
+
+                    $user=$user->fetchObject();
+                    $table='
+                        <tr>
+                        <td id="'.$row->id.'"> '.$row->Title.' </td>
+                        <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
+                        <td>'.$row->URL.'</td>        
+                        <td>'.$row->Comment.'</td>
+                        <td>'.($row->OptedIn ? "Yes" :"No").'</td>
+                        <td>'.$row->EvalNum.'</td>
+                        <td>'.$row->Timestamp.'</td>
+                        </tr>
+                        ';
+                    $ret.=$table;
+
+                }
+                $ret.="</table>";
+                return $ret;
+
+            }
+
 
             $res = $dbr->select(
                 'pe_Activities',
@@ -35,7 +98,7 @@ class apiGetActivities extends ApiQueryBase {
                 </tr>
                 ';
 
-            $ret.=" <h1> Click on the title of an Activity to Evaluate it </h1> <br>";
+            $ret.=" <h3> Click on the title of an Activity to Evaluate it </h3> <br>";
             $ret.=$table;
             foreach ( $res as $row ) {
                 $user = $dbr->select(
@@ -50,7 +113,7 @@ class apiGetActivities extends ApiQueryBase {
                 $table='
                     <tr>
                     <td class="title" id="'.$row->id.'">  <a>'.$row->Title.' </a> </td>
-                    <td> <a href="./User:'.$user->user_name.'">'. $user->user_name .' </a></td>
+                    <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
                     <td>'.$row->URL.'</td>        
                     <td>'.$row->Comment.'</td>
                     <td>'.($row->OptedIn ? "Yes" :"No").'</td>
@@ -59,7 +122,7 @@ class apiGetActivities extends ApiQueryBase {
                     </tr>
                     ';
                 $ret.=$table;
-
+                $ret.="</div>";
             }
             $ret.="</table>";
 
@@ -85,7 +148,7 @@ class apiGetActivities extends ApiQueryBase {
                 </tr>
                 ';
 
-            $ret.=" <h1> Activities not available for evaluation </h1> <br>";
+            $ret.=" <h3> Activities not available for evaluation </h3> <br>";
             $ret.=$table;
             foreach ( $res as $row ) {
                 $user = $dbr->select(
@@ -94,13 +157,13 @@ class apiGetActivities extends ApiQueryBase {
                         $conds = 'user_id='.$row->userId,
                         $fname = __METHOD__,
                         $options = array('')
-                        );
+                );
 
                 $user=$user->fetchObject();
                 $table='
                     <tr>
                     <td> '.$row->Title.'  </td>
-                    <td> <a href="./User:'.$user->user_name.'">'. $user->user_name .' </a></td>
+                    <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
                     <td>'.$row->URL.'</td>        
                     <td>'.$row->Comment.'</td>
                     <td>'.($row->OptedIn ? "Yes" :"No").'</td>

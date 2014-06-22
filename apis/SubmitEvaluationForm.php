@@ -11,6 +11,11 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
         global $wgUser, $wgServer;
         global $wgDefaultUserOptions;
 
+        if (!$wgUser->isLoggedIn()) {
+            $this->dieUsage('must be logged in',
+                'notloggedin');
+        };
+        
         $data='';
 
         $params = $this->extractRequestParams();

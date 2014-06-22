@@ -5,7 +5,7 @@ class TagSubmitActivity {
                 return true;
         }
         static function submitactivityRender( $input, array $args, Parser $parser ) {
-            $ret='<script src="/core/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
+            $ret='<script src="/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
 
             $ret.="<div id='t1content'>";
             
@@ -14,12 +14,21 @@ class TagSubmitActivity {
 
 
             $ret .=' <div id="form">
-                Activity : <select name="Activity_id" id="activityid">
-                <option value="1">1st Learning reflection</option>
-                <option value="2">2nd Learning reflection</option>   
-                <option value="3">Activity 3.1</option>   
-                <option value="4">Activity 4.1</option>   
-                <option value="5">3rd Learning reflection</option>   
+                Activity : <select name="Activity_id" id="activityid">';
+            $dbr = wfGetDB( DB_SLAVE );
+            $activity_cd= $dbr->select(
+                'pe_cd_Activities',
+                array( '*'),
+                $conds = '',
+                $fname = __METHOD__,
+                $options = array( '' )
+            );
+
+            foreach ($activity_cd as $row) {
+                $ret.= '<option value="'.$row->id.'">'.$row->title.'</option>';
+            }
+
+            $ret.='
                 </select>
                 URL of the blog post : <input type="text" name="URL" id="url" onblur="urlFunction()">
                 <b id="urlerror" > </b>

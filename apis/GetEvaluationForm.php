@@ -48,6 +48,14 @@ class apiGetEvaluationForm extends ApiQueryBase {
             return true;
 
         }
+
+        $data.='<h3> Activity Details </h3>';
+        $data.='<b> Title : </b>'.$activity->Title . '<br>';
+        $data.='<b> Comment : </b>'.$activity->Comment . '<br>';
+        $data.='<b> URL : </b> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL . '</a><br>';
+        $data.='<iframe  width="100%"" height="400" src="'.$activity->URL.'"></iframe><br>';
+        $data.='If you cannot see the blog post above please try <a href="'.$activity->URL.'" target="_blank"> clicking here</a>. If you cannot find the specified blog post, kindly choose No in the option to the below question and write a comment. <br>';
+        
         if ( $activityCd->type == 1 ) {
 
             $questions = $dbr->select(

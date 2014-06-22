@@ -8,6 +8,12 @@ class apiSubmitActivity extends ApiQueryBase {
     public function execute() {
         global $wgUser, $wgServer;
         global $wgDefaultUserOptions;
+
+        if (!$wgUser->isLoggedIn()) {
+            $this->dieUsage('must be logged in',
+                'notloggedin');
+        };        
+
         $id = NULL;
         $user = $wgUser->getId();
         $params = $this->extractRequestParams();
@@ -27,7 +33,7 @@ class apiSubmitActivity extends ApiQueryBase {
 
         $result->addValue(null, $this->getModuleName(),array('success' => "
             Activity Successfully Registered<br/>
-            <h1><a href='./Special:ViewActivities'> Click Here to view all submitted Activities </a></h1><br/>"));
+            <h1><a> Click Here to view all submitted Activities </a></h1><br/>"));
 
 
         return true;

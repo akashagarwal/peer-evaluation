@@ -9,7 +9,7 @@ class TagViewEvaluations {
 
 
 	static function viewevaluationsRender( $input, array $args, Parser $parser ) {
-		$ret='<script src="/core/extensions/PeerEvaluation/resources/viewevaluations.js"></script>';
+		$ret='<script src="/extensions/PeerEvaluation/resources/viewevaluations.js"></script>';
 
 		$ret .='<span id="mcontent">
 			<span id="t1content">

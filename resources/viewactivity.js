@@ -3,14 +3,18 @@ $ ( document ).ready ( function() {
 
 	$(".getActivities").click ( function()  {
 		$id=$(this).attr('id');
-		$.get("/core/api.php?action=apiGetActivities&id="+$id+"&format=json",function(data,status){
+		$.get("/api.php?action=apiGetActivities&id="+$id+"&format=json",function(data,status){
 			$text=data['apiGetActivities']['success']
 
 			$('#t1content').html($text);
 
 			$(".title").click ( function()  {
+				if (!wgUserName) {
+					$('#t1content').html('You need to be logged in to submit an evaluation');
+					return;
+				}
 				$id=$(this).attr('id');
-				$.get("/core/api.php?action=apiGetEvaluationForm&id="+$id+"&format=json",function(data,status){
+				$.get("/api.php?action=apiGetEvaluationForm&id="+$id+"&format=json",function(data,status){
 					$text2=data['apiGetEvaluationForm']['success'];
 
 					if ( !$text2 ) {
@@ -41,7 +45,7 @@ $ ( document ).ready ( function() {
 							inp['c'+name]=$('textarea#c'+name).val();
 						} );
 
-						$.get("/core/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
+						$.get("/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
 							$('#mcontent').html('<h6>'+ data['apiSubmitEvaluationForm']['success'] +'</h6>');
 						} );
 						$('#mcontent').html('Submitting your Evaluation...');
