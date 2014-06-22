@@ -37,19 +37,29 @@ $ ( document ).ready ( function() {
 						inp.related_comment = $('textarea#Related_comment').val();
 						inp.id = $('#actid').val();
 
-						formcontent=$ ('#formcontent').children('#ques');
+						flag=0;
 
+						if (inp.related == null){
+							alert('You cannot submit an empty form');
+							flag=1;
+						}
+						formcontent=$ ('#formcontent').children('#ques');
 						formcontent.each(function() {
 							name=$(this).attr('name');	
 							inp[name]=$('input[name='+name+']:checked').val();
 							inp['c'+name]=$('textarea#c'+name).val();
+							if (inp.related==1 && flag==0 & inp[name] == null) {
+								alert('Please select an option for all questions before submitting');
+								flag=1;
+							}
 						} );
 
-						$.get("/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
-							$('#mcontent').html('<h6>'+ data['apiSubmitEvaluationForm']['success'] +'</h6>');
-						} );
-						$('#mcontent').html('Submitting your Evaluation...');
-
+						if (flag == 0) {
+	 						$.get("/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
+								$('#mcontent').html('<h6>'+ data['apiSubmitEvaluationForm']['success'] +'</h6>');
+							} );
+							$('#mcontent').html('Submitting your Evaluation...');
+						};
 					} );
 
 				} );
