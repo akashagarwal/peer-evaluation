@@ -85,7 +85,7 @@ class apiGetEvaluationForm extends ApiQueryBase {
             }
             $form .= '
                 </div>
-                <input type="hidden" id="actid" value="'.$id.'">
+                <input type="hidden" id="actid" value="'.$id.'">                
                 <input type="submit" value="Submit" id="submitform">
                 </form>
             ';

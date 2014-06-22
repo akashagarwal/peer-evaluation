@@ -27,12 +27,13 @@ $wgExtensionCredits['other'][] = array(
 // Register files
 $wgAutoloadClasses['PeerEvaluationHooks'] = dirname(__FILE__). '/PeerEvaluation.hooks.php';
 
+/*
 $wgAutoloadClasses['SpecialHelloWorld'] = dirname(__FILE__). '/specials/SpecialHelloWorld.php';
 $wgAutoloadClasses['SpecialSubmitActivity'] = dirname(__FILE__). '/specials/SpecialSubmitActivity.php';
 $wgAutoloadClasses['SpecialEvaluate'] = dirname(__FILE__). '/specials/SpecialEvaluate.php';
 $wgAutoloadClasses['SpecialViewActivities'] = dirname(__FILE__). '/specials/SpecialViewActivities.php';
 $wgAutoloadClasses['SpecialViewAllEvaluations'] = dirname(__FILE__). '/specials/SpecialViewAllEvaluations.php';
-
+*/
 
 $wgMessagesDirs['PeerEvaluation'] = dirname(__FILE__). '/i18n';
 $wgExtensionMessagesFiles['PeerEvaluationAlias'] = dirname(__FILE__). '/PeerEvaluation.i18n.alias.php';
@@ -41,6 +42,7 @@ $wgExtensionMessagesFiles['PeerEvaluationAlias'] = dirname(__FILE__). '/PeerEval
 #$wgHooks['NameOfHook'][] = 'PeerEvaluationHooks::onNameOfHook';
 
 // Register special pages
+/*
 $wgSpecialPages['HelloWorld'] = 'SpecialHelloWorld';
 $wgSpecialPageGroups['HelloWorld'] = 'other';
 
@@ -55,7 +57,7 @@ $wgSpecialPageGroups['Evaluate'] = 'OCL4Ed-PeerEvaluation';
 
 $wgSpecialPages['ViewAllEvaluations'] ='SpecialViewAllEvaluations' ;
 $wgSpecialPageGroups['ViewAllEvaluations'] = 'OCL4Ed-PeerEvaluation';
-
+*/
 
 // Register modules
 $wgResourceModules['ext.PeerEvaluation.foo'] = array(
@@ -81,6 +83,10 @@ $wgHooks['ParserFirstCallInit'][] = 'TagSubmitActivity::onParserInit';
 $wgAutoloadClasses['TagViewActivity'] = dirname(__FILE__). '/tags/ViewActivity_body.php';
 $wgHooks['ParserFirstCallInit'][] = 'TagViewActivity::onParserInit';
 
+$wgAutoloadClasses['TagViewEvaluations'] = dirname(__FILE__). '/tags/ViewEvaluations_body.php';
+$wgHooks['ParserFirstCallInit'][] = 'TagViewEvaluations::onParserInit';
+
+
 //API's 
 
 $wgAutoloadClasses['apiSubmitActivity'] = dirname(__FILE__). '/apis/SubmitActivity.php';
@@ -94,6 +100,9 @@ $wgAPIModules['apiGetEvaluationForm'] = 'apiGetEvaluationForm';
 
 $wgAutoloadClasses['apiSubmitEvaluationForm'] = dirname(__FILE__). '/apis/SubmitEvaluationForm.php';
 $wgAPIModules['apiSubmitEvaluationForm'] = 'apiSubmitEvaluationForm';
+
+$wgAutoloadClasses['apiViewEvaluations'] = dirname(__FILE__). '/apis/ViewEvaluations.php';
+$wgAPIModules['apiViewEvaluations'] = 'apiViewEvaluations';
 
 
 /* Configuration */

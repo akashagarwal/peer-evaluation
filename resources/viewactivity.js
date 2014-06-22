@@ -36,13 +36,13 @@ $ ( document ).ready ( function() {
 						formcontent=$ ('#formcontent').children('#ques');
 
 						formcontent.each(function() {
-							name=$(this).attr('name');
+							name=$(this).attr('name');	
 							inp[name]=$('input[name='+name+']:checked').val();
 							inp['c'+name]=$('textarea#c'+name).val();
 						} );
 
 						$.get("/core/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
-							$('#mcontent').html('<h6> Successfully submitted </h6>');
+							$('#mcontent').html('<h6>'+ data['apiSubmitEvaluationForm']['success'] +'</h6>');
 						} );
 						$('#mcontent').html('Submitting your Evaluation...');
 
@@ -55,6 +55,8 @@ $ ( document ).ready ( function() {
 
 		$( '#t1content' ).html( "Getting the latest activities for you..." );
 	} )	
+
+
 
 
 } )

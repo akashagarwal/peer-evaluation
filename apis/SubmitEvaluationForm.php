@@ -19,7 +19,7 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
 
         $id = $params['id'];
         $related = $params['related'];
-        $related_comment = $params['related_comment'];
+        $related_comment = $params['related_comment'].' ';
 
         $dbw=$this->getwDB();
 
@@ -61,15 +61,27 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
         );
 
         foreach ( $questions as $row ) {
-            $ans=$params[$row->id];
-            $Comment=$params['c'.$row->id];
+            $ans=$params[$row->id].' ';
+            $Comment=$params['c'.$row->id].' ';
 
             $dbw->insert(
                 'pe_answers',
                 array('qid' => $row->id, 'EvalMainId' => $EvalId, 'answer' => $ans , 'Comment' => $Comment  , 'Timestamp' => $date),
-                $fname = 'Database::insert', $options = array()
+                $fname = 'Database::insert', 
+                $options = array()
             );
+            
         }
+
+        $EvalNum=$activity->EvalNum+1;
+
+        $dbw->update(
+            'pe_Activities',
+            $values = array('EvalNum' =>  $EvalNum),
+            $conds = array('id' => $id),        
+            $fname = 'Database::update', $options = array()
+        );
+
 
         $result->addValue(null, $this->getModuleName(),array('success' => 'Successfully added'));
 
@@ -119,7 +131,7 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
     }
  
     public function getDescription() {
-        return 'API to get the Activities';
+        return 'API to submit an Evaluation';
     }
  
     protected function getExamples() {
