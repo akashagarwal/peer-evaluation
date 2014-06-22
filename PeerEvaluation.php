@@ -92,6 +92,9 @@ $wgAPIModules['apiGetActivities'] = 'apiGetActivities';
 $wgAutoloadClasses['apiGetEvaluationForm'] = dirname(__FILE__). '/apis/GetEvaluationForm.php';
 $wgAPIModules['apiGetEvaluationForm'] = 'apiGetEvaluationForm';
 
+$wgAutoloadClasses['apiSubmitEvaluationForm'] = dirname(__FILE__). '/apis/SubmitEvaluationForm.php';
+$wgAPIModules['apiSubmitEvaluationForm'] = 'apiSubmitEvaluationForm';
+
 
 /* Configuration */
 

@@ -41,7 +41,10 @@ $ ( document ).ready ( function() {
 							inp['c'+name]=$('textarea#c'+name).val();
 						} );
 
-						$('#mcontent').html(inp.id);
+						$.get("/core/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
+							$('#mcontent').html('<h6> Successfully submitted </h6>');
+						} );
+						$('#mcontent').html('Submitting your Evaluation...');
 
 					} );
 
