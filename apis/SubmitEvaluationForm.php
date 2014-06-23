@@ -57,25 +57,65 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
 
         $EvalId=$temp->fetchObject()->id;
 
-        $questions=$dbw->select(
-            'pe_questions_mcq',
+        $activityCd = $dbw->select(
+            'pe_cd_Activities',
             array( '*'),
-            $conds = 'activity_id='.$activityid,
+            $conds = 'id='.$activityid,
             $fname = __METHOD__,
             $options = array( '' )
         );
+        $activityCd=$activityCd->fetchObject();
 
-        foreach ( $questions as $row ) {
-            $ans=trim(filter_var($params[$row->id].' ',FILTER_SANITIZE_STRING));
-            $Comment=trim(filter_var($params['c'.$row->id].' ',FILTER_SANITIZE_STRING));
+        $data.=$activityCd->type;
 
-            $dbw->insert(
-                'pe_answers',
-                array('qid' => $row->id, 'EvalMainId' => $EvalId, 'answer' => $ans , 'Comment' => $Comment  , 'Timestamp' => $date),
-                $fname = 'Database::insert', 
-                $options = array()
+        if ( $activityCd->type == 1 ) {
+
+            $questions=$dbw->select(
+                'pe_questions_mcq',
+                array( '*'),
+                $conds = 'activity_id='.$activityid,
+                $fname = __METHOD__,
+                $options = array( '' )
             );
-            
+
+            foreach ( $questions as $row ) {
+                $ans=trim(filter_var($params[$row->id].' ',FILTER_SANITIZE_STRING));
+                $Comment=trim(filter_var($params['c'.$row->id].' ',FILTER_SANITIZE_STRING));
+
+                $dbw->insert(
+                    'pe_answers',
+                    array('qid' => $row->id, 'EvalMainId' => $EvalId, 'answer' => $ans , 'Comment' => $Comment  , 'Timestamp' => $date),
+                    $fname = 'Database::insert', 
+                    $options = array()
+                );
+                
+            }
+        }
+
+        if ( $activityCd->type == 2 ) {
+            $data.=$activityid;
+            $questions=$dbw->select(
+                'pe_questions_10point',
+                array( '*'),
+                $conds = 'activity_id='.$activityid,
+                $fname = __METHOD__,
+                $options = array( '' )
+            );
+
+            foreach ( $questions as $row ) {
+                $ans=trim(filter_var($params[$row->id].' ',FILTER_SANITIZE_STRING));
+                $Comment=trim(filter_var($params['c'.$row->id].' ',FILTER_SANITIZE_STRING));
+                
+                $data.=$ans;
+
+                $dbw->insert(
+                    'pe_answers',
+                    array('qid' => $row->id, 'EvalMainId' => $EvalId, 'answer' => $ans , 'Comment' => $Comment  , 'Timestamp' => $date),
+                    $fname = 'Database::insert', 
+                    $options = array()
+                );
+                
+            }
         }
 
         $EvalNum=$activity->EvalNum+1;
@@ -88,7 +128,7 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
         );
 
 
-        $result->addValue(null, $this->getModuleName(),array('success' => 'Successfully added'));
+        $result->addValue(null, $this->getModuleName(),array('success' => $data));
 
         return true;
     }

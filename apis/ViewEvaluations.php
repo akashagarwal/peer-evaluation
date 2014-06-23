@@ -108,14 +108,24 @@ class apiViewEvaluations extends ApiQueryBase {
             }
             $data.='<span style="display:none" id='.$row->id.'>';
 
-            $questions = $dbr->select(
-                'pe_questions_mcq',
-                array( '*'),
-                $conds = 'activity_id='.$activity->Activity_id,
-                $fname = __METHOD__,
-                $options = array( '' )
-            );
-
+            if ( $activity_cd->type == 1) {
+                $questions = $dbr->select(
+                    'pe_questions_mcq',
+                    array( '*'),
+                    $conds = 'activity_id='.$activity->Activity_id,
+                    $fname = __METHOD__,
+                    $options = array( '' )
+                );
+            }
+            if ( $activity_cd->type == 2) {
+                $questions = $dbr->select(
+                    'pe_questions_10point',
+                    array( '*'),
+                    $conds = 'activity_id='.$activity->Activity_id,
+                    $fname = __METHOD__,
+                    $options = array( '' )
+                );
+            }
             foreach ($questions as $q) {
                 $answer = $dbr->select(
                     'pe_answers',
@@ -127,7 +137,7 @@ class apiViewEvaluations extends ApiQueryBase {
                 $answer=$answer->fetchObject();
 
                 $data.=$q->Question . '<br>' ;
-                $data.='<b>Answer</b> :'.$answer->answer . '<br>' ;
+                $data.='<b> '.( $activity_cd->type == 1? 'Answer' : 'Points Awarded').'</b> :'.$answer->answer . '<br>' ;
                 if ($answer->Comment!=' ')
                     $data.='Comment :'.$answer->Comment . '<br>' ;
                 $data.='<br>';

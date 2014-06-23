@@ -51,7 +51,7 @@ class apiGetEvaluationForm extends ApiQueryBase {
 
         $data.='<h3> Activity Details </h3>';
         $data.='<b> Name of the Activity : </b>'.$activityCd->title . '<br>';
-        $data.='<b> Title : </b>'.$activity->Title . '<br>';
+        $data.='<b> Title : </b>'.$activity->Title . '<br>';    
         $data.='<b> Comment : </b>'.$activity->Comment . '<br>';
         $data.='<b> URL : </b> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL . '</a><br>';
         $data.='<iframe  width="100%"" height="400" src="'.$activity->URL.'"></iframe><br>';
@@ -126,14 +126,30 @@ class apiGetEvaluationForm extends ApiQueryBase {
                 $form.='<div id="ques" name="'.$row->id.'">';
                 $form.=$row->Question . '<br>';
                 $no=$row->No_options;
-                $form.='<input type="radio" name="'.$row->id.'" value="Not achieved">Not achieved';
-                $form.='<input type="radio" name="'.$row->id.'" value="Achieved">Achieved';
-                $form.='<input type="radio" name="'.$row->id.'" value="Merit">Merit';
+                $form.='<input type="radio" class="answerl1" name="'.$row->id.'" value="Notachieved">Not achieved';
+                $form.='<input type="radio" class="answerl1" name="'.$row->id.'" value="Achieved">Achieved';
+                $form.='<input type="radio" class="answerl1" name="'.$row->id.'" value="Merit">Merit <br>';
 
-                $form.='<span id="rNot achieved'.$row->id.'" > "'.$row->Notachieved_rubric.'" <br> ';
+                $form.='<span style="display:none" id="Notachieved'.$row->id.'" > "'.$row->Notachieved_rubric.'" <br> ';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="1">1';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="2">2';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="3">3';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="4">4<br>';
                 $form.= '</span>';
 
-                $form.='<span id="rcontent"></span>';
+                $form.='<span style="display:none" id="Achieved'.$row->id.'" > "'.$row->Achieved_rubric.'" <br> ';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="5">5';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="6">6';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="7">7<br>';
+                $form.= '</span>';
+
+                $form.='<span style="display:none" id="Merit'.$row->id.'" > "'.$row->Merit_rubric.'" <br> ';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="8">8';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="9">9';
+                $form.='<input type="radio" name="l2'.$row->id.'" value="10">10<br>';
+                $form.= '</span>';
+
+                $form.='<span id="rcontent'.$row->id.'"></span>';
                 $form.='<br><p>Comment (optional)</p>
                 <textarea id="c'.$row->id.'" rows="2" cols="50"></textarea>
                 <br>';
