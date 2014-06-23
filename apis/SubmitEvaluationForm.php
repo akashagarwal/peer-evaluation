@@ -22,9 +22,9 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
 
         $result = $this->getResult();
 
-        $id = $params['id'];
-        $related = $params['related'];
-        $related_comment = $params['related_comment'].' ';
+        $id = filter_var($params['id'],FILTER_SANITIZE_NUMBER_INT);
+        $related = filter_var($params['related'],FILTER_SANITIZE_NUMBER_INT);
+        $related_comment = filter_var($params['related_comment'].' ',FILTER_SANITIZE_STRING);
 
         $dbw=$this->getwDB();
 
@@ -66,8 +66,8 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
         );
 
         foreach ( $questions as $row ) {
-            $ans=$params[$row->id].' ';
-            $Comment=$params['c'.$row->id].' ';
+            $ans=filter_var($params[$row->id].' ',FILTER_SANITIZE_STRING);
+            $Comment=filter_var($params['c'.$row->id].' ',FILTER_SANITIZE_STRING);
 
             $dbw->insert(
                 'pe_answers',

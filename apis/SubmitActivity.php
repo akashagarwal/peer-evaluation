@@ -27,7 +27,7 @@ class apiSubmitActivity extends ApiQueryBase {
 
         $dbw->insert(
             'pe_Activities',
-            array('userid' => $wgUser->getId(), 'URL' => $params['url'] , 'Title' => $params['title'] , 'Comment' => $params['comment']  , 'OptedIn' => ($params['optin']=='true'?1:0), 'Activity_id' => $params['activityid'], 'Timestamp' => $date),
+            array('userid' => $wgUser->getId(), 'URL' => filter_var($params['url'],FILTER_SANITIZE_STRING) , 'Title' => filter_var($params['title'],FILTER_SANITIZE_STRING) , 'Comment' => filter_var($params['comment'],FILTER_SANITIZE_STRING)  , 'OptedIn' => ($params['optin']=='true'?1:0), 'Activity_id' => filter_var($params['activityid'],FILTER_SANITIZE_NUMBER_INT), 'Timestamp' => $date),
             $fname = 'Database::insert', $options = array()
         );
 
