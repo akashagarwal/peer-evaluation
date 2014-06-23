@@ -50,6 +50,7 @@ class apiGetEvaluationForm extends ApiQueryBase {
         }
 
         $data.='<h3> Activity Details </h3>';
+        $data.='<b> Name of the Activity : </b>'.$activityCd->title . '<br>';
         $data.='<b> Title : </b>'.$activity->Title . '<br>';
         $data.='<b> Comment : </b>'.$activity->Comment . '<br>';
         $data.='<b> URL : </b> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL . '</a><br>';
