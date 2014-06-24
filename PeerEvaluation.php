@@ -22,42 +22,11 @@ $wgExtensionCredits['other'][] = array(
 
 );
 
-/* Setup */
-
 // Register files
 $wgAutoloadClasses['PeerEvaluationHooks'] = dirname(__FILE__). '/PeerEvaluation.hooks.php';
 
-/*
-$wgAutoloadClasses['SpecialHelloWorld'] = dirname(__FILE__). '/specials/SpecialHelloWorld.php';
-$wgAutoloadClasses['SpecialSubmitActivity'] = dirname(__FILE__). '/specials/SpecialSubmitActivity.php';
-$wgAutoloadClasses['SpecialEvaluate'] = dirname(__FILE__). '/specials/SpecialEvaluate.php';
-$wgAutoloadClasses['SpecialViewActivities'] = dirname(__FILE__). '/specials/SpecialViewActivities.php';
-$wgAutoloadClasses['SpecialViewAllEvaluations'] = dirname(__FILE__). '/specials/SpecialViewAllEvaluations.php';
-*/
-
 $wgMessagesDirs['PeerEvaluation'] = dirname(__FILE__). '/i18n';
 $wgExtensionMessagesFiles['PeerEvaluationAlias'] = dirname(__FILE__). '/PeerEvaluation.i18n.alias.php';
-
-// Register hooks
-#$wgHooks['NameOfHook'][] = 'PeerEvaluationHooks::onNameOfHook';
-
-// Register special pages
-/*
-$wgSpecialPages['HelloWorld'] = 'SpecialHelloWorld';
-$wgSpecialPageGroups['HelloWorld'] = 'other';
-
-$wgSpecialPages['SubmitActivity'] ='SpecialSubmitActivity' ;
-$wgSpecialPageGroups['SubmitActivity'] = 'OCL4Ed-PeerEvaluation';
-
-$wgSpecialPages['ViewActivities'] ='SpecialViewActivities' ;
-$wgSpecialPageGroups['ViewActivities'] = 'OCL4Ed-PeerEvaluation';
-
-$wgSpecialPages['Evaluate'] ='SpecialEvaluate' ;
-$wgSpecialPageGroups['Evaluate'] = 'OCL4Ed-PeerEvaluation';
-
-$wgSpecialPages['ViewAllEvaluations'] ='SpecialViewAllEvaluations' ;
-$wgSpecialPageGroups['ViewAllEvaluations'] = 'OCL4Ed-PeerEvaluation';
-*/
 
 // Register modules
 $wgResourceModules['ext.PeerEvaluation.foo'] = array(
