@@ -149,7 +149,7 @@ class apiUserDashboard extends ApiQueryBase {
 
             $data.= '<tr>
               <td> '. $activity_cd->title .' </td>
-              <td>  <a class="title" name='.$row->id.'>'.$activity->Title.' </a> </td>
+              <td> '.$activity->Title.' </td>
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
               <td>'.$activity->URL.'</td>        
               <td>'.$activity->Comment.'</td>
@@ -233,7 +233,7 @@ class apiUserDashboard extends ApiQueryBase {
 
             $data.= '<tr>
               <td> '. $activity_cd->title .' </td>
-              <td>  <a class="title" name='.$row->id.'>'.$activity->Title.' </a> </td>
+              <td> '.$activity->Title.' </td>
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
               <td>'.$activity->URL.'</td>        
               <td>'.$activity->Comment.'</td>
