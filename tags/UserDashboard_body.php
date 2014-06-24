@@ -11,7 +11,7 @@ class TagUserDashboard {
 	static function userdashboardRender( $input, array $args, Parser $parser ) {
 		$ret='<script src="/extensions/PeerEvaluation/resources/userdashboard.js"></script>';
 
-		$ret .='<span id="mcontent">
+		$ret .='<span id="errors"></span><span id="mcontent">
 			<span id="t1content">
 			</span>
 			</span>

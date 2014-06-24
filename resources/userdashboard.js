@@ -1,17 +1,27 @@
 $ ( document ).ready ( function() {
 
 	$.get("/api.php?action=apiUserDashboard&format=json",function(data,status){
+		if (data['error'] && data['error']['code']=='notloggedin') {
+			$('#errors').html('<b>You need to be logged in to view your dashboard.</b>');	
+			return;
+		};
 		$text=data['apiUserDashboard']['success'];
 		$('#t1content').html($text);
 
 			$(".title").click ( function()  {
-				if (!wgUserName) {
-					$('#t1content').html('You need to be logged in to submit an evaluation');
-					return;
-				}
+				$login=1;
+				$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data,status){ 
+					if (data['error']) {
+						$('#t1content').html('<b> Not logged in : You need to be looged in to submit evaluations </b><br>');
+						$login=0;
+					};
+				});
+
 
 				$id=$(this).attr('id');
 				$.get("/api.php?action=apiGetEvaluationForm&id="+$id+"&format=json",function(data,status){
+					if (!$login)
+						return;
 					$text2=data['apiGetEvaluationForm']['success'];
 
 					if (data['apiGetEvaluationForm']['type'] == 1) {
