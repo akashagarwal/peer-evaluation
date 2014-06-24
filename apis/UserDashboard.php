@@ -83,7 +83,7 @@ class apiUserDashboard extends ApiQueryBase {
         $ret.="</table>";
         $data.=$ret;
 
-        $data.='<h2>Evaluations on your Activity</h2>';
+        $data.='<h2>Evaluations of your activities</h2>';
         $evals=$dbr->select(
             'pe_eval_main',
             array( '*'),
@@ -244,7 +244,7 @@ class apiUserDashboard extends ApiQueryBase {
         $data.='</table><br>';
 
         $data.='<h2> Recommended Activites (of 2nd Learning reflection) for you to Evaluate </h2> ';
-
+        $data.='<b> Till now you have submitted '.$evals->numRows().' Evaluations. It is recommended that you do at least 3 evaluations.</b>;
         $ret='';
         $res = $dbr->select(
             'pe_Activities',
@@ -264,7 +264,7 @@ class apiUserDashboard extends ApiQueryBase {
             <td>URL</td>      
             <td>Comment</td>
             <td>Opted in for Evaluation</td>
-            <td>Number of Evaluations</td>
+            <td>Total number of evaluations</td>
             <td>Submission Time</td>
             </tr>
             ';
