@@ -171,7 +171,7 @@ class apiUserDashboard extends ApiQueryBase {
             $fname = __METHOD__,
             $options = array( '' )
         );
-        $numE=$evals->numRows();   
+        $numE=$evals->numRows();       
         $data.='
             <table border="1" class="prettytable sortable "  >
             <tr>
@@ -237,14 +237,12 @@ class apiUserDashboard extends ApiQueryBase {
               <td>'.($row->Related ? "Yes" :"No").'</td>
               <td>'.$row->Score.'</td>
               </tr>
-            ';
-        
-
+            ';    
         }
         $data.='</table><br>';
 
         $data.='<h2> Recommended Activites (of 2nd Learning reflection) for you to Evaluate </h2> ';
-        $data.='<b> Till now you have submitted '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations.</b>;
+        $data.='<b> Till now you have submitted '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations.</b>';
         $ret='';
         $res = $dbr->select(
             'pe_Activities',
