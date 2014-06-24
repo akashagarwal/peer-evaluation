@@ -58,14 +58,6 @@ function submit()
 
 }
 
-window.onload=function(){
-	if (!wgUserName)
-	{
-		content=document.getElementById("t1content").innerHTML="You are not logged in";
-		console.log("Not logged in");
-	}
-};
-
 function urlFunction()
 {
 	url=document.getElementById("url").value;
@@ -80,3 +72,11 @@ function urlFunction()
 	document.getElementById("urlerror").innerHTML=content;
 }
 
+$ ( document ).ready ( function() {
+
+	$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data,status){ 
+		if (data['error']) {
+			$('#errors').html('<b> Not logged in : You need to be looged in to submit activities </b><br>');
+		};
+	});
+});
