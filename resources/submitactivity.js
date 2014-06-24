@@ -16,9 +16,20 @@ function submit()
 	    if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
 			xmlDoc=xmlhttp.responseXML;
-			x=xmlDoc.getElementsByTagName("apiSubmitActivity")[0].attributes['success'].nodeValue;
+			x=xmlDoc.getElementsByTagName("apiSubmitActivity")[0];
+			if (!x) {
+				code=xmlDoc.getElementsByTagName("error")[0].attributes['code'].nodeValue;
+				if (code == 'notloggedin') {
+					alert('Looks like you have logged out from another tab or your session has expired. Please login before you continue.');
+				};
+				else {
+					alert('Error : Cound not submit the activity. Please report this.');
+				}
+				return;
+			}
+			y=x.attributes['success'].nodeValue;
 
-		    document.getElementById("form").innerHTML=x;
+		    document.getElementById("form").innerHTML=y;
 
 		}
 	}

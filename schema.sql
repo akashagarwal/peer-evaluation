@@ -71,6 +71,8 @@ CREATE TABLE IF NOT EXISTS `mw_pe_eval_main` (
   PRIMARY KEY (`id`)
 );
 
+ALTER TABLE  `pe_eval_main` ADD  `Score` VARCHAR( 5 ) NOT NULL DEFAULT  'N/A' AFTER  `Other_comments`;
+
 CREATE TABLE IF NOT EXISTS `mw_pe_answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `qid` int(11) NOT NULL,

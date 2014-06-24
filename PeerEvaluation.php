@@ -86,6 +86,9 @@ $wgHooks['ParserFirstCallInit'][] = 'TagViewActivity::onParserInit';
 $wgAutoloadClasses['TagViewEvaluations'] = dirname(__FILE__). '/tags/ViewEvaluations_body.php';
 $wgHooks['ParserFirstCallInit'][] = 'TagViewEvaluations::onParserInit';
 
+$wgAutoloadClasses['TagUserDashboard'] = dirname(__FILE__). '/tags/UserDashboard_body.php';
+$wgHooks['ParserFirstCallInit'][] = 'TagUserDashboard::onParserInit';
+
 
 //API's 
 
@@ -104,6 +107,8 @@ $wgAPIModules['apiSubmitEvaluationForm'] = 'apiSubmitEvaluationForm';
 $wgAutoloadClasses['apiViewEvaluations'] = dirname(__FILE__). '/apis/ViewEvaluations.php';
 $wgAPIModules['apiViewEvaluations'] = 'apiViewEvaluations';
 
+$wgAutoloadClasses['apiUserDashboard'] = dirname(__FILE__). '/apis/UserDashboard.php';
+$wgAPIModules['apiUserDashboard'] = 'apiUserDashboard';
 
 /* Configuration */
 

@@ -1,13 +1,8 @@
 $ ( document ).ready ( function() {
 
-
-	$(".getActivities").click ( function()  {
-		$id=$(this).attr('id');
-		$.get("/api.php?action=apiGetActivities&id="+$id+"&format=json",function(data,status){
-			$text=data['apiGetActivities']['success']
-
-
-			$('#t1content').html($text);
+	$.get("/api.php?action=apiUserDashboard&format=json",function(data,status){
+		$text=data['apiUserDashboard']['success'];
+		$('#t1content').html($text);
 
 			$(".title").click ( function()  {
 				if (!wgUserName) {
@@ -144,10 +139,6 @@ $ ( document ).ready ( function() {
 
 				} );
 
-			} )
-  		} );
-
-		$( '#t1content' ).html( "Getting the latest activities for you..." );
-	} )	
-
+			} );
+	});
 } )
