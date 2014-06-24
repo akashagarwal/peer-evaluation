@@ -2,6 +2,6 @@
 
 It contains the following tags:
 * \<userdashboard\>
-* \<submitactivit\y>
-* <\viewactivities\>
+* \<submitactivity\>
+* \<viewactivities\>
 * \<viewevaluations\>
