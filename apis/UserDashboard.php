@@ -186,7 +186,9 @@ class apiUserDashboard extends ApiQueryBase {
             </tr>
         ';
 
+        $conditionRecom='';
         foreach ($evals as $row) {
+
 
             $learner = $dbr->select(
                 'user',
@@ -214,7 +216,9 @@ class apiUserDashboard extends ApiQueryBase {
                 $options = array( '' )
             );
 
+
             $activity=$activity->fetchObject();
+            $conditionRecom.=' id!='.$activity->id .' and ';
 
             $activity_cd= $dbr->select(
                 'pe_cd_Activities',
@@ -247,7 +251,7 @@ class apiUserDashboard extends ApiQueryBase {
         $res = $dbr->select(
             'pe_Activities',
             array( '*'),
-            $conds = 'Activity_id=2 and OptedIn=1 ',
+            $conds = $conditionRecom.' Activity_id=2 and OptedIn=1 ',
             $fname = __METHOD__,
             $options = array( 'ORDER BY' => 'EvalNum ASC' , 'LIMIT' => '3' )
         );
