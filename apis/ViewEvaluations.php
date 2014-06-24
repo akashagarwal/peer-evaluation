@@ -29,7 +29,7 @@ class apiViewEvaluations extends ApiQueryBase {
 
         $data.='<h6> Click on a title to get the details </h6>';
         $data.='
-            <table border="1" >
+            <table border="1" class="prettytable sortable "  >
             <tr>
               <td>Activity </td>
               <td>Title</td>
@@ -38,6 +38,7 @@ class apiViewEvaluations extends ApiQueryBase {
               <td>Comment</td>
               <td>Evaluated by </td>
               <td> Is_Related </td>
+              <td> Score </td>
             </tr>
         ';
 
@@ -96,6 +97,7 @@ class apiViewEvaluations extends ApiQueryBase {
               <td>'.$activity->Comment.'</td>
               <td> <a href="/User:'.$evaluater->user_name.'">'. $evaluater->user_name .' </a></td>
               <td>'.($row->Related ? "Yes" :"No").'</td>
+              <td>'.$row->Score.'</td>
               </tr>
             ';
             if (!$row->Related) {

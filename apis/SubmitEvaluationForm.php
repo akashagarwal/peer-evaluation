@@ -40,7 +40,7 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
         $activityid=$activity->Activity_id;
         $date = date('Y-m-d H:i:s');
 
-
+        $score=0.0;
         $dbw->insert(
             'pe_eval_main',
             array('ActivityId' => $id, 'EvaluaterId' => $wgUser->getId(), 'LearnerId' => $activity->userId , 'Related' => $related  , 'Related_comment' => $related_comment, 'Timestamp' => $date),
@@ -80,6 +80,17 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
 
             foreach ( $questions as $row ) {
                 $ans=trim(filter_var($params[$row->id].' ',FILTER_SANITIZE_STRING));
+
+                if ($ans == $row->option1) {
+                    $score += ($row->option1_weight/100.0)*$row->weightage_question;
+                }
+                elseif ($ans == $row->option2) {
+                    $score += ($row->option2_weight/100.0)*$row->weightage_question;
+                }
+                elseif ($ans == $row->option3) {
+                    $score += ($row->option3_weight/100.0)*$row->weightage_question;
+                }
+
                 $Comment=trim(filter_var($params['c'.$row->id].' ',FILTER_SANITIZE_STRING));
 
                 $dbw->insert(
@@ -90,10 +101,12 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
                 );
                 
             }
+
+
         }
 
         if ( $activityCd->type == 2 ) {
-            $data.=$activityid;
+//            $data.=$activityid;
             $questions=$dbw->select(
                 'pe_questions_10point',
                 array( '*'),
@@ -104,9 +117,10 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
 
             foreach ( $questions as $row ) {
                 $ans=trim(filter_var($params[$row->id].' ',FILTER_SANITIZE_STRING));
+                $score+=($ans/10.0)*$row->weightage_question;
                 $Comment=trim(filter_var($params['c'.$row->id].' ',FILTER_SANITIZE_STRING));
                 
-                $data.=$ans;
+ //               $data.=$ans;
 
                 $dbw->insert(
                     'pe_answers',
@@ -120,6 +134,13 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
 
         $EvalNum=$activity->EvalNum+1;
 
+        $temp = $dbw->update(
+            'pe_eval_main',
+            $values = array('Score' => $score.' %', ),
+            $conds = array('id' => $EvalId),        
+            $fname = 'Database::update', $options = array()
+        );
+
         $dbw->update(
             'pe_Activities',
             $values = array('EvalNum' =>  $EvalNum),
@@ -128,7 +149,7 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
         );
 
 
-        $result->addValue(null, $this->getModuleName(),array('success' => $data));
+        $result->addValue(null, $this->getModuleName(),array('success' => 'Your Evaluation is successfully saved'));
 
         return true;
     }
