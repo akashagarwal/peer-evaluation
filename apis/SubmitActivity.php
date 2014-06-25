@@ -12,17 +12,19 @@ class apiSubmitActivity extends ApiQueryBase {
         if (!$wgUser->isLoggedIn()) {
             $this->dieUsage('must be logged in',
                 'notloggedin');
-        };  
+        };
+
+        $params = $this->extractRequestParams();
 
         $result = $this->getResult();
 
-        if ( $params['logincheck']){
+        $logincheck=$params['logincheck'];
+        if ($logincheck){
             return;
         };
 
         $id = NULL;
         $user = $wgUser->getId();
-        $params = $this->extractRequestParams();
 
         $dbw=$this->getDB();
 //       $result->addValue( null, $this->getModuleName(), array ( 'apiresponses' => $params['face'] ));
@@ -66,7 +68,7 @@ class apiSubmitActivity extends ApiQueryBase {
             'comment' => 'comment',
             'activityid' => 'activityid',
             'optin' => 'optin',
-            'logincheck' => logincheck
+            'logincheck' => 'logincheck'
 
         );
     }
