@@ -148,7 +148,8 @@ class apiGetActivities extends ApiQueryBase {
                 </tr>
                 ';
 
-            $ret.=" <h3> Activities not available for evaluation </h3> <br>";
+            $ret.=" <h3> Submissions not available for evaluation </h3> <br>";
+            $ret.=" <b> The learner did not choose to opt in for Peer Evaluation for these activities </b> <br>";
             $ret.=$table;
             foreach ( $res as $row ) {
                 $user = $dbr->select(

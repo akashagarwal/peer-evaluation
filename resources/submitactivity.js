@@ -1,4 +1,4 @@
-function submit(
+function submit()
 {
 //	alert("hello");
 	var xmlhttp;

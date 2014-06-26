@@ -40,7 +40,7 @@ class apiSubmitActivity extends ApiQueryBase {
 
         $result->addValue(null, $this->getModuleName(),array('success' => "
             Activity Successfully Registered<br/>
-            <h1><a> Click Here to view all submitted Activities </a></h1><br/>"));
+            <h2><a href='http://b.wikieducator.org/User:Akashagarwal/sample-ViewActivities'> Click Here to view all submitted Activities </a></h2><br/>"));
 
 
         return true;
