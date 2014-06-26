@@ -31,14 +31,14 @@ class apiViewEvaluations extends ApiQueryBase {
         $data.='
             <table border="1" class="prettytable sortable "  >
             <tr>
-              <td>Activity </td>
+              <td>Activity</td>
               <td>Title</td>
               <td>Submitted by</td>
               <td>URL</td>      
               <td>Comment</td>
-              <td>Evaluated by </td>
-              <td> Is_Related </td>
-              <td> Score </td>
+              <td>Evaluated by</td>
+              <td>Is_Related</td>
+              <td>Score</td>
             </tr>
         ';
 
