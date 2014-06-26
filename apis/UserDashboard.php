@@ -250,7 +250,8 @@ class apiUserDashboard extends ApiQueryBase {
         $data.='</table><br>';
 
         $data.='<h2> Recommended Activites (of 2nd Learning reflection) for you to Evaluate </h2> ';
-        $data.='<b> Till now you have submitted '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations.</b>';
+        $data.='<b> Till now you have submitted '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations.</b><br>';
+	$data.='<b><a href="http://b.wikieducator.org/User:Akashagarwal/sample-ViewActivities"> You could also click here to view all submitted activities and evaluate them </a> </b> <br>';
         $ret='';
         $res = $dbr->select(
             'pe_Activities',
@@ -275,7 +276,7 @@ class apiUserDashboard extends ApiQueryBase {
             </tr>
             ';
 
-        $ret.=" <b> Click on the title of an Activity to Evaluate it </b> <br>";
+        $ret.=" <b> Click on the title of an activity in the below table to evaluate it </b> <br>";
         $ret.=$table;
         foreach ( $res as $row ) {
 
