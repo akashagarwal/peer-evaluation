@@ -7,6 +7,7 @@ $ ( document ).ready ( function() {
 		};
 		$text=data['apiUserDashboard']['success'];
 		$('#t1content').html($text);
+		sortables_init();
 
 			$(".title").click ( function()  {
 				$login=1;

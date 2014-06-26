@@ -8,6 +8,7 @@ $ ( document ).ready ( function() {
 
 
 			$('#t1content').html($text);
+			sortables_init();
 
 			$(".title").click ( function()  {
 				$id=$(this).attr('id');
