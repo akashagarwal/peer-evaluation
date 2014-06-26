@@ -64,7 +64,7 @@ $ ( document ).ready ( function() {
 								} );
 
 								if (flag == 0) {
-			 						$.get("/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
+			 						$.post("/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
 			 							if (!data['apiSubmitEvaluationForm']) {
 											code=data['error']['code'];
 											if (code == 'notloggedin') {
@@ -129,7 +129,7 @@ $ ( document ).ready ( function() {
 								} );
 
 								if (flag == 0) {
-			 						$.get("/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
+			 						$.post("/api.php?action=apiSubmitEvaluationForm&format=json",inp,function(data,status){
 			 							if (!data['apiSubmitEvaluationForm']) {
 											code=data['error']['code'];
 											if (code == 'notloggedin') {
