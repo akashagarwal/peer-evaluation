@@ -74,7 +74,7 @@ class apiUserDashboard extends ApiQueryBase {
                 <tr>
                 <td>'.$activity_cd->title.'</td>'.
                 ($activity_cd->pe_flag ? '<td class="title" id="'.$row->id.'">  <a>'.$row->Title.' </a> </td>' : '<td id="'.$row->id.'"> '.$row->Title.' </td>')
-                .'<td>'.$row->URL.'</td>        
+                .' <td> <a href="'.$row->URL.'" target="_blank"> '.$row->URL.'</a> </td>         
                 <td>'.$row->Comment.'</td>
                 <td>'.($row->OptedIn ? "Yes" :"No").'</td>
                 <td>'.$row->EvalNum.'</td>
@@ -155,7 +155,7 @@ class apiUserDashboard extends ApiQueryBase {
               <td> '. $activity_cd->title .' </td>
               <td> '.$activity->Title.' </td>
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
-              <td>'.$activity->URL.'</td>        
+              <td> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL.'</a></td>        
               <td>'.$activity->Comment.'</td>
               <td> <a href="/User:'.$evaluater->user_name.'">'. $evaluater->user_name .' </a></td>
               <td>'.($row->Related ? "Yes" :"No").'</td>
@@ -239,7 +239,7 @@ class apiUserDashboard extends ApiQueryBase {
               <td> '. $activity_cd->title .' </td>
               <td> '.$activity->Title.' </td>
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
-              <td>'.$activity->URL.'</td>        
+              <td> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL.'</a></td>        
               <td>'.$activity->Comment.'</td>
               <td> <a href="/User:'.$evaluater->user_name.'">'. $evaluater->user_name .' </a></td>
               <td>'.($row->Related ? "Yes" :"No").'</td>
@@ -251,7 +251,7 @@ class apiUserDashboard extends ApiQueryBase {
 
         $data.='<h2> Recommended Activites (of 2nd Learning reflection) for you to Evaluate </h2> ';
         $data.='<b> Till now you have submitted '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations.</b><br>';
-	$data.='<b><a href="http://b.wikieducator.org/User:Akashagarwal/sample-ViewActivities"> You could also click here to view all submitted activities and evaluate them </a> </b> <br>';
+//	$data.='<b><a href="http://b.wikieducator.org/User:Akashagarwal/sample-ViewActivities"> You could also click here to view all submitted activities and evaluate them </a> </b> <br>';
         $ret='';
         $res = $dbr->select(
             'pe_Activities',
@@ -304,7 +304,7 @@ class apiUserDashboard extends ApiQueryBase {
                 <td>'.$activity_cd->title.'</td>
                 <td class="title" id="'.$row->id.'">  <a>'.$row->Title.' </a> </td>
                 <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
-                <td>'.$row->URL.'</td>        
+                <td> <a href="'.$row->URL.'" target="_blank"> '.$row->URL.'</a> </td>   
                 <td>'.$row->Comment.'</td>
                 <td>'.($row->OptedIn ? "Yes" :"No").'</td>
                 <td>'.$row->EvalNum.'</td>

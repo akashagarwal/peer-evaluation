@@ -60,7 +60,7 @@ class apiGetActivities extends ApiQueryBase {
                         <tr>
                         <td id="'.$row->id.'"> '.$row->Title.' </td>
                         <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
-                        <td>'.$row->URL.'</td>        
+                        <td> <a href="'.$row->URL.'" target="_blank"> '.$row->URL.'</a> </td>        
                         <td>'.$row->Comment.'</td>
                         <td>'.($row->OptedIn ? "Yes" :"No").'</td>
                         <td>'.$row->EvalNum.'</td>
@@ -114,7 +114,7 @@ class apiGetActivities extends ApiQueryBase {
                     <tr>
                     <td class="title" id="'.$row->id.'">  <a>'.$row->Title.' </a> </td>
                     <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
-                    <td>'.$row->URL.'</td>        
+                    <td> <a href="'.$row->URL.'" target="_blank"> '.$row->URL.'</a> </td>        
                     <td>'.$row->Comment.'</td>
                     <td>'.($row->OptedIn ? "Yes" :"No").'</td>
                     <td>'.$row->EvalNum.'</td>
@@ -165,7 +165,7 @@ class apiGetActivities extends ApiQueryBase {
                     <tr>
                     <td> '.$row->Title.'  </td>
                     <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
-                    <td>'.$row->URL.'</td>        
+                    <td> <a href="'.$row->URL.'" target="_blank"> '.$row->URL.'</a> </td>        
                     <td>'.$row->Comment.'</td>
                     <td>'.($row->OptedIn ? "Yes" :"No").'</td>
                     <td>'.$row->EvalNum.'</td>

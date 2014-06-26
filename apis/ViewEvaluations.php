@@ -93,7 +93,7 @@ class apiViewEvaluations extends ApiQueryBase {
               <td> '. $activity_cd->title .' </td>
               <td>  <a class="title" name='.$row->id.'>'.$activity->Title.' </a> </td>
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
-              <td>'.$activity->URL.'</td>        
+              <td><a href="'.$activity->URL.'" target="_blank"> '.$activity->URL.'</a> </td>        
               <td>'.$activity->Comment.'</td>
               <td> <a href="/User:'.$evaluater->user_name.'">'. $evaluater->user_name .' </a></td>
               <td>'.($row->Related ? "Yes" :"No").'</td>
