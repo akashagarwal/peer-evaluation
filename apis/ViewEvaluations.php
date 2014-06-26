@@ -37,7 +37,7 @@ class apiViewEvaluations extends ApiQueryBase {
               <td>URL</td>      
               <td>Comment</td>
               <td>Evaluated by</td>
-              <td>Is_Related</td>
+              <td>Related</td>
               <td>Score</td>
             </tr>
         ';
