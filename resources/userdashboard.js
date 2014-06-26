@@ -15,7 +15,7 @@ $ ( document ).ready ( function() {
 
 				$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data,status){ 
 					if (data['error']) {
-						$('#t1content').html('<b> Not logged in : You need to be looged in to submit evaluations </b><br>');
+						$('#t1content').html('<b> Not logged in : You need to be logged in to submit evaluations </b><br>');
 						$login=0;
 					};
 
