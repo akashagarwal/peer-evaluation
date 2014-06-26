@@ -249,74 +249,85 @@ class apiUserDashboard extends ApiQueryBase {
         }
         $data.='</table><br>';
 
-        $data.='<h2> Recommended Activites (of 2nd Learning reflection) for you to Evaluate </h2> ';
-        $data.='<b> Till now you have submitted '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations.</b><br>';
+	$data.='<h2> Recommended Activites for you to Evaluate </h2> ';
+	$activity_cd= $dbr->select(
+		'pe_cd_Activities',
+		array( '*'),
+		$conds = 'pe_flag=1',
+		$fname = __METHOD__,
+		$options = array( '' )
+	);
+
+      	$data.='<b> Till now you have submitted a total of '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations for each Activity.</b><br>';
+	foreach ($activity_cd as $row)
+	{
+		$data.='<h4>'.$row->title.'</h4>';
 //	$data.='<b><a href="http://b.wikieducator.org/User:Akashagarwal/sample-ViewActivities"> You could also click here to view all submitted activities and evaluate them </a> </b> <br>';
-        $ret='';
-        $res = $dbr->select(
-            'pe_Activities',
-            array( '*'),
-            $conds = $conditionRecom.' Activity_id=2 and OptedIn=1 ',
-            $fname = __METHOD__,
-            $options = array( 'ORDER BY' => 'EvalNum ASC' , 'LIMIT' => '3' )
-        );
+        	$ret='';
+	        $res = $dbr->select(
+	            'pe_Activities',
+	            array( '*'),
+	            $conds = $conditionRecom.' Activity_id='.$row->id.' and OptedIn=1 ',
+	            $fname = __METHOD__,
+	            $options = array( 'ORDER BY' => 'EvalNum ASC' , 'LIMIT' => '3' )
+	        );
 
 
-        $table='
-            <table border="1" class="prettytable sortable" >
-            <tr>
-            <td>Activity</td>
-            <td>Title</td>
-            <td>Submitted by</td>
-            <td>URL</td>      
-            <td>Comment</td>
-            <td>Opted in for Evaluation</td>
-            <td>Total number of evaluations</td>
-            <td>Submission Time</td>
-            </tr>
-            ';
+	        $table='
+	            <table border="1" class="prettytable sortable" >
+	            <tr>
+	            <td>Activity</td>
+	            <td>Title</td>
+	            <td>Submitted by</td>
+	            <td>URL</td>      
+	            <td>Comment</td>
+	            <td>Opted in for Evaluation</td>
+	            <td>Total number of evaluations</td>
+	            <td>Submission Time</td>
+	            </tr>
+		';
 
-        $ret.=" <b> Click on the title of an activity in the below table to evaluate it </b> <br>";
-        $ret.=$table;
-        foreach ( $res as $row ) {
+	        $ret.=" <b> Click on the title of an activity in the below table to evaluate it </b> <br>";
+	        $ret.=$table;
+	        foreach ( $res as $row ) {
 
-            $activity_cd= $dbr->select(
-                'pe_cd_Activities',
-                array( '*'),
-                $conds = 'id='.$row->Activity_id,
-                $fname = __METHOD__,
-                $options = array( '' )
-            );
-            $activity_cd=$activity_cd->fetchObject();
+	        $activity_cd= $dbr->select(
+	                'pe_cd_Activities',
+	                array( '*'),
+	                $conds = 'id='.$row->Activity_id,
+	                $fname = __METHOD__,
+	                $options = array( '' )
+	        );
+		$activity_cd=$activity_cd->fetchObject();
 
 
-            $user = $dbr->select(
-                    'user',
-                    array( '*'),
-                    $conds = 'user_id='.$row->userId,
-                    $fname = __METHOD__,
-                    $options = array('')
-                    );
+		    $user = $dbr->select(
+	                    'user',
+	                    array( '*'),
+	                    $conds = 'user_id='.$row->userId,
+	                    $fname = __METHOD__,
+	                    $options = array('')
+	            );
 
-            $user=$user->fetchObject();
-            $table='
-                <tr>
-                <td>'.$activity_cd->title.'</td>
-                <td class="title" id="'.$row->id.'">  <a>'.$row->Title.' </a> </td>
-                <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
-                <td> <a href="'.$row->URL.'" target="_blank"> '.$row->URL.'</a> </td>   
-                <td>'.$row->Comment.'</td>
-                <td>'.($row->OptedIn ? "Yes" :"No").'</td>
-                <td>'.$row->EvalNum.'</td>
-                <td>'.$row->Timestamp.'</td>
-                </tr>
-                ';
-            $ret.=$table;
-            $ret.="</div>";
-        }
-        $ret.="</table>";
-        $data.=$ret;
-
+	            $user=$user->fetchObject();
+	            $table='
+	                <tr>
+	                <td>'.$activity_cd->title.'</td>
+	                <td class="title" id="'.$row->id.'">  <a>'.$row->Title.' </a> </td>
+	                <td> <a href="/User:'.$user->user_name.'">'. $user->user_name .' </a></td>
+	                <td> <a href="'.$row->URL.'" target="_blank"> '.$row->URL.'</a> </td>   
+	                <td>'.$row->Comment.'</td>
+	                <td>'.($row->OptedIn ? "Yes" :"No").'</td>
+	                <td>'.$row->EvalNum.'</td>
+	                <td>'.$row->Timestamp.'</td>
+	                </tr>
+	            ';
+	            $ret.=$table;
+	            $ret.="</div>";
+	        }
+	        $ret.="</table>";
+	        $data.=$ret;
+	}
 
         $result->addValue(null, $this->getModuleName(),array('success' => $data));
 
