@@ -12,7 +12,6 @@ function submit()
 			      }
 	xmlhttp.onreadystatechange=function()
 	{
-		console.log("uYes");
 	    if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
 			xmlDoc=xmlhttp.responseXML;
@@ -52,7 +51,6 @@ function submit()
         return false;
     }
 	optin=document.getElementById("optin").checked;
-	console.log(url+"Yes");
 	xmlhttp.open("POST","/api.php",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml");

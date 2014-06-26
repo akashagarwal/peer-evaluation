@@ -120,7 +120,6 @@ $ ( document ).ready ( function() {
 								formcontent.each(function() {
 									name=$(this).attr('name');	
 									inp[name]=$('input[name=l2'+name+']:checked').val();
-									console.log(inp[name]);
 									inp['c'+name]=$('textarea#c'+name).val();
 									if (inp.related==1 && flag==0 & inp[name] == null) {
 										alert('Please select an option for all questions before submitting');
