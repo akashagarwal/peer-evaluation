@@ -24,7 +24,7 @@ class apiUserDashboard extends ApiQueryBase {
         $dbr=$this->getrDB();
 
         $data.='<h2> Your Activity submissions </h2>';
-        $data.='<b> You may click on the title (those in blue) to do a self evaluation. </b>';
+        $data.='<b> We encourage learners to evaluate their own work. Click on the blue title links below to submit your self-evaluation. </b>';
         $ret='';
         $res = $dbr->select(
             'pe_Activities',
