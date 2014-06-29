@@ -22,6 +22,7 @@ class apiUserDashboard extends ApiQueryBase {
         $result = $this->getResult();
 
         $dbr=$this->getrDB();
+        $conditionRecom='';
 
         $data.='<h2> Your Activity submissions </h2>';
         $data.='<b> We encourage learners to evaluate their own work. Click on the blue title links below to submit your self-evaluation. </b>';
@@ -50,6 +51,8 @@ class apiUserDashboard extends ApiQueryBase {
 
         $ret.=$table;
         foreach ( $res as $row ) {
+
+            $conditionRecom.=' id!='.$row->id .' and ';
 
             $activity_cd= $dbr->select(
                 'pe_cd_Activities',
@@ -167,11 +170,13 @@ class apiUserDashboard extends ApiQueryBase {
         }
         $data.='</table><br>';
 
-        $data.='<h2>Evaluations by you</h2>';
+        $evalnum=[];
+
+        $data.='<h2>Your Self Evaluations</h2>';
         $evals=$dbr->select(
             'pe_eval_main',
             array( '*'),
-            $conds = 'EvaluaterId='.$wgUser->getId(),
+            $conds = 'EvaluaterId='.$wgUser->getId().' and LearnerId='.$wgUser->getId() ,
             $fname = __METHOD__,
             $options = array( '' )
         );
@@ -190,7 +195,6 @@ class apiUserDashboard extends ApiQueryBase {
             </tr>
         ';
 
-        $conditionRecom='';
         foreach ($evals as $row) {
 
 
@@ -220,9 +224,9 @@ class apiUserDashboard extends ApiQueryBase {
                 $options = array( '' )
             );
 
-
             $activity=$activity->fetchObject();
             $conditionRecom.=' id!='.$activity->id .' and ';
+
 
             $activity_cd= $dbr->select(
                 'pe_cd_Activities',
@@ -241,7 +245,91 @@ class apiUserDashboard extends ApiQueryBase {
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
               <td> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL.'</a></td>        
               <td>'.$activity->Comment.'</td>
-              <td> <a href="/User:'.$evaluater->user_name.'">'. $evaluater->user_name .' </a></td>
+              <td> <a href="/User:
+              '.$evaluater->user_name.'">'. $evaluater->user_name .' </a></td>
+              <td>'.($row->Related ? "Yes" :"No").'</td>
+              <td>'.$row->Score.'</td>
+              </tr>
+            ';    
+        }
+        $data.='</table><br>';
+
+        $data.='<h2>Evaluations by you</h2>';
+        $evals=$dbr->select(
+            'pe_eval_main',
+            array( '*'),
+            $conds = 'EvaluaterId='.$wgUser->getId().' and LearnerId!='.$wgUser->getId(),
+            $fname = __METHOD__,
+            $options = array( '' )
+        );
+        $numE=$evals->numRows();       
+        $data.='
+            <table border="1" class="prettytable sortable "  >
+            <tr>
+              <td>Activity</td>
+              <td>Title</td>
+              <td>Submitted by</td>
+              <td>URL</td>      
+              <td>Comment</td>
+              <td>Evaluated by</td>
+              <td>Related</td>
+              <td>Score</td>
+            </tr>
+        ';
+
+        foreach ($evals as $row) {
+
+
+            $learner = $dbr->select(
+                'user',
+                array( '*'),
+                $conds = 'user_id='.$row->LearnerId,
+                $fname = __METHOD__,
+                $options = array('')
+                );
+            $learner=$learner->fetchObject();
+
+            $evaluater = $dbr->select(
+                'user',
+                array( '*'),
+                $conds = 'user_id='.$row->EvaluaterId,
+                $fname = __METHOD__,
+                $options = array('')
+            );
+            $evaluater=$evaluater->fetchObject();
+
+            $activity= $dbr->select(
+                'pe_Activities',
+                array( '*'),
+                $conds = 'id='.$row->ActivityId,
+                $fname = __METHOD__,
+                $options = array( '' )
+            );
+
+            $activity=$activity->fetchObject();
+            $conditionRecom.=' id!='.$activity->id .' and ';
+            $evalnum[$activity->Activity_id]+=1;
+            
+
+            $activity_cd= $dbr->select(
+                'pe_cd_Activities',
+                array( '*'),
+                $conds = 'id='.$activity->Activity_id,
+                $fname = __METHOD__,
+                $options = array( '' )
+            );
+
+            $activity_cd=$activity_cd->fetchObject();
+
+
+            $data.= '<tr>
+              <td> '. $activity_cd->title .' </td>
+              <td> '.$activity->Title.' </td>
+              <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
+              <td> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL.'</a></td>        
+              <td>'.$activity->Comment.'</td>
+              <td> <a href="/User:
+              '.$evaluater->user_name.'">'. $evaluater->user_name .' </a></td>
               <td>'.($row->Related ? "Yes" :"No").'</td>
               <td>'.$row->Score.'</td>
               </tr>
@@ -258,10 +346,12 @@ class apiUserDashboard extends ApiQueryBase {
 		$options = array( '' )
 	);
 
-      	$data.='<b> Till now you have submitted a total of '.$numE.' Evaluations. It is recommended that you do at least 3 evaluations for each Activity.</b><br>';
+      	$data.='<b> We recommend that you submit a minimum 3 evaluations for each activity</b><br>';
 	foreach ($activity_cd as $row)
 	{
-		$data.='<h4>'.$row->title.'</h4>';
+	   	    $data.='<h4>'.$row->title.'</h4>';
+            $data.='<b>You have submitted '. ($evalnum[$row->id] ? $evalnum[$row->id] : 0) . ' evaluations for this activity.';
+
 //	$data.='<b><a href="http://b.wikieducator.org/User:Akashagarwal/sample-ViewActivities"> You could also click here to view all submitted activities and evaluate them </a> </b> <br>';
         	$ret='';
 	        $res = $dbr->select(
