@@ -75,8 +75,13 @@ $ ( document ).ready ( function() {
 
 	$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data,status){ 
 		if (data['error']) {
-			$('#errors').html('<b> Not logged in : You need to be looged in to submit activities </b><br>');
+			$('#errors').html('You need to be logged in to submit an activity. Click <a href=".?title=Special:UserLogin" target="_blank">here </a> to login');
+			$('#form').hide();
 		};
+	});
+
+	$(window).focus(function() {
+		location.reload(true);
 	});
 });
 
