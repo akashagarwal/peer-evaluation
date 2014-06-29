@@ -54,6 +54,7 @@ function submit()
 	xmlhttp.open("POST","/api.php",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml");
+	document.getElementById("form").innerHTML="Your submission is being processed...";
 
 }
 
