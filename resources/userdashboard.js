@@ -1,4 +1,7 @@
 $ ( document ).ready ( function() {
+	$(window).focus(function() {
+		location.reload(true);
+	});
 
 	$.get("/api.php?action=apiUserDashboard&format=json",function(data,status){
 		if (data['error'] && data['error']['code']=='notloggedin') {
