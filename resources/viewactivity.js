@@ -15,7 +15,7 @@ $ ( document ).ready ( function() {
 				$login=1;
 				$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data,status){ 
 					if (data['error']) {
-						$('#t1content').html('<b> Not logged in : You need to be looged in to submit evaluations </b><br>');
+						$('#t1content').html('<b> Not logged in : You need to be looged in to submit evaluations. Click <a href=".?title=Special:UserLogin" target="_blank">here </a> to login. </b><br>');
 						$login=0;
 					};
 					if (!$login)
