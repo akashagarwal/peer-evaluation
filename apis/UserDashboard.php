@@ -170,7 +170,6 @@ class apiUserDashboard extends ApiQueryBase {
         }
         $data.='</table><br>';
 
-        $evalnum=[];
 
         $data.='<h2>Your Self Evaluations</h2>';
         $evals=$dbr->select(
