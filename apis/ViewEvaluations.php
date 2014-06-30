@@ -111,7 +111,7 @@ class apiViewEvaluations extends ApiQueryBase {
             $data.='<span style="display:none" id='.$row->id.'>';
 
             if ( $row->Related_comment != ' ') {
-                $data.= '<b> Overall Comment : </b> ' . $row->Related_comment; 
+                $data.= '<b> Overall Comment : </b> <br>' . $row->Related_comment; 
 	    }
             if ( $activity_cd->type == 1) {
                 $questions = $dbr->select(
@@ -152,6 +152,11 @@ class apiViewEvaluations extends ApiQueryBase {
 
         }
         $data.='<br>';
+
+        $data.='
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+            <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+        ';
         $result->addValue(null, $this->getModuleName(),array('success' => $data));
 
         return true;

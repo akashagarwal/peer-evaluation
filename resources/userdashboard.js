@@ -5,7 +5,7 @@ $ ( document ).ready ( function() {
 
 	$.get("/api.php?action=apiUserDashboard&format=json",function(data,status){
 		if (data['error'] && data['error']['code']=='notloggedin') {
-			$('#errors').html('<b>You need to be logged in to view your Dashboard. Click <a href=".?title=Special:UserLogin" target="_blank">here </a> to login</b>');	
+			$('#errors').html('<b>You need to be logged in to view your Dashboard. Click <a href="/?title=Special:UserLogin" target="_blank">here </a> to login</b>');	
 			return;
 		};
 		$text=data['apiUserDashboard']['success'];

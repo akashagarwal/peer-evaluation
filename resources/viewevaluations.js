@@ -6,7 +6,9 @@ $ ( document ).ready ( function() {
 		sortables_init();
 		$('.title').click ( function()  {
 			$id = $(this).attr('name');
-			$('#bcontent').html($('#'+$id).html());
+			$('#t1content').after('<div id="dialog" title="Evaluation Details">'+$('#'+$id).html()+'</div>');
+			$( "#dialog" ).dialog({width:500});
+			return false;
 		});
 	});
 } )
