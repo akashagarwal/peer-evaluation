@@ -112,7 +112,7 @@ class apiViewEvaluations extends ApiQueryBase {
 
             if ( $row->Related_comment != ' ') {
                 $data.= '<b> Overall Comment : </b> <br>' . $row->Related_comment . '<br><br>'; 
-	    }
+	        }
             if ( $activity_cd->type == 1) {
                 $questions = $dbr->select(
                     'pe_questions_mcq',

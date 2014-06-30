@@ -12,6 +12,13 @@ $ ( document ).ready ( function() {
 		$('#t1content').html($text);
 		sortables_init();
 
+		$('.evaltitle').click ( function()  {
+			$id = $(this).attr('name');
+			$('#t1content').after('<div id="dialog" title="Evaluation Details">'+$('#'+$id).html()+'</div>');
+			$( "#dialog" ).dialog({width:500});
+			return false;
+		});
+
 			$(".title").click ( function()  {
 				$login=1;
 				$id=$(this).attr('id');

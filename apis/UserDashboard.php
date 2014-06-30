@@ -91,6 +91,7 @@ class apiUserDashboard extends ApiQueryBase {
         $data.=$ret;
 
         $data.='<h2>Evaluations of your activities</h2>';
+        $data.='<b>Click on a title for more details</b><br>';
         $evals=$dbr->select(
             'pe_eval_main',
             array( '*'),
@@ -156,7 +157,7 @@ class apiUserDashboard extends ApiQueryBase {
 
             $data.= '<tr>
               <td> '. $activity_cd->title .' </td>
-              <td> '.$activity->Title.' </td>
+              <td>  <a class="evaltitle" name='.$row->id.'>'.$activity->Title.' </a> </td>
               <td> <a href="/User:'.$learner->user_name.'">'. $learner->user_name .' </a></td>
               <td> <a href="'.$activity->URL.'" target="_blank">'.$activity->URL.'</a></td>        
               <td>'.$activity->Comment.'</td>
@@ -165,7 +166,55 @@ class apiUserDashboard extends ApiQueryBase {
               <td>'.$row->Score.'</td>
               </tr>
             ';
-        
+            if (!$row->Related) {
+                $data.='<span style="display:none" id='.$row->id.'> <b>Evaluator said that the post is not related so the Evaluation did not continue </b><br>';
+                if ( $row->Related_comment != ' ') {
+                    $data.= '<b> Comment : </b> ' . $row->Related_comment; 
+                }
+                $data.='</span>';
+                continue;
+            }
+            $data.='<span style="display:none" id='.$row->id.'>';
+
+            if ( $row->Related_comment != ' ') {
+                $data.= '<b> Overall Comment : </b> <br>' . $row->Related_comment . '<br><br>'; 
+            }
+            if ( $activity_cd->type == 1) {
+                $questions = $dbr->select(
+                    'pe_questions_mcq',
+                    array( '*'),
+                    $conds = 'activity_id='.$activity->Activity_id,
+                    $fname = __METHOD__,
+                    $options = array( '' )
+                );
+            }
+            if ( $activity_cd->type == 2) {
+                $questions = $dbr->select(
+                    'pe_questions_10point',
+                    array( '*'),
+                    $conds = 'activity_id='.$activity->Activity_id,
+                    $fname = __METHOD__,
+                    $options = array( '' )
+                );
+            }
+            foreach ($questions as $q) {
+                $answer = $dbr->select(
+                    'pe_answers',
+                    array( '*'),
+                    $conds = 'EvalMainId='.$row->id . ' and qid = ' . $q->id,
+                    $fname = __METHOD__,
+                    $options = array( '' )
+                );
+                $answer=$answer->fetchObject();
+
+                $data.=$q->Question . '<br>' ;
+                $data.='<b> '.( $activity_cd->type == 1? 'Answer' : 'Points Awarded').'</b> :'.$answer->answer . '<br>' ;
+                if ($answer->Comment!=' ')
+                    $data.='Comment :'.$answer->Comment . '<br>' ;
+                $data.='<br>';
+            }
+
+            $data.='</span>';        
 
         }
         $data.='</table><br>';
@@ -417,7 +466,10 @@ class apiUserDashboard extends ApiQueryBase {
 	        $ret.="</table>";
 	        $data.=$ret;
 	}
-
+        $data.='
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+            <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+        ';
         $result->addValue(null, $this->getModuleName(),array('success' => $data));
 
         return true;
