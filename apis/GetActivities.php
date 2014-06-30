@@ -31,6 +31,8 @@ class apiGetActivities extends ApiQueryBase {
                     $options = array( 'ORDER BY' => 'EvalNum ASC' )
                 );
 
+                if (!$res->numRows())
+                    return "<br><b> There are no submissions in this catagory </b><br>";
 
                 $table='
                     <table border="1" class="prettytable sortable" >
@@ -84,6 +86,8 @@ class apiGetActivities extends ApiQueryBase {
                 $options = array( 'ORDER BY' => 'EvalNum ASC' )
             );
 
+            if (!$res->numRows())
+                    $ret.= "<br><b> There are no submissions in this catagory </b><br>";
 
             $table='
                 <table border="1" class="prettytable sortable" >
@@ -98,8 +102,10 @@ class apiGetActivities extends ApiQueryBase {
                 </tr>
                 ';
 
-            $ret.=" <h3> Click on the title of an Activity to Evaluate it </h3> <br>";
-            $ret.=$table;
+            if ($res->numRows()) {
+                $ret.=" <h3> Click on the title of an Activity to Evaluate it </h3> <br>";
+                $ret.=$table;
+            }
             foreach ( $res as $row ) {
                 $user = $dbr->select(
                         'user',
@@ -124,7 +130,8 @@ class apiGetActivities extends ApiQueryBase {
                 $ret.=$table;
                 $ret.="</div>";
             }
-            $ret.="</table>";
+            if ($res->numRows())
+                $ret.="</table>";
 
             $res = $dbr->select(
                     'pe_Activities',
@@ -148,9 +155,12 @@ class apiGetActivities extends ApiQueryBase {
                 </tr>
                 ';
 
-            $ret.=" <h3> Submissions not available for evaluation </h3> <br>";
-            $ret.=" <b> The learner did not choose to opt in for Peer Evaluation for these activities </b> <br>";
-            $ret.=$table;
+
+            if ($res->numRows()) {
+                $ret.=" <h3> Submissions not available for evaluation </h3> <br>";
+                $ret.=" <b> The learner did not choose to opt in for Peer Evaluation for these activities </b> <br>";
+                $ret.=$table;
+            }
             foreach ( $res as $row ) {
                 $user = $dbr->select(
                         'user',
@@ -172,10 +182,12 @@ class apiGetActivities extends ApiQueryBase {
                     <td>'.$row->Timestamp.'</td>
                     </tr>
                     ';
-                $ret.=$table;
+                if ($res->numRows())
+                    $ret.=$table;
 
             }
-            $ret.="</table>";
+            if ($res->numRows())
+                $ret.="</table>";
             $ret.="</div>";
             return $ret;
         }

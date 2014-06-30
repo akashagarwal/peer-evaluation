@@ -25,7 +25,6 @@ class apiUserDashboard extends ApiQueryBase {
         $conditionRecom='';
 
         $data.='<h2> Your Activity submissions </h2>';
-        $data.='<b> We encourage learners to evaluate their own work. Click on the blue title links below to submit your self-evaluation. </b>';
         $ret='';
         $res = $dbr->select(
             'pe_Activities',
@@ -35,6 +34,10 @@ class apiUserDashboard extends ApiQueryBase {
             $options = array( 'ORDER BY' => 'EvalNum ASC' )
         );
 
+        if ($res->numRows())
+            $data.='<b> We encourage learners to evaluate their own work. Click on the blue title links below to submit your self-evaluation. </b>';
+        else
+            $data.='<b> You have not submitted any activites yet.</b><br>';
 
         $table='
             <table border="1" class="prettytable sortable" >
@@ -49,7 +52,8 @@ class apiUserDashboard extends ApiQueryBase {
             </tr>
             ';
 
-        $ret.=$table;
+        if ($res->numRows())
+            $ret.=$table;
         foreach ( $res as $row ) {
 
             $conditionRecom.=' id!='.$row->id .' and ';
@@ -87,11 +91,12 @@ class apiUserDashboard extends ApiQueryBase {
             $ret.=$table;
 
         }
-        $ret.="</table>";
-        $data.=$ret;
+        if ($res->numRows()) {
+            $ret.="</table>";
+            $data.=$ret;
+        }
 
         $data.='<h2>Evaluations of your activities</h2>';
-        $data.='<b>Click on a title for more details</b><br>';
         $evals=$dbr->select(
             'pe_eval_main',
             array( '*'),
@@ -100,7 +105,9 @@ class apiUserDashboard extends ApiQueryBase {
             $options = array( '' )
         );
 
-        $data.='
+
+        if ($evals->numRows()) {
+            $data.='
             <table border="1" class="prettytable sortable "  >
             <tr>
               <td>Activity</td>
@@ -112,7 +119,11 @@ class apiUserDashboard extends ApiQueryBase {
               <td>Related</td>
               <td>Score</td>
             </tr>
-        ';
+            ';
+            $data.='<b>Click on a title for more details</b><br>';
+        }
+        else 
+            $data.='<b> No evaluations on your activities yet. Kindly check again later</b>';
 
         foreach ($evals as $row) {
 
@@ -217,10 +228,10 @@ class apiUserDashboard extends ApiQueryBase {
             $data.='</span>';        
 
         }
-        $data.='</table><br>';
+        if ($evals->numRows())
+            $data.='</table><br>';
 
 
-        $data.='<h2>Your Self Evaluations</h2>';
         $evals=$dbr->select(
             'pe_eval_main',
             array( '*'),
@@ -228,21 +239,28 @@ class apiUserDashboard extends ApiQueryBase {
             $fname = __METHOD__,
             $options = array( '' )
         );
-        $numE=$evals->numRows();       
-        $data.='
-            <table border="1" class="prettytable sortable "  >
-            <tr>
-              <td>Activity</td>
-              <td>Title</td>
-              <td>Submitted by</td>
-              <td>URL</td>      
-              <td>Comment</td>
-              <td>Evaluated by</td>
-              <td>Related</td>
-              <td>Score</td>
-            </tr>
-        ';
+        $numE=$evals->numRows();
+        $data.='<h2>Your Self Evaluations</h2>';       
 
+        if ($numE) {
+            $data.='
+                <table border="1" class="prettytable sortable "  >
+                <tr>
+                  <td>Activity</td>
+                  <td>Title</td>
+                  <td>Submitted by</td>
+                  <td>URL</td>      
+                  <td>Comment</td>
+                  <td>Evaluated by</td>
+                  <td>Related</td>
+                  <td>Score</td>
+                </tr>
+            ';
+        }
+        else
+        {
+            $data.='<b> You have not done a self evaluation yet.<b></br>';
+        }
         foreach ($evals as $row) {
 
 
@@ -311,6 +329,8 @@ class apiUserDashboard extends ApiQueryBase {
             $options = array( '' )
         );
         $numE=$evals->numRows();       
+
+        if ($numE) {
         $data.='
             <table border="1" class="prettytable sortable "  >
             <tr>
@@ -324,7 +344,10 @@ class apiUserDashboard extends ApiQueryBase {
               <td>Score</td>
             </tr>
         ';
-
+        }
+        else {
+            $data.='<b> You have not performed a Peer Evaluation yet.</b><br>';
+        }
         foreach ($evals as $row) {
 
 
@@ -383,7 +406,8 @@ class apiUserDashboard extends ApiQueryBase {
               </tr>
             ';    
         }
-        $data.='</table><br>';
+        if ($numE)
+            $data.='</table><br>';
 
 	$data.='<h2> Recommended Activites for you to Evaluate </h2> ';
 	$activity_cd= $dbr->select(
@@ -398,7 +422,7 @@ class apiUserDashboard extends ApiQueryBase {
 	foreach ($activity_cd as $row)
 	{
 	   	    $data.='<h4>'.$row->title.'</h4>';
-            $data.='<b>You have submitted '. ($evalnum[$row->id] ? $evalnum[$row->id] : 0) . ' evaluations for this activity.';
+            $data.='<b>You have submitted '. ($evalnum[$row->id] ? $evalnum[$row->id] : 0) . ' evaluations for this activity.</b>';
 
 //	$data.='<b><a href="http://b.wikieducator.org/User:Akashagarwal/sample-ViewActivities"> You could also click here to view all submitted activities and evaluate them </a> </b> <br>';
         	$ret='';
@@ -424,9 +448,13 @@ class apiUserDashboard extends ApiQueryBase {
 	            <td>Submission Time</td>
 	            </tr>
 		';
+            if (!$res->numRows())
+                $ret.= "<br> Currently, there are no submissions in this catagory for you to evaluate. Kindly check again later. <br>";
 
-	        $ret.=" <b> Click on the title of an activity in the below table to evaluate it </b> <br>";
-	        $ret.=$table;
+            if ($res->numRows()) {
+	           $ret.=" <b> Click on the title of an activity in the below table to evaluate it </b> <br>";
+	           $ret.=$table;
+            };
 	        foreach ( $res as $row ) {
 
 	        $activity_cd= $dbr->select(
@@ -460,8 +488,8 @@ class apiUserDashboard extends ApiQueryBase {
 	                <td>'.$row->Timestamp.'</td>
 	                </tr>
 	            ';
-	            $ret.=$table;
-	            $ret.="</div>";
+                if ($res->numRows())
+                    $ret.=$table;
 	        }
 	        $ret.="</table>";
 	        $data.=$ret;
