@@ -101,6 +101,7 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
                 );
                 
             }
+            $score=$score/10;
 
 
         }
@@ -136,7 +137,7 @@ class apiSubmitEvaluationForm extends ApiQueryBase {
 
         $temp = $dbw->update(
             'pe_eval_main',
-            $values = array('Score' => $score.' %', ),
+            $values = array('Score' => ($activityCd->type == 2 ? $score.' %' : $score.' points'), ),
             $conds = array('id' => $EvalId),        
             $fname = 'Database::update', $options = array()
         );
