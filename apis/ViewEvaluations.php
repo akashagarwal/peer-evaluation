@@ -155,7 +155,6 @@ class apiViewEvaluations extends ApiQueryBase {
 
         $data.='
             <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-            <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
         ';
         $result->addValue(null, $this->getModuleName(),array('success' => $data));
 
