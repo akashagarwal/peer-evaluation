@@ -58,6 +58,8 @@ $wgHooks['ParserFirstCallInit'][] = 'TagViewEvaluations::onParserInit';
 $wgAutoloadClasses['TagUserDashboard'] = dirname(__FILE__). '/tags/UserDashboard_body.php';
 $wgHooks['ParserFirstCallInit'][] = 'TagUserDashboard::onParserInit';
 
+$wgAutoloadClasses['GenForm'] = dirname(__FILE__). '/tags/GenForm.php';
+$wgHooks['ParserFirstCallInit'][] = 'GenForm::onParserInit';
 
 //API's 
 
