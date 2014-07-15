@@ -12,11 +12,11 @@ class GenForm {
         global $wgUser;
 
         $title = Title::newFromText( ':' . $rubric );
-        $wpage = Wikipage::factory( $title );
+        $revision = Revision::newFromTitle ( $title );
 
-
-        $text = $wpage->getText();
-
+	if ($revision == null  )
+		return "Page does not exist";
+	$text = $revision->getText( Revision::FOR_PUBLIC );		
 
         $pos = strpos( $text , "<!--" );
         $activitytitle = substr( $text , 1 , $pos - 1 );
