@@ -19,7 +19,6 @@ $wgExtensionCredits['other'][] = array(
         'version'  => '0.1 Alpha',
         'url' => 'http://wikieducator.org/Extension:PeerEvaluation',
         'description' => 'Prototype extension for PeerEvaluation',
-
 );
 
 // Register files
@@ -80,6 +79,10 @@ $wgAPIModules['apiViewEvaluations'] = 'apiViewEvaluations';
 
 $wgAutoloadClasses['apiUserDashboard'] = dirname(__FILE__). '/apis/UserDashboard.php';
 $wgAPIModules['apiUserDashboard'] = 'apiUserDashboard';
+
+
+$wgAutoloadClasses['pesubmit'] = dirname(__FILE__). '/apis/pesubmit.php';
+$wgAPIModules['pesubmit'] = 'pesubmit';
 
 /* Configuration */
 
