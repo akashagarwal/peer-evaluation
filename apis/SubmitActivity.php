@@ -13,34 +13,11 @@ class apiSubmitActivity extends ApiQueryBase {
             $this->dieUsage('must be logged in',
                 'notloggedin');
         };
-
-        $params = $this->extractRequestParams();
-
-        $result = $this->getResult();
-
-        $logincheck=$params['logincheck'];
-        if ($logincheck){
-            return;
-        };
-
-        $id = NULL;
-        $user = $wgUser->getId();
-
-        $dbw=$this->getDB();
-//       $result->addValue( null, $this->getModuleName(), array ( 'apiresponses' => $params['face'] ));
-//     $result->addValue( null, $this->getModuleName(), array ( 'user' => $user ));
-
-        $date = date('Y-m-d H:i:s');
-
-        $dbw->insert(
-            'pe_Activities',
-            array('userid' => $wgUser->getId(), 'URL' => trim(filter_var($params['url'],FILTER_SANITIZE_STRING)) , 'Title' => trim(filter_var($params['title'],FILTER_SANITIZE_STRING)) , 'Comment' => trim(filter_var($params['comment'],FILTER_SANITIZE_STRING))  , 'OptedIn' => ($params['optin']=='true'?1:0), 'Activity_id' => filter_var($params['activityid'],FILTER_SANITIZE_NUMBER_INT), 'Timestamp' => $date),
-            $fname = 'Database::insert', $options = array()
-        );
-
+	
+	$result=$this->getResult();
+	$this->editArticle('yo hoho mo !!! it works' , 'auto edit by API','User:Akashagarwal/sample-Activity3');
         $result->addValue(null, $this->getModuleName(),array('success' => "
             Activity Successfully Registered<br/>"));
-
 
         return true;
     }
@@ -48,7 +25,14 @@ class apiSubmitActivity extends ApiQueryBase {
     protected function getDB() {
         return wfGetDB( DB_MASTER );
     }
- 
+
+    protected function editArticle ($text, $summary,$title ) {
+
+	    $wgTitle = Title::newFromText( $title );
+	    $wgArticle = new Article( $wgTitle );
+	    $wgArticle->doEdit( $text, $summary, ( 0 ) | ( 0 ) | ( 0 ) | ( 0 ) );
+    }
+
     public function getAllowedParams() {
         return array (
             'url' => null,
