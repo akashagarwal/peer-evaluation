@@ -7,15 +7,15 @@ function submit()
 			    xmlhttp=new XMLHttpRequest();
 			      }
 	else
-		  {// code for IE6, IE5
+		{// code for IE6, IE5
 			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			      }
+		}
 	xmlhttp.onreadystatechange=function()
 	{
 	    if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
 			xmlDoc=xmlhttp.responseXML;
-			x=xmlDoc.getElementsByTagName("apiSubmitActivity")[0];
+			x=xmlDoc.getElementsByTagName("pesubmit")[0];
 			if (!x) {
 				code=xmlDoc.getElementsByTagName("error")[0].attributes['code'].nodeValue;
 				if (code == 'notloggedin') {
@@ -44,16 +44,12 @@ function submit()
         return false;
     }
 	comment=document.getElementById("comment").value;
+	activityPage=document.getElementById("activityPage").value;
 
-	activityid=document.getElementById("activityid").value;
-    if (activityid == null || activityid == "") {
-        alert("You must choose an activity.");
-        return false;
-    }
 	optin=document.getElementById("optin").checked;
 	xmlhttp.open("POST","/api.php",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send("action=apiSubmitActivity&url="+url+"&title="+title+"&comment="+comment+"&activityid="+activityid+"&optin="+optin+"&format=xml");
+	xmlhttp.send("action=pesubmit&peurl="+url+"&petitle="+title+"&pecomment="+comment+"&peoptin="+optin+"&peactivity="+activityPage+"&format=xml");
 	document.getElementById("form").innerHTML="Your submission is being processed...";
 
 }
@@ -81,8 +77,5 @@ $ ( document ).ready ( function() {
 		};
 	});
 
-	$(window).focus(function() {
-		location.reload(true);
-	});
 });
 
