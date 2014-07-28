@@ -17,12 +17,12 @@ function submit()
 			xmlDoc=xmlhttp.responseXML;
 			x=xmlDoc.getElementsByTagName("pesubmit")[0];
 			if (!x) {
-				code=xmlDoc.getElementsByTagName("error")[0].attributes['code'].nodeValue;
+				code=xmlDoc.getElementsByTagName("error")[0].attributes['code'].Value;
 				if (code == 'notloggedin') {
 					alert('Looks like you have logged out from another tab or your session has expired. Please login before you continue.');
 				}
 				else {
-					alert('Error : Cound not submit the activity. Please report this.');
+					alert('Error : '+code);
 				}
 				return;
 			}
