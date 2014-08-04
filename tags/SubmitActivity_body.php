@@ -36,7 +36,6 @@ class TagSubmitActivity {
 			return $ret;
 		}
 
-
 }
 ?>
 

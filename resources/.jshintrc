@@ -1,5 +1,4 @@
 {
-
 	// Enforcing
 	"bitwise": true,
 	"eqeqeq": true,

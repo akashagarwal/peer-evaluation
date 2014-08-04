@@ -1,17 +1,21 @@
 <?php
-class GenForm {
+class Evaluation {
     static function onParserInit( Parser $parser ) {
-            $parser->setHook( 'genform', array( __CLASS__, 'submitactivityRender' ) );
+            $parser->setHook( 'evaluation', array( __CLASS__, 'evaluationRender' ) );
             return true;
     }
 
-    static function submitactivityRender( $input, array $args, Parser $parser ) {
+    static function evaluationRender( $input, array $args, Parser $parser ) {
 
-        $ret = '';
+        $ret='<link rel="stylesheet" type="text/css" href="/extensions/PeerEvaluation/resources/evaluations.css">';
+        $ret.='<script src="/extensions/PeerEvaluation/resources/evaluations.js"></script>';
 
+
+        $ret.="<div id='form'>";
         $rubric = $args[ 'rubric' ];
         global $wgUser;
 
+        $activity=$args['activity'];
         $title = Title::newFromText( ':' . $rubric );
         $revision = Revision::newFromTitle ( $title );
 
@@ -23,6 +27,8 @@ class GenForm {
         $activitytitle = substr( $text , 1 , $pos - 1 );
         $type = substr( $text, $pos + 4 , 1 );
         $text = substr( $text , $pos + 9 );
+
+        $ret.="<span id='type' value='".$type."' activity='".$activity."' ></span>";
 
         if ( $type == 1 ) { 
 
@@ -37,13 +43,10 @@ class GenForm {
             $type1 = substr( $text , 0 , $pos  -1 );            
             $text = substr( $text , $pos );            
 
-
             $nlinepos  = strpos( $text , "\n" );
-            $nestedcheck = $text[0];
-
+            $nestedcheck = $text[1];
 
             $arr1 = array();
-            $arr = array();
 
             while ( $nestedcheck == '*' ) {
                 $nlinepos  = strpos( $text , "\n" );
@@ -69,7 +72,7 @@ class GenForm {
 
             $ret .= '<form>' ;
             foreach ( $arr as $key => $value ) {
-                $ret .= $value . '<br>';
+                $ret .= '<span type="q" qid="a'.$key.'" name="a">' . $value . ' </span>  <br>';
                 $ret .= '
 <label for="a'.$key.'yes">Yes</label>
 <input type="radio" name="a'.$key.'" id="a'.$key.'yes" value="1">
@@ -80,7 +83,7 @@ class GenForm {
             
 
             foreach ( $arr2 as $key => $value ) {
-                $ret .= $value . '<br>';
+                $ret .= '<span type="q" qid="b'.$key.'" name="b">' . $value . ' </span>  <br>';
                 $ret .= '
 <label for="b'.$key.'yes">Yes</label>
 <input type="radio" name="b'.$key.'" id="b'.$key.'yes" value="1">
@@ -98,6 +101,10 @@ class GenForm {
             $qintermediate = array();
             $qadvanced = array();
 
+            $qbeginnerGrade = array();
+            $qintermediateGrade= array();
+            $qadvancedGrade = array();
+
             $nos = 0;
             while ( $text[0] == '*' )
             {
@@ -112,24 +119,33 @@ class GenForm {
                 for ($i=0; $i < 3; $i++) { 
 
                     $content = '';
+
+                    $nlinepos  = strpos( $text , "\n" );
+                    $gradeEnd = strpos( $text , "-->" );
+                    $grade = substr( $text , 10 , $gradeEnd - 10 );
+                    $text = substr( $text , $nlinepos + 1 );                    
+
                     $nlinepos  = strpos( $text , "\n" );
                     $content .= substr( $text , 2 , $nlinepos - 1 );
                     $text = substr( $text , $nlinepos + 1 );
-                    while ( $text[2] == '*' ) {
+                    while ( $text[0] == '#' ) {
                         $nlinepos  = strpos( $text , "\n" );
-                        $content .= substr( $text , 2 , $nlinepos - 1 );
+                        $content .= "\n".substr( $text , 0 , $nlinepos - 1 );
                         $text = substr( $text , $nlinepos + 1 );                    
                     }
 
                     switch ( $i ) {
                         case 0:
                             $qbeginner[]=$content;
+                            $qbeginnerGrade[]=$grade;
                             break;
                         case 1:
                             $qintermediate[]=$content;
+                            $qintermediateGrade[]=$grade;
                             break;
                         case 2:
                             $qadvanced[]=$content;
+                            $qadvancedGrade[]=$grade;
                             break;
                         
                         default:
@@ -139,15 +155,15 @@ class GenForm {
             }
 
             for ( $i=0;  $i < $nos ;  $i++) {    
-                
-                $ret .= 'Question ' . ($i+1) . ' : <b>' . $q[$i] . '</b><br><br>';
+                $ret .= '<span type="q" qid="b'.$i.'" name="b" q="'.$q[$i].'"">  <br>';                
+                $ret .= 'Question ' . ($i+1) . ' : <b>' . $q[$i] . '</b><br><br></span>';
                 $ret .= '
-<label for="b'.$i.'Beginner">Beginner : '.$qbeginner[$i].'<br></label>
-<input type="radio" name="b'.$i.'" id="b'.$i.'Beginner" value="0"><br>
-<label for="b'.$i.'Intermediate">Intermediate : '.$qintermediate[$i].'<br></label>
-<input type="radio" name="b'.$i.'" id="b'.$i.'Intermediate" value="1"><br>
-<label for="b'.$i.'Advanced">Advanced : '.$qadvanced[$i].'<br></label>
-<input type="radio" name="b'.$i.'" id="b'.$i.'Advanced" value="2"><br> <br>
+<label for="b'.$i.'Beginner"> '.$qbeginnerGrade[$i].' : '.$qbeginner[$i].'<br></label>
+<input type="radio" name="b'.$i.'" id="b'.$i.'Beginner" value="'.$qbeginnerGrade[$i].'"><br>
+<label for="b'.$i.'Intermediate"> '.$qintermediateGrade[$i].' : '.$qintermediate[$i].'<br></label>
+<input type="radio" name="b'.$i.'" id="b'.$i.'Intermediate" value="'.$qintermediateGrade[$i].'"><br>
+<label for="b'.$i.'Advanced">' .$qadvancedGrade[$i].' : '.$qadvanced[$i].'<br></label>
+<input type="radio" name="b'.$i.'" id="b'.$i.'Advanced" value="'.$qadvancedGrade[$i].'"><br> <br>
 ';            }
 
         }
@@ -190,11 +206,14 @@ class GenForm {
                 $ret .= 'Question ' . ($i+1) . ' : <b>' . $q[$i] . '</b><br><br>';
                 $ret .= '
 <label for="description'.$i.'">'.$qdescription[$i].'</label>
-Your Rating (1-5) : <input type="text" name="rating'.$i.'" id="description'.$i.'"> <br><br>
-';            }
+Your Rating (1-5) : <input type="text" q="' . $q[$i] . '" name="rating'.$i.'" id="description'.$i.'"> <br><br>';}
 
             
         }                
+
+        $ret.='<input type="button" id="submit" value="Submit"></input>';
+        $ret.='</div>';
+        $ret.='<div id="table"></div>';
 
         return $ret;
     }

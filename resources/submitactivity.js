@@ -1,52 +1,47 @@
+/*global $:false */
+/*global alert:false */
+/* exported submit */
+/* exported urlFunction */
+
 function submit()
 {
-//	alert("hello");
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-		  {// code for IE7+, Firefox, Chrome, Opera, Safari
-			    xmlhttp=new XMLHttpRequest();
-			      }
-	else
-		{// code for IE6, IE5
-			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		}
+
+	var xmlhttp=new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function()
 	{
-	    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    if (xmlhttp.readyState===4 && xmlhttp.status===200)
 		{
-			xmlDoc=xmlhttp.responseXML;
-			x=xmlDoc.getElementsByTagName("pesubmit")[0];
+			var xmlDoc=xmlhttp.responseXML;
+			var x=xmlDoc.getElementsByTagName("pesubmit")[0];
 			if (!x) {
-				code=xmlDoc.getElementsByTagName("error")[0].attributes['code'].Value;
-				if (code == 'notloggedin') {
-					alert('Looks like you have logged out from another tab or your session has expired. Please login before you continue.');
+				var code=xmlDoc.getElementsByTagName("error")[0].attributes.code.Value;
+				if (code === "notloggedin") {
+					alert("Looks like you have logged out from another tab or your session has expired. Please login before you continue.");
 				}
 				else {
-					alert('Error : '+code);
+					alert("Error : "+code);
 				}
 				return;
 			}
-			y=x.attributes['success'].nodeValue;
-
+			var y=x.attributes.success.nodeValue;
 		    document.getElementById("form").innerHTML=y;
-
 		}
-	}
-	url=document.getElementById("url").value;
-    if (url == null || url == "") {
+	};
+	var url=document.getElementById.url.value;
+    if (url === null || url === "") {
         alert("URL must be filled out");
         return false;
     }
 
-	title=document.getElementById("title").value;
-    if (title == null || title == "") {
+	var title=document.getElementById("title").value;
+    if (title === null || title === "") {
         alert("Title must be filled out");
         return false;
     }
-	comment=document.getElementById("comment").value;
-	activityPage=document.getElementById("activityPage").value;
+	var comment=document.getElementById.comment.value;
+	var activityPage=document.getElementById.activityPage.value;
 
-	optin=document.getElementById("optin").checked;
+	var optin=document.getElementById("optin").checked;
 	xmlhttp.open("POST","/api.php",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("action=pesubmit&peurl="+url+"&petitle="+title+"&pecomment="+comment+"&peoptin="+optin+"&peactivity="+activityPage+"&format=xml");
@@ -56,26 +51,24 @@ function submit()
 
 function urlFunction()
 {
-	url=document.getElementById("url").value;
+	var url=document.getElementById.url.value;
 	var n = url.indexOf("www");
-	if (n==0 || url.indexOf("http")!=0 )
+	if (n===0 || url.indexOf("http")!==0 )
 	{
 		url="http://" + url;
 		document.getElementById("url").value=url;
 	}
-	content="<iframe  width='100%' height='300	' src="+url+"></iframe><br>";
+	var content="<iframe  width='100%' height='300	' src="+url+"></iframe><br>";
 	content+="<p>Please ensure that the URL contains the blog post specified and not the home page of the blog or the edit page.<br>If you can see your post above then the URL is correct otherwise click <a href="+url+" target='_blank'> here </a> to check if you reach the correct post. </p>";
 	document.getElementById("urlerror").innerHTML=content;
 }
 
 $ ( document ).ready ( function() {
 
-	$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data,status){ 
-		if (data['error']) {
-			$('#errors').html('You need to be logged in to submit an activity. Click <a href="/?title=Special:UserLogin" target="_blank">here </a> to login');
-			$('#form').hide();
-		};
+	$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data){ 
+		if (data.error) {
+			$("#errors").html("You need to be logged in to submit an activity. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
+			$("#form").hide();
+		}
 	});
-
 });
-

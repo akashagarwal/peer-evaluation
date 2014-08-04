@@ -35,15 +35,13 @@ class GenForm {
 
             $pos = strpos( $text , "*" );
             $type1 = substr( $text , 0 , $pos  -1 );            
-            $text = substr( $text , $pos );            
-
+            $text = substr( $text , $pos + 1 );            
 
             $nlinepos  = strpos( $text , "\n" );
-            $nestedcheck = $text[0];
-
+            $text = substr( $text , $nlinepos + 1 );
+            $nestedcheck = $text[1];
 
             $arr1 = array();
-            $arr = array();
 
             while ( $nestedcheck == '*' ) {
                 $nlinepos  = strpos( $text , "\n" );
