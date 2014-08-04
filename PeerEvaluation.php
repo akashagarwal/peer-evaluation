@@ -60,7 +60,12 @@ $wgHooks['ParserFirstCallInit'][] = 'TagUserDashboard::onParserInit';
 $wgAutoloadClasses['GenForm'] = dirname(__FILE__). '/tags/GenForm.php';
 $wgHooks['ParserFirstCallInit'][] = 'GenForm::onParserInit';
 
+$wgAutoloadClasses['Evaluation'] = dirname(__FILE__). '/tags/Evaluation.php';
+$wgHooks['ParserFirstCallInit'][] = 'Evaluation::onParserInit';
+
 //API's 
+
+//old version
 
 $wgAutoloadClasses['apiSubmitActivity'] = dirname(__FILE__). '/apis/SubmitActivity.php';
 $wgAPIModules['apiSubmitActivity'] = 'apiSubmitActivity';
@@ -80,9 +85,17 @@ $wgAPIModules['apiViewEvaluations'] = 'apiViewEvaluations';
 $wgAutoloadClasses['apiUserDashboard'] = dirname(__FILE__). '/apis/UserDashboard.php';
 $wgAPIModules['apiUserDashboard'] = 'apiUserDashboard';
 
+//New API's
 
 $wgAutoloadClasses['pesubmit'] = dirname(__FILE__). '/apis/pesubmit.php';
 $wgAPIModules['pesubmit'] = 'pesubmit';
+
+$wgAutoloadClasses['evaluations'] = dirname(__FILE__). '/apis/evaluations.php';
+$wgAPIModules['evaluations'] = 'evaluations';
+
+$wgAutoloadClasses['pevaluate'] = dirname(__FILE__). '/apis/pevaluate.php';
+$wgAPIModules['pevaluate'] = 'pevaluate';
+
 
 /* Configuration */
 
