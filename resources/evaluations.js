@@ -3,7 +3,8 @@
 
 $ ( document ).ready ( function() {
 
-	$.get("/api.php?action=evaluations&evactivities=User:Test/sampleactivity&format=json",function(data) {
+	var activity=$("#type").attr("activity");
+	$.get("/api.php?action=evaluations&evactivities="+activity+"&evprop=submissions&format=json",function(data) {
 		$("#form").hide();
 
 
@@ -37,7 +38,7 @@ $ ( document ).ready ( function() {
 		}
 		$("#table").html(table);
 
-		$(".title").click ( function()  {
+		$(".title").click ( function()  {	
 			$("#table").hide();
 			var type=$("#type").attr("value");
 			$("#form").show();

@@ -11,6 +11,10 @@ class TagViewEvaluations {
 	static function viewevaluationsRender( $input, array $args, Parser $parser ) {
 		$ret='<script src="/extensions/PeerEvaluation/resources/viewevaluations.js"></script>';
 
+        $activity=$args['activity'];
+
+        $ret.="<span id='activityPage' value='".$type."' activity='".$activity."' ></span>";
+       
 		$ret .='<span id="mcontent">
 			<span id="t1content">
 			</span>
