@@ -4,7 +4,7 @@ class pesubmit extends ApiQueryBase {
 	public function __construct( $query, $moduleName ) {
 		parent :: __construct( $query, $moduleName, '' );
 	}
- 
+
 	public function execute() {
 		global $wgUser, $wgServer;
 		global $wgDefaultUserOptions;
@@ -12,9 +12,9 @@ class pesubmit extends ApiQueryBase {
 		$result = $this->getResult();
 		$params = $this->extractRequestParams();
 
-		$data='';
+		$data = '';
 
-		$activityPage=filter_var($params['peactivity'],FILTER_SANITIZE_STRING);
+		$activityPage = filter_var( $params['peactivity'], FILTER_SANITIZE_STRING );
 
 		if ( !$activityPage ) {
 			$this->dieUsage( 'nopeactivity' , 'activity page cannot be null' );
@@ -25,35 +25,35 @@ class pesubmit extends ApiQueryBase {
 
 		if ( $revision == null )
 		  return "Page does not exist";
-		$text = $revision->getText( Revision::FOR_PUBLIC );            
+		$text = $revision->getText( Revision::FOR_PUBLIC );
 
 		$end = strpos( $text, '|}' );
 
 		$entry = "|-\n";
-		$entry .= "|[".filter_var($params['peurl'],FILTER_SANITIZE_STRING)." ".filter_var($params['petitle'],FILTER_SANITIZE_STRING)."]\n";
-		$entry .= "|[[User:".$wgUser->getName()."|".$wgUser->getRealName()."]]\n";
-		$entry .= "|".filter_var($params['pecomment'],FILTER_SANITIZE_STRING)."\n";
-		$entry .= "|". ( filter_var($params['peoptin'],FILTER_SANITIZE_STRING) == 'true' ? "Yes" : "No" ) . "\n";
-		$entry .= "|". date('Y-m-d H:i:s') . "\n";
+		$entry .= "|[" . filter_var( $params['peurl'], FILTER_SANITIZE_STRING ) . " " . filter_var( $params['petitle'], FILTER_SANITIZE_STRING ) . "]\n";
+		$entry .= "|[[User:" . $wgUser->getName() . "|" . $wgUser->getRealName() . "]]\n";
+		$entry .= "|" . filter_var( $params['pecomment'], FILTER_SANITIZE_STRING ) . "\n";
+		$entry .= "|" . ( filter_var( $params['peoptin'], FILTER_SANITIZE_STRING ) == 'true' ? "Yes" : "No" ) . "\n";
+		$entry .= "|" . date( 'Y-m-d H:i:s' ) . "\n";
 		$entry .= "|0\n";
 
 
-		$pre=substr($text, 0 , $end);
-		$post=substr($text, $end);
-		$this->editArticle($pre.$entry.$post,"Test edit of article",$activityPage);
+		$pre = substr( $text, 0 , $end );
+		$post = substr( $text, $end );
+		$this->editArticle( $pre . $entry . $post, "Test edit of article", $activityPage );
 
 
-		$result->addValue(null, $this->getModuleName(),array('success' => "
-			Activity Successfully Registered".$data));
-		
+		$result->addValue( null, $this->getModuleName(), array( 'success' => "
+			Activity Successfully Registered" . $data ) );
+
 		return true;
 	}
-	
+
 	protected function getDB() {
 		return wfGetDB( DB_MASTER );
 	}
 
-	protected function editArticle ($text, $summary,$title ) {
+	protected function editArticle ( $text, $summary, $title ) {
 
 		$wgTitle = Title::newFromText( $title );
 		$wgArticle = new Article( $wgTitle );
@@ -70,7 +70,7 @@ class pesubmit extends ApiQueryBase {
 			'petitle' => null
 		);
 	}
- 
+
 	public function getParamDescription() {
 		return array (
 			'pecourse' => 'course identifier',
@@ -81,11 +81,11 @@ class pesubmit extends ApiQueryBase {
 			'petitle' => 'Title of the submission'
 		);
 	}
- 
+
 	public function getDescription() {
 		return 'API to submit the Activities';
 	}
- 
+
 	protected function getExamples() {
 		return array ();
 	}

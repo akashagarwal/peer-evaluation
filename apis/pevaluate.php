@@ -4,7 +4,7 @@ class pevaluate extends ApiQueryBase {
 	public function __construct( $query, $moduleName ) {
 		parent :: __construct( $query, $moduleName, '' );
 	}
- 
+
 	public function execute() {
 		global $wgUser, $wgServer;
 		global $wgDefaultUserOptions;
@@ -13,25 +13,25 @@ class pevaluate extends ApiQueryBase {
 		$params = $this->extractRequestParams();
 
 
-		$activityPage=filter_var($params['peactivity'],FILTER_SANITIZE_STRING);
-		$id=filter_var($params['peid'],FILTER_SANITIZE_NUMBER_INT);
-		$evaluation=filter_var($params['pevaluation'],FILTER_SANITIZE_STRING);
+		$activityPage = filter_var( $params['peactivity'], FILTER_SANITIZE_STRING );
+		$id = filter_var( $params['peid'], FILTER_SANITIZE_NUMBER_INT );
+		$evaluation = $params['pevaluation'];
 
-		$dbw=$this->getDB();
+		$dbw = $this->getDB();
 
-        $dbw->insert(
-            'pe_evaluations',
-            array('activityId' => $id, 'Activity' => $activityPage, 'evaluaterUName' => $wgUser , 'evaluation' => $evaluation ),
-            $fname = 'Database::insert', 
-            $options = array()
-        );
+		$dbw->insert(
+			'pe_evaluations',
+			array( 'activityId' => $id, 'Activity' => $activityPage, 'evaluaterUName' => $wgUser , 'evaluation' => $evaluation ),
+			$fname = 'Database::insert',
+			$options = array()
+		);
 
-		$result->addValue(null, $this->getModuleName(),array('success' => "
-			Evaluation Successfully Processed"));
-		
+		$result->addValue( null, $this->getModuleName(), array( 'success' => "
+			Evaluation Successfully Processed" ) );
+
 		return true;
 	}
-	
+
 	protected function getDB() {
 		return wfGetDB( DB_MASTER );
 	}
@@ -43,7 +43,7 @@ class pevaluate extends ApiQueryBase {
 			'pevaluation' => null,
 		);
 	}
- 
+
 	public function getParamDescription() {
 		return array (
 			'peid' => 'peer evaluation item',
@@ -51,11 +51,11 @@ class pevaluate extends ApiQueryBase {
 			'pevaluation' => 'evaluation of item',
 		);
 	}
- 
+
 	public function getDescription() {
 		return 'API to submit the Activities';
 	}
- 
+
 	protected function getExamples() {
 		return array ();
 	}

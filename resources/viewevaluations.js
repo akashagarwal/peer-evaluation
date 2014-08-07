@@ -20,7 +20,7 @@ $ ( document ).ready ( function() {
 		";
 
 		for (var i in data.evaluations) {
-
+			console.log(data.evaluations[i]);
 			if ( !data.evaluations[i].evaluation)
 				continue;
 			$table += "<tr> \
