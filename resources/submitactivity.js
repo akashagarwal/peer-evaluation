@@ -27,7 +27,7 @@ function submit()
 		    document.getElementById("form").innerHTML=y;
 		}
 	};
-	var url=document.getElementById.url.value;
+	var url=document.getElementById("url").value;
     if (url === null || url === "") {
         alert("URL must be filled out");
         return false;
@@ -51,7 +51,7 @@ function submit()
 
 function urlFunction()
 {
-	var url=document.getElementById.url.value;
+	var url=document.getElementById("url").value;
 	var n = url.indexOf("www");
 	if (n===0 || url.indexOf("http")!==0 )
 	{
