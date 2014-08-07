@@ -15,7 +15,7 @@ class pevaluate extends ApiQueryBase {
 
 		$activityPage = filter_var( $params['peactivity'], FILTER_SANITIZE_STRING );
 		$id = filter_var( $params['peid'], FILTER_SANITIZE_NUMBER_INT );
-		$evaluation = $params['pevaluation'];
+		$evaluation = filter_var($params['pevaluation'],FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
 
 		$dbw = $this->getDB();
 
