@@ -21,7 +21,7 @@ class pevaluate extends ApiQueryBase {
 
 		$dbw->insert(
 			'pe_evaluations',
-			array( 'activityId' => $id, 'Activity' => $activityPage, 'evaluaterUName' => $wgUser , 'evaluation' => $evaluation ),
+			array( 'activityId' => $id, 'Activity' => $activityPage, 'evaluaterUName' => $wgUser->getName() , 'evaluation' => $evaluation ),
 			$fname = 'Database::insert',
 			$options = array()
 		);
