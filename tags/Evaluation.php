@@ -12,10 +12,10 @@ class Evaluation {
 
 
 		$ret .= "<div id='form'>";
-		$rubric = $args[ 'rubric' ];
+		$rubric = filter_var( $args[ 'rubric' ], FILTER_SANITIZE_STRING );
 		global $wgUser;
 
-		$activity = $args['activity'];
+		$activity = filter_var( $args['activity'], FILTER_SANITIZE_STRING );
 		$title = Title::newFromText( ':' . $rubric );
 		$revision = Revision::newFromTitle ( $title );
 
