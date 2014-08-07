@@ -38,8 +38,8 @@ function submit()
         alert("Title must be filled out");
         return false;
     }
-	var comment=document.getElementById.comment.value;
-	var activityPage=document.getElementById.activityPage.value;
+	var comment=document.getElementById("comment").value;
+	var activityPage=document.getElementById("activityPage").value;
 
 	var optin=document.getElementById("optin").checked;
 	xmlhttp.open("POST","/api.php",true);
