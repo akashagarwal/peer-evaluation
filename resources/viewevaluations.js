@@ -21,6 +21,8 @@ $ ( document ).ready ( function() {
 
 		for (var i in data.evaluations) {
 
+			if ( !data.evaluations[i].evaluation)
+				continue;
 			$table += "<tr> \
 			  <td>  <a class='title' name="+data.evaluations[i].id+">"+ data.evaluations[i].evaluation.activity.title +" </a> </td> \
 			  <td> <a href='/User:"+ data.evaluations[i].evaluation.activity.userName +"'>"+ data.evaluations[i].evaluation.activity.userName +" </a></td> \

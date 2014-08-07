@@ -13,7 +13,7 @@ class TagViewEvaluations {
 
         $activity=$args['activity'];
 
-        $ret.="<span id='activityPage' value='".$type."' activity='".$activity."' ></span>";
+        $ret.="<span id='activityPage' activity='".$activity."' ></span>";
        
 		$ret .='<span id="mcontent">
 			<span id="t1content">

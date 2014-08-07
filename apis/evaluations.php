@@ -15,8 +15,8 @@ class evaluations extends ApiQueryBase {
 
 		$data='';
 
-		$activityPage=$params['evactivities'];
-		$evprop=$params['evprop'];
+		$activityPage=filter_var($params['evactivities'],FILTER_SANITIZE_STRING);
+		$evprop=filter_var($params['evprop'],FILTER_SANITIZE_STRING);
 
 		if ( !$activityPage ) {
 			$this->dieUsage( 'nopeactivity' , 'activity page cannot be null' );

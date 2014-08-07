@@ -13,21 +13,21 @@ class pevaluate extends ApiQueryBase {
 		$params = $this->extractRequestParams();
 
 
-		$activityPage=$params['peactivity'];
-		$id=$params['peid'];
-		$evaluation=$params['pevaluation'];
+		$activityPage=filter_var($params['peactivity'],FILTER_SANITIZE_STRING);
+		$id=filter_var($params['peid'],FILTER_SANITIZE_NUMBER_INT);
+		$evaluation=filter_var($params['pevaluation'],FILTER_SANITIZE_STRING);
 
 		$dbw=$this->getDB();
 
         $dbw->insert(
             'pe_evaluations',
-            array('id' => $id, 'Activity' => $activityPage, 'evaluaterUName' => $wgUser , 'evaluation' => $evaluation ),
+            array('activityId' => $id, 'Activity' => $activityPage, 'evaluaterUName' => $wgUser , 'evaluation' => $evaluation ),
             $fname = 'Database::insert', 
             $options = array()
         );
 
 		$result->addValue(null, $this->getModuleName(),array('success' => "
-			Evaluation Successfully Processed<br/>"));
+			Evaluation Successfully Processed"));
 		
 		return true;
 	}

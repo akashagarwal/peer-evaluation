@@ -1,3 +1,14 @@
+-- Table for activity centric Peer Evalaution --
+
+CREATE TABLE IF NOT EXISTS `mw_pe_evaluations` (
+  `Activity` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL,
+  `evaluaterUName` varchar(25) NOT NULL,
+  `evaluation` blob NOT NULL
+);
+
+-- Old Tables --
+
 -- Meta data for course --
 
 CREATE TABLE IF NOT EXISTS `mw_pe_cd_Activities` (

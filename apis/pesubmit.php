@@ -13,12 +13,8 @@ class pesubmit extends ApiQueryBase {
 		$params = $this->extractRequestParams();
 
 		$data='';
-/*        
-		foreach ($params as $key => $value) {
-			$data.=$key." - ".$value."<br>";
-		}
-*/
-		$activityPage=$params['peactivity'];
+
+		$activityPage=filter_var($params['peactivity'],FILTER_SANITIZE_STRING);
 
 		if ( !$activityPage ) {
 			$this->dieUsage( 'nopeactivity' , 'activity page cannot be null' );
@@ -34,10 +30,10 @@ class pesubmit extends ApiQueryBase {
 		$end = strpos( $text, '|}' );
 
 		$entry = "|-\n";
-		$entry .= "|[".$params['peurl']." ".$params['petitle']."]\n";
+		$entry .= "|[".filter_var($params['peurl'],FILTER_SANITIZE_STRING)." ".filter_var($params['petitle'],FILTER_SANITIZE_STRING)."]\n";
 		$entry .= "|[[User:".$wgUser->getName()."|".$wgUser->getRealName()."]]\n";
-		$entry .= "|".$params['pecomment']."\n";
-		$entry .= "|". ( $params['peoptin'] == 'true' ? "Yes" : "No" ) . "\n";
+		$entry .= "|".filter_var($params['pecomment'],FILTER_SANITIZE_STRING)."\n";
+		$entry .= "|". ( filter_var($params['peoptin'],FILTER_SANITIZE_STRING) == 'true' ? "Yes" : "No" ) . "\n";
 		$entry .= "|". date('Y-m-d H:i:s') . "\n";
 		$entry .= "|0\n";
 
@@ -48,7 +44,7 @@ class pesubmit extends ApiQueryBase {
 
 
 		$result->addValue(null, $this->getModuleName(),array('success' => "
-			Activity Successfully Registered<br/>".$data));
+			Activity Successfully Registered".$data));
 		
 		return true;
 	}
