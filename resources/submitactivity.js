@@ -1,69 +1,5 @@
 /*global $:false */
-/*global alert:false */
-/* exported submit */
-/* exported urlFunction */
 /*jshint -W043 */
-
-
-function submit()
-{
-
-	var xmlhttp=new XMLHttpRequest();
-	xmlhttp.onreadystatechange=function()
-	{
-	    if (xmlhttp.readyState===4 && xmlhttp.status===200)
-		{
-			var xmlDoc=xmlhttp.responseXML;
-			var x=xmlDoc.getElementsByTagName("pesubmit")[0];
-			if (!x) {
-				var code=xmlDoc.getElementsByTagName("error")[0].attributes.code.Value;
-				if (code === "notloggedin") {
-					alert("Looks like you have logged out from another tab or your session has expired. Please login before you continue.");
-				}
-				else {
-					alert("Error : "+code);
-				}
-				return;
-			}
-			var y=x.attributes.success.nodeValue;
-		    document.getElementById("form").innerHTML=y;
-		}
-	};
-	var url=document.getElementById("url").value;
-    if (url === null || url === "") {
-        alert("URL must be filled out");
-        return false;
-    }
-
-	var title=document.getElementById("title").value;
-    if (title === null || title === "") {
-        alert("Title must be filled out");
-        return false;
-    }
-	var comment=document.getElementById("comment").value;
-	var activityPage=document.getElementById("activityPage").value;
-
-	var optin=document.getElementById("optin").checked;
-	xmlhttp.open("POST","/api.php",true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send("action=pesubmit&peurl="+url+"&petitle="+title+"&pecomment="+comment+"&peoptin="+optin+"&peactivity="+activityPage+"&format=xml");
-	document.getElementById("form").innerHTML="Your submission is being processed...";
-
-}
-
-function urlFunction()
-{
-	var url=document.getElementById("url").value;
-	var n = url.indexOf("www");
-	if (n===0 || url.indexOf("http")!==0 )
-	{
-		url="http://" + url;
-		document.getElementById("url").value=url;
-	}
-	var content="<p>Please ensure that the URL contains the blog post specified and not the home page of the blog or the edit page. \
-			<br>Click <a href="+url+" target='_blank'> here </a> to check if you reach the correct post. </p>";
-	document.getElementById("urlerror").innerHTML=content;
-}
 
 $ ( document ).ready ( function() {
 
@@ -74,5 +10,63 @@ $ ( document ).ready ( function() {
 		}
 	});
 
+	$("#url").blur( function() {
+		var url=$(this).val();
+		var n = url.indexOf("www");
+		if (n===0 || url.indexOf("http")!==0 )
+		{
+			url="http://" + url;
+			$(this).val(url);
+		}
+		var content="<p>Please ensure that the URL contains the blog post specified and not the home page of the blog or the edit page. \
+				<br>Click <a href="+url+" target='_blank'> here </a> to check if you reach the correct post. </p>";
+		$("#urlerror").html(content);
+	});
 
+	$("#sa_submit").click( function() {
+
+		$("#urlerror2").html("");
+		$("#titleerror").html("");
+
+		var submitData={};
+
+		var url=$("#url").val();
+		if (url === null || url === "") {
+			$("#urlerror2").html("<br><b style='color:red'>URL must be filled out</b>");
+			return false;
+		}
+
+		var title=$("#title").val();
+		if (title === null || title === "") {
+			$("#titleerror").html("<b style='color:red' >Title must be filled out</b></br>");
+			return false;
+		}
+		var comment=$("#comment").val();
+		var activityPage=$("#activityPage").val();
+
+		var optin=document.getElementById("optin").checked;
+
+		submitData.action="pesubmit";
+		submitData.peurl=url;
+		submitData.petitle=title;
+		submitData.pecomment=comment;
+		submitData.peoptin=optin;
+		submitData.peactivity=activityPage;
+		submitData.format="json";
+
+		$("#form").html("Processing your submission...");			
+
+		$.post("/api.php", submitData, function( data ) {
+				if (!data.pesubmit) {
+					if ( data.error.code === "notloggedin") {
+						$("#form").html("Looks like you have logged out from another tab or your session has expired. Please login before you continue.");
+					}
+					else {
+						$("#form").html("Error : "+data.error.code);
+					}
+					return;
+				}
+				$("#form").html(data.pesubmit.success);
+			});
+	});
 });

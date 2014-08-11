@@ -24,13 +24,15 @@ class TagSubmitActivity {
 
 			$ret.='
                                 </select>
-                                URL of the blog post : <input type="text" name="URL" id="url" onblur="urlFunction()">
+                                URL of the blog post : <input type="text" name="URL" id="url">
                                 <b id="urlerror" > </b>
+                                <b id="urlerror2" ></b>
                                 Title : <input type="text" name="Title" id="title">
+                                <b id="titleerror" ></b>
                                 Comment : <input type="text" name="Comment" id="comment">
                                 <input type="checkbox" name="OptedIn" value="true" id="optin"> Opt in for Peer Evaluation
                                 <input type="hidden" id="activityPage" name="activityPage" value="'.$activityPage.'">
-                                <input type="submit" value="Submit" onclick="submit()">
+                                <input type="submit" value="Submit" id="sa_submit" >
                                 </div>
                                 </div>';
 			return $ret;
