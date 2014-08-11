@@ -2,6 +2,8 @@
 /*global alert:false */
 /* exported submit */
 /* exported urlFunction */
+/*jshint -W043 */
+
 
 function submit()
 {
@@ -58,17 +60,19 @@ function urlFunction()
 		url="http://" + url;
 		document.getElementById("url").value=url;
 	}
-	var content="<iframe  width='100%' height='300	' src="+url+"></iframe><br>";
-	content+="<p>Please ensure that the URL contains the blog post specified and not the home page of the blog or the edit page.<br>If you can see your post above then the URL is correct otherwise click <a href="+url+" target='_blank'> here </a> to check if you reach the correct post. </p>";
+	var content="<p>Please ensure that the URL contains the blog post specified and not the home page of the blog or the edit page. \
+			<br>Click <a href="+url+" target='_blank'> here </a> to check if you reach the correct post. </p>";
 	document.getElementById("urlerror").innerHTML=content;
 }
 
 $ ( document ).ready ( function() {
 
-	$.get("/api.php?action=apiSubmitActivity&logincheck=1&format=json",function(data){ 
-		if (data.error) {
+	$.get("/api.php?action=query&meta=userinfo&format=json",function(data){ 
+		if (data.query.userinfo.id === 0) {
 			$("#errors").html("You need to be logged in to submit an activity. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
 			$("#form").hide();
 		}
 	});
+
+
 });

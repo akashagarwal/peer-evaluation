@@ -11,6 +11,11 @@ class pevaluate extends ApiQueryBase {
 
 		$result = $this->getResult();
 		$params = $this->extractRequestParams();
+		
+        if (!$wgUser->isLoggedIn()) {
+            $this->dieUsage('must be logged in',
+                'notloggedin');
+        };
 
 
 		$activityPage = filter_var( $params['peactivity'], FILTER_SANITIZE_STRING );

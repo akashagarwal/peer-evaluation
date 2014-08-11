@@ -3,6 +3,13 @@
 
 $ ( document ).ready ( function() {
 
+	$.get("/api.php?action=query&meta=userinfo&format=json",function(data){ 
+		if (data.query.userinfo.id === 0) {
+			$("#table").html("You need to be logged in to submit an activity. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
+			return;
+		}
+	});
+
 	var activity=$("#type").attr("activity");
 	$.get("/api.php?action=evaluations&evactivities="+activity+"&evprop=submissions&format=json",function(data) {
 		$("#form").hide();
