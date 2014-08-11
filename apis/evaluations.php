@@ -67,17 +67,17 @@ class evaluations extends ApiQueryBase {
 				$text = substr( $text, $pos + 1 );
 
 				$pos = strpos( $text, "|" );
-				$comment = substr( $text, 0, $pos );
+				$comment = substr( $text, 0, $pos - 1 );
 				$text = substr( $text, $pos + 1 );
 				$entry['comment'] = $comment;
 
 				$pos = strpos( $text, "|" );
-				$optedIn = substr( $text, 0, $pos );
+				$optedIn = substr( $text, 0, $pos - 1 );
 				$text = substr( $text, $pos + 1 );
 				$entry['optedIn'] = $optedIn;
 
 				$pos = strpos( $text, "|" );
-				$timeStamp = substr( $text, 0, $pos );
+				$timeStamp = substr( $text, 0, $pos - 1);
 				$text = substr( $text, $pos + 1 );
 				$entry['timeStamp'] = $timeStamp;
 

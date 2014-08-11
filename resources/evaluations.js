@@ -36,7 +36,7 @@ $ ( document ).ready ( function() {
 						<td> <a href='/User:"+data.evaluations[i].userName+"'>"+ data.evaluations[i].userName +" </a></td> \
 						<td> <a href='"+data.evaluations[i].url+"' target='_blank'> "+data.evaluations[i].url+"</a></td>   \
 						<td>"+data.evaluations[i].comment+"</td> \
-						<td>"+(data.evaluations[i].optedIn ? "Yes" :"No")+"</td> \
+						<td>"+( (data.evaluations[i].optedIn === "Yes" ) ? "Yes" :"No")+"</td> \
 						<td>"+data.evaluations[i].numEval+"</td> \
 						<td>"+data.evaluations[i].timeStamp+"</td> \
 						</tr> \
