@@ -7,8 +7,9 @@ $ ( document ).ready ( function() {
 	$.get("/api.php?action=evaluations&evactivities="+activity+"&evprop=submissions&format=json",function(data) {
 		$("#form").hide();
 
+		var table = "<h2>Click on a title to evaluate submission</h2>";
 
-		var table=" \
+		table+=" \
 			<table border='1' class='prettytable sortable' > \
 			<tr> \
 			<td>Title</td> \
@@ -42,6 +43,7 @@ $ ( document ).ready ( function() {
 			$("#table").hide();
 			var type=$("#type").attr("value");
 			$("#form").show();
+			$("#form").css("visibility","visible");
 
 			var id=$(this).attr("id");
 			var evaluation={};

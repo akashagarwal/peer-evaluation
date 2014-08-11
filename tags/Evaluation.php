@@ -11,7 +11,7 @@ class Evaluation {
 		$ret .= '<script src="/extensions/PeerEvaluation/resources/evaluations.js"></script>';
 
 
-		$ret .= "<div id='form'>";
+		$ret .= "<div id='form' style='visibility:hidden' >";
 		$rubric = filter_var( $args[ 'rubric' ], FILTER_SANITIZE_STRING );
 		global $wgUser;
 
@@ -157,14 +157,21 @@ class Evaluation {
 			for ( $i = 0;  $i < $nos ;  $i++ ) {
 				$ret .= '<span type="q" qid="b' . $i . '" name="b" q="' . $q[$i] . '"">  <br>';
 				$ret .= 'Question ' . ( $i + 1 ) . ' : <b>' . $q[$i] . '</b><br><br></span>';
+				$ret .= '<table class="wikitable" >';
 				$ret .= '
-					<label for="b' . $i . 'Beginner"> ' . $qbeginnerGrade[$i] . ' : ' . $qbeginner[$i] . '<br></label>
+					<tr>
+					<td style="text-align:center" width="33%">
+					<label for="b' . $i . 'Beginner"> <i><b>' . $qbeginnerGrade[$i] . '</i></b> : ' . $qbeginner[$i] . '<br></label>
 					<input type="radio" name="b' . $i . '" id="b' . $i . 'Beginner" value="' . $qbeginnerGrade[$i] . '"><br>
-					<label for="b' . $i . 'Intermediate"> ' . $qintermediateGrade[$i] . ' : ' . $qintermediate[$i] . '<br></label>
+					</td><td style="text-align:center" width="33%">
+					<label for="b' . $i . 'Intermediate"> <i><b>' . $qintermediateGrade[$i] . '</i></b> : ' . $qintermediate[$i] . '<br></label>
 					<input type="radio" name="b' . $i . '" id="b' . $i . 'Intermediate" value="' . $qintermediateGrade[$i] . '"><br>
-					<label for="b' . $i . 'Advanced">' . $qadvancedGrade[$i] . ' : ' . $qadvanced[$i] . '<br></label>
-					<input type="radio" name="b' . $i . '" id="b' . $i . 'Advanced" value="' . $qadvancedGrade[$i] . '"><br> <br>
+					</td><td style="text-align:center" width="33%">
+					<label for="b' . $i . 'Advanced"> <i><b>' . $qadvancedGrade[$i] . '</i></b> : ' . $qadvanced[$i] . '<br></label>
+					<input type="radio"  name="b' . $i . '" id="b' . $i . 'Advanced" value="' . $qadvancedGrade[$i] . '"><br> <br>
+					</td></tr>
 					';
+				$ret .= '</table>';
 				}
 		}
 

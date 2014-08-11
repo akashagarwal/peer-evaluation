@@ -44,7 +44,7 @@ class pesubmit extends ApiQueryBase {
 
 
 		$result->addValue( null, $this->getModuleName(), array( 'success' => "
-			Activity Successfully Registered" . $data ) );
+			Activity successfully registered" . $data ) );
 
 		return true;
 	}

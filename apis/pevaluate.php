@@ -27,7 +27,7 @@ class pevaluate extends ApiQueryBase {
 		);
 
 		$result->addValue( null, $this->getModuleName(), array( 'success' => "
-			Evaluation Successfully Processed" ) );
+			Evaluation successfully processed" ) );
 
 		return true;
 	}
