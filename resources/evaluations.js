@@ -57,11 +57,18 @@ $ ( document ).ready ( function() {
 					if ( type === "1" ) {
 
 						$("#submit").click ( function () {
+							var errorFlag=0;
 							evaluation.submission={ a:[] , b:[] };
 
 							$("span[type=q]").each( function() {
 								var entry=$(this);
 								var ans=$("input[name="+entry.attr("qid")+"]:checked").val();
+								$("#error"+entry.attr("qid")).html("");
+
+								if (!ans) {
+									$("#error"+entry.attr("qid")).html("<b style='color:red'> Please select an option for this question</b></br>");
+									errorFlag=1;
+								}
 
 								var qa={};
 
@@ -71,11 +78,15 @@ $ ( document ).ready ( function() {
 								evaluation.submission[entry.attr("name")].push(qa);
 
 							});
+							if ( errorFlag === 1) {
+								return;
+							}
 							var submitData={};
 							submitData.peid=data.evaluations[id].id;
 							submitData.peactivity="User:Test/sampleactivity";
 							submitData.pevaluation=JSON.stringify(evaluation);
 
+							$("#form").html("Processing Evaluation");
 							$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
 								$("#form").html(data.pevaluate.success);
 							});
@@ -84,11 +95,17 @@ $ ( document ).ready ( function() {
 					if ( type === "2" ) {
 
 						$("#submit").click ( function () {
+							var errorFlag=0;
 							evaluation.submission=[];
 
 							$("span[type=q]").each( function() {
 								var entry=$(this);
 								var ans=$("input[name="+entry.attr("qid")+"]:checked").val();
+								$("#error"+entry.attr("qid")).html("");
+								if (!ans) {
+									$("#error"+entry.attr("qid")).html("<b style='color:red'> Please select an option for this question</b></br>");
+									errorFlag=1;
+								}
 
 								var qa={};
 
@@ -98,10 +115,15 @@ $ ( document ).ready ( function() {
 								evaluation.submission.push(qa);
 
 							});
+							if ( errorFlag === 1) {
+								return;
+							}
+
 							var submitData={};
 							submitData.peid=data.evaluations[id].id;
 							submitData.peactivity="User:Test/sampleactivity";
 							submitData.pevaluation=JSON.stringify(evaluation);
+							$("#form").html("Processing Evaluation");
 							$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
 								$("#form").html(data.pevaluate.success);
 							});
@@ -110,11 +132,22 @@ $ ( document ).ready ( function() {
 					if ( type === "3" ) {
 
 						$("#submit").click ( function () {
+							var errorFlag=0;
 							evaluation.submission=[];
 
 							$("input[type=text]").each( function() {
 								var entry=$(this);
 								var ans=entry.val();
+								$("#error"+entry.attr("name")).html("");
+								if (ans === "" ) {
+									$("#error"+entry.attr("name")).html("<b style='color:red'> Please rate this question</b></br></br>");
+									errorFlag=1;
+								}
+
+								if ( parseInt(ans) < 1 || parseInt(ans) > 5  ) {
+									$("#error"+entry.attr("name")).html("<b style='color:red'> Please enter a value between 1 and 5</b></br></br>");
+									errorFlag=1;
+								}
 
 								var qa={};
 
@@ -124,11 +157,14 @@ $ ( document ).ready ( function() {
 								evaluation.submission.push(qa);
 
 							});
+							if ( errorFlag === 1) {
+								return;
+							}
 							var submitData={};
 							submitData.peid=data.evaluations[id].id;
 							submitData.peactivity="User:Test/sampleactivity";
 							submitData.pevaluation=JSON.stringify(evaluation);
-
+							$("#form").html("Processing Evaluation");
 							$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
 								$("#form").html(data.pevaluate.success);
 							});

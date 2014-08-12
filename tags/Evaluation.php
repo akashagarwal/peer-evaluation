@@ -78,6 +78,7 @@ class Evaluation {
 					<input type="radio" name="a' . $key . '" id="a' . $key . 'yes" value="1">
 					<label for="a' . $key . 'no">No</label>
 					<input type="radio" name="a' . $key . '" id="a' . $key . 'no" value="0"><br>
+					<span id="errora' . $key . '"></span>
 				';
 			}
 
@@ -88,7 +89,8 @@ class Evaluation {
 					<label for="b' . $key . 'yes">Yes</label>
 					<input type="radio" name="b' . $key . '" id="b' . $key . 'yes" value="1">
 					<label for="b' . $key . 'no">No</label>
-					<input type="radio" name="b' . $key . '" id="b' . $key . 'no" value="0"><br>
+					<input type="radio" name="b' . $key . '" id="b' . $key . 'no" value="0"><br>					<span id="errora' . $key . '"></span>
+					<span id="errorb' . $key . '"></span>
 				';
 			}
 		}
@@ -172,6 +174,8 @@ class Evaluation {
 					</td></tr>
 					';
 				$ret .= '</table>';
+				$ret .= '<span id="errorb' . $i . '"></span>';
+
 				}
 		}
 
@@ -213,9 +217,9 @@ class Evaluation {
 				$ret .= 'Question ' . ( $i + 1 ) . ' : <b>' . $q[$i] . '</b><br><br>';
 				$ret .= '
 					<label for="description' . $i . '">' . $qdescription[$i] . '</label>
-					Your Rating (1-5) : <input type="text" q="' . $q[$i] . '" name="rating' . $i . '" id="description' . $i . '"> <br><br>'; }
-
-
+					Your Rating (1-5) : <input type="text" q="' . $q[$i] . '" name="rating' . $i . '" id="description' . $i . '"> <br><br>'; 
+				$ret .= '<span id="errorrating' . $i . '"></span>';
+			}
 		}
 
 		$ret .= '<input type="button" id="submit" value="Submit"></input>';
