@@ -35,8 +35,10 @@ class pesubmit extends ApiQueryBase {
 		$title = Title::newFromText( ':' . $activityPage );
 		$revision = Revision::newFromTitle ( $title );
 
-		if ( $revision == null )
-		  return "Page does not exist";
+		if ( $revision == null ) {
+			$this->dieUsage( 'pagedoesnotexest' , 'activity page does not exist' );
+		}
+
 		$text = $revision->getText( Revision::FOR_PUBLIC );
 
 		$end = strpos( $text, '|}' );

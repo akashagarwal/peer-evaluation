@@ -39,13 +39,13 @@ $ ( document ).ready ( function() {
 
 		var url=$("#url").val();
 		if (url === null || url === "") {
-			$("#urlerror2").html("<br><b style='color:red'>URL must be filled out</b>");
+			$("#urlerror2").html("<br><b style='color:red'>URL must be filled out</b><br/>");
 			return false;
 		}
 
 		var title=$("#title").val();
 		if (title === null || title === "") {
-			$("#titleerror").html("<b style='color:red' >Title must be filled out</b></br>");
+			$("#titleerror").html("<b style='color:red' >Title must be filled out</b><br/>");
 			return false;
 		}
 		var comment=$("#comment").val();

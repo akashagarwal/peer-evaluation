@@ -4,7 +4,7 @@
  * For more info see http://wikieducator.org/Extension:PeerEvaluation
  * @license GNU General Public Licence 2.0 or later
  */
- 
+
 class TagSubmitActivity {
 		static function onParserInit( Parser $parser ) {
 				$parser->setHook( 'submitactivity', array( __CLASS__, 'submitactivityRender' ) );
@@ -29,18 +29,18 @@ class TagSubmitActivity {
 			$ret .=' <div id="form">';
 
 			$ret.='
-                                </select>
-                                URL of the blog post : <input type="text" name="URL" id="url">
-                                <b id="urlerror" > </b>
-                                <b id="urlerror2" ></b>
-                                Title : <input type="text" name="Title" id="title">
-                                <b id="titleerror" ></b>
-                                Comment : <input type="text" name="Comment" id="comment">
-                                <input type="checkbox" name="OptedIn" value="true" id="optin"> Opt in for Peer Evaluation
-                                <input type="hidden" id="activityPage" name="activityPage" value="'.$activityPage.'">
-                                <input type="submit" value="Submit" id="sa_submit" >
-                                </div>
-                                </div>';
+</select>
+URL of the blog post : <input type="text" name="URL" id="url"><br/>
+<b id="urlerror" > </b>
+<b id="urlerror2" ></b>
+Title : <input type="text" name="Title" id="title"><br/>
+<b id="titleerror" ></b>
+Comment : <input type="text" name="Comment" id="comment"><br/>
+<input type="checkbox" name="OptedIn" value="true" id="optin"> Opt in for Peer Evaluation<br/>
+<input type="hidden" id="activityPage" name="activityPage" value="'.$activityPage.'">
+<input type="submit" value="Submit" id="sa_submit" >
+</div>
+</div>';
 			return $ret;
 		}
 
