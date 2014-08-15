@@ -12,12 +12,12 @@ $ ( document ).ready ( function() {
 
 	$.get("/api.php?action=query&meta=userinfo&format=json",function(data){ 
 		if (data.query.userinfo.id === 0) {
-			$("#errors").html("You need to be logged in to submit an activity. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
-			$("#form").hide();
+			$("#pesaerrors").html("You need to be logged in to submit an activity. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
+			$("#pesaform").hide();
 		}
 	});
 
-	$("#url").blur( function() {
+	$("#pesaurl").blur( function() {
 		var url=$(this).val();
 		var n = url.indexOf("www");
 		if (n===0 || url.indexOf("http")!==0 )
@@ -27,31 +27,31 @@ $ ( document ).ready ( function() {
 		}
 		var content="<p>Please ensure that the URL contains the blog post specified and not the home page of the blog or the edit page. \
 				<br>Click <a href="+url+" target='_blank'> here </a> to check if you reach the correct post. </p>";
-		$("#urlerror").html(content);
+		$("#pesaurlerror").html(content);
 	});
 
-	$("#sa_submit").click( function() {
+	$("#pesa_submit").click( function() {
 
-		$("#urlerror2").html("");
-		$("#titleerror").html("");
+		$("#pesaurlerror2").html("");
+		$("#pesatitleerror").html("");
 
 		var submitData={};
 
-		var url=$("#url").val();
+		var url=$("#pesaurl").val();
 		if (url === null || url === "") {
-			$("#urlerror2").html("<br><b style='color:red'>URL must be filled out</b><br/>");
+			$("#pesaurlerror2").html("<br><b style='color:red'>URL must be filled out</b><br/>");
 			return false;
 		}
 
-		var title=$("#title").val();
+		var title=$("#pesatitle").val();
 		if (title === null || title === "") {
-			$("#titleerror").html("<b style='color:red' >Title must be filled out</b><br/>");
+			$("#pesatitleerror").html("<b style='color:red' >Title must be filled out</b><br/>");
 			return false;
 		}
-		var comment=$("#comment").val();
-		var activityPage=$("#activityPage").val();
+		var comment=$("#pesacomment").val();
+		var activityPage=$("#pesaactivityPage").val();
 
-		var optin=document.getElementById("optin").checked;
+		var optin=document.getElementById("pesaoptin").checked;
 
 		submitData.action="pesubmit";
 		submitData.peurl=url;
@@ -61,19 +61,19 @@ $ ( document ).ready ( function() {
 		submitData.peactivity=activityPage;
 		submitData.format="json";
 
-		$("#form").html("Processing your submission...");			
+		$("#pesaform").html("Processing your submission...");			
 
 		$.post("/api.php", submitData, function( data ) {
 				if (!data.pesubmit) {
 					if ( data.error.code === "notloggedin") {
-						$("#form").html("Looks like you have logged out from another tab or your session has expired. Please login before you continue.");
+						$("#pesaform").html("Looks like you have logged out from another tab or your session has expired. Please login before you continue.");
 					}
 					else {
-						$("#form").html("Error : "+data.error.code);
+						$("#pesaform").html("Error : "+data.error.code);
 					}
 					return;
 				}
-				$("#form").html(data.pesubmit.success);
+				$("#pesaform").html(data.pesubmit.success);
 			});
 	});
 });

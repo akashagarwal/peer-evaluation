@@ -15,7 +15,7 @@ class TagSubmitActivity {
 
 			$activityPage=$args['activity'];
 
-			$ret.="<span id='errors'></span><div id='t1content'>";
+			$ret.="<span id='pesaerrors'></span><div id='pesat1content'>";
 /*
 			$title = Title::newFromText( ':' . $activityPage );
 			$revision = Revision::newFromTitle ( $title );
@@ -26,19 +26,19 @@ class TagSubmitActivity {
 
 			$ret.=$text;
 */
-			$ret .=' <div id="form">';
+			$ret .=' <div id="pesaform">';
 
 			$ret.='
 </select>
-URL of the blog post : <input type="text" name="URL" id="url"><br/>
-<b id="urlerror" > </b>
-<b id="urlerror2" ></b>
-Title : <input type="text" name="Title" id="title"><br/>
-<b id="titleerror" ></b>
-Comment : <input type="text" name="Comment" id="comment"><br/>
-<input type="checkbox" name="OptedIn" value="true" id="optin"> Opt in for Peer Evaluation<br/>
-<input type="hidden" id="activityPage" name="activityPage" value="'.$activityPage.'">
-<input type="submit" value="Submit" id="sa_submit" >
+<label for="pesaurl">URL of the blog post : </label><input type="text" name="pesaURL" id="pesaurl"><br/>
+<b id="pesaurlerror" > </b>
+<b id="pesaurlerror2" ></b>
+<label for="pesatitle">Title : </label><input type="text" name="pesaTitle" id="pesatitle"><br/>
+<b id="pesatitleerror" ></b>
+<label for="pesacomment">Comment : </label><input type="text" name="pesaComment" id="pesacomment"><br/>
+<input type="checkbox" name="pesaOptedIn" value="true" id="pesaoptin"> <label for="pesaoptin">Opt in for Peer Evaluation</label><br/>
+<input type="hidden" id="pesaactivityPage" name="pesaactivityPage" value="'.$activityPage.'">
+<input type="submit" value="Submit" id="pesa_submit" >
 </div>
 </div>';
 			return $ret;
