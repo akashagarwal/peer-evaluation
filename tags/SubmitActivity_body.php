@@ -30,13 +30,13 @@ class TagSubmitActivity {
 
 			$ret.='
 </select>
-<label for="pesaurl">URL of the blog post : </label><input type="text" name="pesaURL" id="pesaurl"><br/>
+<label for="pesaurl"><b>URL</b> of the submission ( Blog post/Wiki Page ) : </label><input type="text" name="pesaURL" id="pesaurl" size="50"><br/><br/>
 <b id="pesaurlerror" > </b>
 <b id="pesaurlerror2" ></b>
-<label for="pesatitle">Title : </label><input type="text" name="pesaTitle" id="pesatitle"><br/>
+<label for="pesatitle"> <b>Title</b> : </label><input type="text" name="pesaTitle" id="pesatitle" size="50"><br/><br/>
 <b id="pesatitleerror" ></b>
-<label for="pesacomment">Comment : </label><input type="text" name="pesaComment" id="pesacomment"><br/>
-<input type="checkbox" name="pesaOptedIn" value="true" id="pesaoptin"> <label for="pesaoptin">Opt in for Peer Evaluation</label><br/>
+<label for="pesacomment">Comment : </label><textarea name="pesaComment" id="pesacomment"></textarea><br/>
+<input type="checkbox" name="pesaOptedIn" value="true" id="pesaoptin"> <label for="pesaoptin"><b>Opt in</b> for Peer Evaluation</label><br/><br/>
 <input type="hidden" id="pesaactivityPage" name="pesaactivityPage" value="'.$activityPage.'">
 <input type="submit" value="Submit" id="pesa_submit" >
 </div>
