@@ -1,5 +1,12 @@
+/**
+ * This file is part of the PeerEvaluation extension.
+ * For more info see http://wikieducator.org/Extension:PeerEvaluation
+ * @license GNU General Public Licence 2.0 or later
+ */
+
 /*global $:false */
 /*jshint -W043 */
+
 
 $ ( document ).ready ( function() {
 

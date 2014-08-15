@@ -1,4 +1,11 @@
 <?php
+/**
+ * This file is part of the PeerEvaluation extension.
+ * For more info see http://wikieducator.org/Extension:PeerEvaluation
+ * @license GNU General Public Licence 2.0 or later
+ */
+
+
 class Evaluation {
 	static function onParserInit( Parser $parser ) {
 			$parser->setHook( 'evaluation', array( __CLASS__, 'evaluationRender' ) );
@@ -7,9 +14,7 @@ class Evaluation {
 
 	static function evaluationRender( $input, array $args, Parser $parser ) {
 
-		$ret = '<link rel="stylesheet" type="text/css" href="/extensions/PeerEvaluation/resources/evaluations.css">';
-		$ret .= '<script src="/extensions/PeerEvaluation/resources/evaluations.js"></script>';
-
+		$ret = '<script src="/extensions/PeerEvaluation/resources/evaluations.js"></script>';
 
 		$ret .= "<div id='form' style='visibility:hidden' >";
 		$rubric = filter_var( $args[ 'rubric' ], FILTER_SANITIZE_STRING );

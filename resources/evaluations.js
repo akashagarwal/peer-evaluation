@@ -1,3 +1,9 @@
+/**
+ * This file is part of the PeerEvaluation extension.
+ * For more info see http://wikieducator.org/Extension:PeerEvaluation
+ * @license GNU General Public Licence 2.0 or later
+ */
+
 /*global $:false */
 /*jshint -W043 */
 
@@ -144,7 +150,7 @@ $ ( document ).ready ( function() {
 									errorFlag=1;
 								}
 
-								if ( parseInt(ans) < 1 || parseInt(ans) > 5  ) {
+								if ( parseInt(ans,10) < 1 || parseInt(ans,10) > 5  ) {
 									$("#error"+entry.attr("name")).html("<b style='color:red'> Please enter a value between 1 and 5</b></br></br>");
 									errorFlag=1;
 								}

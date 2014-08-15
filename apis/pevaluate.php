@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * This file is part of the PeerEvaluation extension.
+ * For more info see http://wikieducator.org/Extension:PeerEvaluation
+ * @license GNU General Public Licence 2.0 or later
+ */
+
 class pevaluate extends ApiQueryBase {
 	public function __construct( $query, $moduleName ) {
 		parent :: __construct( $query, $moduleName, '' );
@@ -16,7 +22,6 @@ class pevaluate extends ApiQueryBase {
             $this->dieUsage('must be logged in',
                 'notloggedin');
         };
-
 
 		$activityPage = filter_var( $params['peactivity'], FILTER_SANITIZE_STRING );
 		$id = filter_var( $params['peid'], FILTER_SANITIZE_NUMBER_INT );
