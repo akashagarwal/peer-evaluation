@@ -6,6 +6,7 @@
 
 /*global $:false */
 /*jshint -W043 */
+/*global wgScriptPath */
 
 $ ( document ).ready ( function() {
 

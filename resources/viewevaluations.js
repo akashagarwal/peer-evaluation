@@ -6,6 +6,7 @@
 
 /*global $:false */
 /*jshint -W043 */
+/*global wgScriptPath */
 
 
 $ ( document ).ready ( function() {
@@ -40,6 +41,7 @@ $ ( document ).ready ( function() {
 		}
 
 		$("#peVEt1content").html($table);
+
 	});
 
 });
