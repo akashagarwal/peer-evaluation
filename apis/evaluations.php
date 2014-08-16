@@ -168,7 +168,7 @@ class evaluations extends ApiQueryBase {
 	}
 
 	public function getDescription() {
-		return 'API to submit the Activities';
+		return 'API to view activity submissions or evaluations';
 	}
 
 	protected function getExamples() {

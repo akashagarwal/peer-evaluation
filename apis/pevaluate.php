@@ -63,7 +63,7 @@ class pevaluate extends ApiQueryBase {
 	}
 
 	public function getDescription() {
-		return 'API to submit the Activities';
+		return 'API to submit evaluations';
 	}
 
 	protected function getExamples() {

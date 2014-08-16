@@ -97,7 +97,7 @@ class pesubmit extends ApiQueryBase {
 	}
 
 	public function getDescription() {
-		return 'API to submit the Activities';
+		return 'API to submit activities';
 	}
 
 	protected function getExamples() {
