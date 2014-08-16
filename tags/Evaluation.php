@@ -242,6 +242,7 @@ class Evaluation {
 
 		}
 
+		$ret .= '<textarea id="overallComment" placeholder="Enter your comments here"></textarea>';
 		$ret .= '<span id="submitError"></span>';
 		$ret .= '<input type="button" id="submit" value="Submit"></input>';
 		$ret .= '</div>';

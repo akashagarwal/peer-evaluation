@@ -98,6 +98,10 @@ $ ( document ).ready ( function() {
 
 							var submitData={};
 
+							var overallComment = $("#overallComment").val();
+							if ( overallComment )
+								evaluation.comment = overallComment;
+
 							if ( evaluation.related === 0 ) {
 								submitData.peid=data.evaluations[id].id;
 								submitData.peactivity="User:Test/sampleactivity";
@@ -158,6 +162,9 @@ $ ( document ).ready ( function() {
 							}
 							var submitData={};
 
+							var overallComment = $("#overallComment").val();
+							if ( overallComment )
+								evaluation.comment = overallComment;
 							if ( evaluation.related === 0 ) {
 								submitData.peid=data.evaluations[id].id;
 								submitData.peactivity="User:Test/sampleactivity";
@@ -214,6 +221,10 @@ $ ( document ).ready ( function() {
 								return;
 							}
 							var submitData={};
+							
+							var overallComment = $("#overallComment").val();
+							if ( overallComment )
+								evaluation.comment = overallComment;
 
 							if ( evaluation.related === 0 ) {
 								submitData.peid=data.evaluations[id].id;
