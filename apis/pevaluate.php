@@ -7,6 +7,7 @@
  */
 
 class pevaluate extends ApiQueryBase {
+	
 	public function __construct( $query, $moduleName ) {
 		parent :: __construct( $query, $moduleName, '' );
 	}

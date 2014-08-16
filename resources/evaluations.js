@@ -12,7 +12,7 @@ $ ( document ).ready ( function() {
 	$.get("/api.php?action=query&meta=userinfo&format=json",function(data){ 
 		if (data.query.userinfo.id === 0) {
 			$("#peEvalform").hide();
-			$("#peEvaltable").html("You need to be logged in to submit an activity. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
+			$("#peEvaltable").html("You need to be logged in to view submissions available for evaluation. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
 		}
 		else {
 			var activity=$("#peEvaltype").attr("activity");
