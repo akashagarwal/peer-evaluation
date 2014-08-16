@@ -12,7 +12,7 @@ $ ( document ).ready ( function() {
 
 	var activity=$("#peVEactivityPage").attr("activity");
 
-	$.get("/api.php?action=evaluations&evactivities="+activity+"&evprop=evaluations&format=json",function(data) {
+	$.get(wgScriptPath+"/api.php?action=evaluations&evactivities="+activity+"&evprop=evaluations&format=json",function(data) {
 
 		var $table="<h6> Click on a title to get the details </h6>";
 		$table+=" \

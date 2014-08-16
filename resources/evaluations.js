@@ -9,14 +9,14 @@
 
 $ ( document ).ready ( function() {
 
-	$.get("/api.php?action=query&meta=userinfo&format=json",function(data){ 
+	$.get(wgScriptPath+"/api.php?action=query&meta=userinfo&format=json",function(data){ 
 		if (data.query.userinfo.id === 0) {
 			$("#peEvalform").hide();
 			$("#peEvaltable").html("You need to be logged in to view submissions available for evaluation. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
 		}
 		else {
 			var activity=$("#peEvaltype").attr("activity");
-			$.get("/api.php?action=evaluations&evactivities="+activity+"&evprop=submissions&format=json",function(data) {
+			$.get(wgScriptPath+"/api.php?action=evaluations&evactivities="+activity+"&evprop=submissions&format=json",function(data) {
 				$("#peEvalform").hide();
 
 				var table = "<h2>Click on a title to evaluate submission</h2>";
@@ -109,7 +109,7 @@ $ ( document ).ready ( function() {
 								submitData.pevaluation=JSON.stringify(evaluation);
 
 								$("#peEvalform").html("Processing Evaluation");
-								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+								$.post(wgScriptPath+"/api.php?action=pevaluate&format=json",submitData,function(data){
 									$("#peEvalform").html(data.pevaluate.success);
 								});								
 							}
@@ -145,7 +145,7 @@ $ ( document ).ready ( function() {
 								submitData.pevaluation=JSON.stringify(evaluation);
 
 								$("#peEvalform").html("Processing Evaluation");
-								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+								$.post(wgScriptPath+"/api.php?action=pevaluate&format=json",submitData,function(data){
 									$("#peEvalform").html(data.pevaluate.success);
 								});
 							}
@@ -171,7 +171,7 @@ $ ( document ).ready ( function() {
 								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
-								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+								$.post(wgScriptPath+"/api.php?action=pevaluate&format=json",submitData,function(data){
 									$("#peEvalform").html(data.pevaluate.success);
 								});								
 							}
@@ -206,7 +206,7 @@ $ ( document ).ready ( function() {
 								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
-								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+								$.post(wgScriptPath+"/api.php?action=pevaluate&format=json",submitData,function(data){
 									$("#peEvalform").html(data.pevaluate.success);
 								});
 							}
@@ -232,7 +232,7 @@ $ ( document ).ready ( function() {
 								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
-								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+								$.post(wgScriptPath+"/api.php?action=pevaluate&format=json",submitData,function(data){
 									$("#peEvalform").html(data.pevaluate.success);
 								});								
 							}
@@ -271,7 +271,7 @@ $ ( document ).ready ( function() {
 								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
-								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+								$.post(wgScriptPath+"/api.php?action=pevaluate&format=json",submitData,function(data){
 									$("#peEvalform").html(data.pevaluate.success);
 								});
 							}
