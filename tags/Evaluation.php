@@ -1,10 +1,10 @@
 <?php
+
 /**
  * This file is part of the PeerEvaluation extension.
  * For more info see http://wikieducator.org/Extension:PeerEvaluation
  * @license GNU General Public Licence 2.0 or later
  */
-
 
 class Evaluation {
 	static function onParserInit( Parser $parser ) {
@@ -34,6 +34,13 @@ class Evaluation {
 		$text = substr( $text , $pos + 9 );
 
 		$ret .= "<span id='type' value='" . $type . "' activity='" . $activity . "' ></span>";
+
+		$ret .=  '<form>
+			Is the content of the post specified in the above URL related to the desired activity ?
+			<input type="radio" name="Related" value="1" class="Related" id="relatedy"> <label for="relatedy">Yes</label>
+			<input type="radio" name="Related" value="0" class="Related" id="relatedn"> <label for="relatedn">No</label> <br>
+			<span id="relatedError"></span>
+			<br>';
 
 		if ( $type == 1 ) {
 
@@ -75,7 +82,7 @@ class Evaluation {
 				$nestedcheck = $text[1];
 			}
 
-			$ret .= '<form>' ;
+			$ret .= '<div id="formcontent">';
 			foreach ( $arr as $key => $value ) {
 				$ret .= '<span type="q" qid="a' . $key . '" name="a">' . $value . ' </span>  <br>';
 				$ret .= '
@@ -98,6 +105,7 @@ class Evaluation {
 					<span id="errorb' . $key . '"></span>
 				';
 			}
+			$ret .= '</div>';
 		}
 
 		if ( $type == 2 ) {
@@ -160,7 +168,7 @@ class Evaluation {
 					}
 				}
 			}
-
+			$ret .= '<div id="formcontent">';
 			for ( $i = 0;  $i < $nos ;  $i++ ) {
 				$ret .= '<span type="q" qid="b' . $i . '" name="b" q="' . $q[$i] . '"">  <br>';
 				$ret .= 'Question ' . ( $i + 1 ) . ' : <b>' . $q[$i] . '</b><br><br></span>';
@@ -181,7 +189,9 @@ class Evaluation {
 				$ret .= '</table>';
 				$ret .= '<span id="errorb' . $i . '"></span>';
 
-				}
+			}
+			$ret .= '</div>';
+
 		}
 
 		if ( $type == 3 ) {
@@ -216,6 +226,7 @@ class Evaluation {
 				$qdescription[] = $content;
 
 			}
+			$ret .= '<div id="formcontent">';
 
 			for ( $i = 0;  $i < $nos ;  $i++ ) {
 
@@ -225,8 +236,12 @@ class Evaluation {
 					Your Rating (1-5) : <input type="text" q="' . $q[$i] . '" name="rating' . $i . '" id="description' . $i . '"> <br><br>'; 
 				$ret .= '<span id="errorrating' . $i . '"></span>';
 			}
-		}
 
+			$ret .= '</div>';
+
+		}
+		
+		$ret .= '<span id="submitError"></span>';
 		$ret .= '<input type="button" id="submit" value="Submit"></input>';
 		$ret .= '</div>';
 		$ret .= '<div id="table"></div>';

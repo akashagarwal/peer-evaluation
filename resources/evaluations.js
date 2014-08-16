@@ -60,120 +60,201 @@ $ ( document ).ready ( function() {
 					var id=$(this).attr("id");
 					var evaluation={};
 					evaluation.activity={ title: data.evaluations[id].title, userName: data.evaluations[id].userName, url:data.evaluations[id].url , comment:data.evaluations[id].comment , optedIn:data.evaluations[id].optedIn , timeStamp:data.evaluations[id].timeStamp };
+
+					$("#formcontent").hide();
+
+					evaluation.related = -1;
+
+					$(".Related").focus(function(){
+						$("#relatedError").html("");
+
+						if ( $(this).val() === "1" ) {
+							$("#formcontent").show();
+							evaluation.related=1;
+							return;
+						}
+						else if ( $(this).val() === "0" )
+							$("#formcontent").hide();
+							evaluation.related=0;
+					});
+
 					if ( type === "1" ) {
 
 						$("#submit").click ( function () {
-							var errorFlag=0;
-							evaluation.submission={ a:[] , b:[] };
 
-							$("span[type=q]").each( function() {
-								var entry=$(this);
-								var ans=$("input[name="+entry.attr("qid")+"]:checked").val();
-								$("#error"+entry.attr("qid")).html("");
-
-								if (!ans) {
-									$("#error"+entry.attr("qid")).html("<b style='color:red'> Please select an option for this question</b></br>");
-									errorFlag=1;
-								}
-
-								var qa={};
-
-								qa.Question=entry.html();
-								qa.Answer=ans;
-
-								evaluation.submission[entry.attr("name")].push(qa);
-
-							});
-							if ( errorFlag === 1) {
+							$("#submitError").html("");
+							if ( evaluation.related === -1 ) {
+								$("#relatedError").html("<b style='color:red'> Please select Yes or No</b></br>");
 								return;
 							}
-							var submitData={};
-							submitData.peid=data.evaluations[id].id;
-							submitData.peactivity="User:Test/sampleactivity";
-							submitData.pevaluation=JSON.stringify(evaluation);
 
-							$("#form").html("Processing Evaluation");
-							$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
-								$("#form").html(data.pevaluate.success);
-							});
+							var submitData={};
+
+							if ( evaluation.related === 0 ) {
+								submitData.peid=data.evaluations[id].id;
+								submitData.peactivity="User:Test/sampleactivity";
+								submitData.pevaluation=JSON.stringify(evaluation);
+
+								$("#form").html("Processing Evaluation");
+								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+									$("#form").html(data.pevaluate.success);
+								});								
+							}
+
+							else {
+								var errorFlag=0;
+								evaluation.submission={ a:[] , b:[] };
+
+								$("span[type=q]").each( function() {
+									var entry=$(this);
+									var ans=$("input[name="+entry.attr("qid")+"]:checked").val();
+									$("#error"+entry.attr("qid")).html("");
+
+									if (!ans) {
+										$("#error"+entry.attr("qid")).html("<b style='color:red'> Please select an option for this question</b></br>");
+										errorFlag=1;
+									}
+
+									var qa={};
+
+									qa.Question=entry.html();
+									qa.Answer=ans;
+
+									evaluation.submission[entry.attr("name")].push(qa);
+
+								});
+								if ( errorFlag === 1) {
+									$("#submitError").html("Please compelete the form (errors are specifies above in red) <br/>");
+									return;
+								}
+								submitData.peid=data.evaluations[id].id;
+								submitData.peactivity="User:Test/sampleactivity";
+								submitData.pevaluation=JSON.stringify(evaluation);
+
+								$("#form").html("Processing Evaluation");
+								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+									$("#form").html(data.pevaluate.success);
+								});
+							}
 						});
 					}
+
 					if ( type === "2" ) {
 
 						$("#submit").click ( function () {
-							var errorFlag=0;
-							evaluation.submission=[];
 
-							$("span[type=q]").each( function() {
-								var entry=$(this);
-								var ans=$("input[name="+entry.attr("qid")+"]:checked").val();
-								$("#error"+entry.attr("qid")).html("");
-								if (!ans) {
-									$("#error"+entry.attr("qid")).html("<b style='color:red'> Please select an option for this question</b></br>");
-									errorFlag=1;
-								}
-
-								var qa={};
-
-								qa.Question=entry.attr("q");
-								qa.Answer=ans;
-
-								evaluation.submission.push(qa);
-
-							});
-							if ( errorFlag === 1) {
+							$("#submitError").html("");
+							if ( evaluation.related === -1 ) {
+								$("#relatedError").html("<b style='color:red'> Please select Yes or No</b></br>");
 								return;
 							}
-
 							var submitData={};
-							submitData.peid=data.evaluations[id].id;
-							submitData.peactivity="User:Test/sampleactivity";
-							submitData.pevaluation=JSON.stringify(evaluation);
-							$("#form").html("Processing Evaluation");
-							$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
-								$("#form").html(data.pevaluate.success);
-							});
+
+							if ( evaluation.related === 0 ) {
+								submitData.peid=data.evaluations[id].id;
+								submitData.peactivity="User:Test/sampleactivity";
+								submitData.pevaluation=JSON.stringify(evaluation);
+								$("#form").html("Processing Evaluation");
+								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+									$("#form").html(data.pevaluate.success);
+								});								
+							}
+
+							else {
+								var errorFlag=0;
+								evaluation.submission=[];
+
+								$("span[type=q]").each( function() {
+									var entry=$(this);
+									var ans=$("input[name="+entry.attr("qid")+"]:checked").val();
+									$("#error"+entry.attr("qid")).html("");
+									if (!ans) {
+										$("#error"+entry.attr("qid")).html("<b style='color:red'> Please select an option for this question</b></br>");
+										errorFlag=1;
+									}
+
+									var qa={};
+
+									qa.Question=entry.attr("q");
+									qa.Answer=ans;
+
+									evaluation.submission.push(qa);
+
+								});
+								if ( errorFlag === 1) {
+									$("#submitError").html("Please compelete the form (errors are specifies above in red) <br/>");
+									return;
+								}
+
+								submitData.peid=data.evaluations[id].id;
+								submitData.peactivity="User:Test/sampleactivity";
+								submitData.pevaluation=JSON.stringify(evaluation);
+								$("#form").html("Processing Evaluation");
+								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+									$("#form").html(data.pevaluate.success);
+								});
+							}
 						});
 					}       
 					if ( type === "3" ) {
 
 						$("#submit").click ( function () {
-							var errorFlag=0;
-							evaluation.submission=[];
 
-							$("input[type=text]").each( function() {
-								var entry=$(this);
-								var ans=entry.val();
-								$("#error"+entry.attr("name")).html("");
-								if (ans === "" ) {
-									$("#error"+entry.attr("name")).html("<b style='color:red'> Please rate this question</b></br></br>");
-									errorFlag=1;
-								}
-
-								if ( parseInt(ans,10) < 1 || parseInt(ans,10) > 5  ) {
-									$("#error"+entry.attr("name")).html("<b style='color:red'> Please enter a value between 1 and 5</b></br></br>");
-									errorFlag=1;
-								}
-
-								var qa={};
-
-								qa.Question=entry.attr("q");
-								qa.Answer=ans;
-
-								evaluation.submission.push(qa);
-
-							});
-							if ( errorFlag === 1) {
+							$("#submitError").html("");
+							if ( evaluation.related === -1 ) {
+								$("#relatedError").html("<b style='color:red'> Please select Yes or No</b></br>");
 								return;
 							}
 							var submitData={};
-							submitData.peid=data.evaluations[id].id;
-							submitData.peactivity="User:Test/sampleactivity";
-							submitData.pevaluation=JSON.stringify(evaluation);
-							$("#form").html("Processing Evaluation");
-							$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
-								$("#form").html(data.pevaluate.success);
-							});
+
+							if ( evaluation.related === 0 ) {
+								submitData.peid=data.evaluations[id].id;
+								submitData.peactivity="User:Test/sampleactivity";
+								submitData.pevaluation=JSON.stringify(evaluation);
+								$("#form").html("Processing Evaluation");
+								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+									$("#form").html(data.pevaluate.success);
+								});								
+							}
+
+							else {
+								var errorFlag=0;
+								evaluation.submission=[];
+
+								$("input[type=text]").each( function() {
+									var entry=$(this);
+									var ans=entry.val();
+									$("#error"+entry.attr("name")).html("");
+									if (ans === "" ) {
+										$("#error"+entry.attr("name")).html("<b style='color:red'> Please rate this question</b></br></br>");
+										errorFlag=1;
+									}
+
+									if ( parseInt(ans,10) < 1 || parseInt(ans,10) > 5  ) {
+										$("#error"+entry.attr("name")).html("<b style='color:red'> Please enter a value between 1 and 5</b></br></br>");
+										errorFlag=1;
+									}
+
+									var qa={};
+
+									qa.Question=entry.attr("q");
+									qa.Answer=ans;
+
+									evaluation.submission.push(qa);
+
+								});
+								if ( errorFlag === 1) {
+									$("#submitError").html("Please compelete the form (errors are specifies above in red) <br/>");
+									return;
+								}
+								submitData.peid=data.evaluations[id].id;
+								submitData.peactivity="User:Test/sampleactivity";
+								submitData.pevaluation=JSON.stringify(evaluation);
+								$("#form").html("Processing Evaluation");
+								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
+									$("#form").html(data.pevaluate.success);
+								});
+							}
 						});
 					}
 				} );
