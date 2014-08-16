@@ -1,19 +1,19 @@
 -- Table for activity centric Peer Evalaution --
 
-CREATE TABLE IF NOT EXISTS `mw_pe_evaluations` (
+CREATE TABLE IF NOT EXISTS /*_*/pe_evaluations (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Activity` varchar(50) NOT NULL,
   `activityId` int(11) NOT NULL,
   `evaluaterUName` varchar(25) NOT NULL,
   `evaluation` blob NOT NULL,
   PRIMARY KEY (`id`)
-);
+) /*$wgDBTableOptions*/ ; 
 
--- Old Tables --
+-- Old Tables ( Used for OCL4Ed snapshot prototype ) --
 
 -- Meta data for course --
 
-CREATE TABLE IF NOT EXISTS `mw_pe_cd_Activities` (
+CREATE TABLE IF NOT EXISTS /*_*/pe_cd_Activities (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` int(11) NOT NULL,
   `about_url` int(11) NOT NULL,
@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS `mw_pe_cd_Activities` (
   `title` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `title` (`title`)
-);
+)/*$wgDBTableOptions*/;
 
-CREATE TABLE IF NOT EXISTS `mw_pe_questions_10point` (
+CREATE TABLE IF NOT EXISTS /*_*/pe_questions_10point (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `activity_id` int(11) NOT NULL,
   `Question` varchar(1024) NOT NULL,
@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS `mw_pe_questions_10point` (
   `Merit_rubric` varchar(2048) NOT NULL,
   `timestamp` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-);
+)/*$wgDBTableOptions*/;
 
-CREATE TABLE IF NOT EXISTS `mw_pe_questions_mcq` (
+CREATE TABLE IF NOT EXISTS /*_*/pe_questions_mcq (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `activity_id` int(11) NOT NULL,
   `Question` varchar(1024) NOT NULL,
@@ -55,11 +55,11 @@ CREATE TABLE IF NOT EXISTS `mw_pe_questions_mcq` (
   `timestamp` datetime NOT NULL,
   `weightage_question` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-);
+)/*$wgDBTableOptions*/;
 
 -- Activity data : Frequently Updated--
 
-CREATE TABLE IF NOT EXISTS `mw_pe_Activities` (
+CREATE TABLE IF NOT EXISTS /*_*/pe_Activities (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `userId` int(10) NOT NULL,
   `URL` varchar(255) NOT NULL,
@@ -70,9 +70,9 @@ CREATE TABLE IF NOT EXISTS `mw_pe_Activities` (
   `Timestamp` datetime NOT NULL,
   `EvalNum` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ;
+) /*$wgDBTableOptions*/;
 
-CREATE TABLE IF NOT EXISTS `mw_pe_eval_main` (
+CREATE TABLE IF NOT EXISTS /*_*/pe_eval_main (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ActivityId` int(11) NOT NULL,
   `EvaluaterId` int(11) NOT NULL,
@@ -82,15 +82,15 @@ CREATE TABLE IF NOT EXISTS `mw_pe_eval_main` (
   `Other_comments` varchar(512) NOT NULL,
   `Timestamp` datetime NOT NULL,
   PRIMARY KEY (`id`)
-);
+)/*$wgDBTableOptions*/;
 
-ALTER TABLE  `mw_pe_eval_main` ADD  `Score` VARCHAR( 5 ) NOT NULL DEFAULT  'N/A' AFTER  `Other_comments`;
-ALTER TABLE  `mw_pe_eval_main` ADD  `Learners_comment` VARCHAR( 512 ) NOT NULL AFTER  `Other_comments`;
+ALTER TABLE  /*_*/pe_eval_main ADD  `Score` VARCHAR( 5 ) NOT NULL DEFAULT  'N/A' AFTER  `Other_comments`;
+ALTER TABLE  /*_*/pe_eval_main ADD  `Learners_comment` VARCHAR( 512 ) NOT NULL AFTER  `Other_comments`;
 
-ALTER TABLE  `mw_pe_eval_main` CHANGE  `Score`  `Score` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'N/A'
+ALTER TABLE  /*_*/pe_eval_main CHANGE  `Score`  `Score` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  'N/A'
 
 
-CREATE TABLE IF NOT EXISTS `mw_pe_answers` (
+CREATE TABLE IF NOT EXISTS /*_*/pe_answers (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `qid` int(11) NOT NULL,
   `EvalMainId` int(11) NOT NULL,
@@ -98,5 +98,4 @@ CREATE TABLE IF NOT EXISTS `mw_pe_answers` (
   `Comment` varchar(512) NOT NULL,
   `Timestamp` datetime NOT NULL,
   PRIMARY KEY (`id`)
-);
-
+)/*$wgDBTableOptions*/;
