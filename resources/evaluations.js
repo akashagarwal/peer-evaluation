@@ -263,7 +263,7 @@ $ ( document ).ready ( function() {
 
 								});
 								if ( errorFlag === 1) {
-									$("#submitError").html("Please compelete the form (errors are specifies above in red) <br/>");
+									$("#submitError").html("Please compelete the form (errors are specified above in red) <br/>");
 									return;
 								}
 								submitData.peid=data.evaluations[id].id;
