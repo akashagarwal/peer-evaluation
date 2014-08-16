@@ -6,11 +6,12 @@
 
 /*global $:false */
 /*jshint -W043 */
+/*global wgScriptPath */
 
 
 $ ( document ).ready ( function() {
 
-	$.get("/api.php?action=query&meta=userinfo&format=json",function(data){ 
+	$.get(wgScriptPath+"/api.php?action=query&meta=userinfo&format=json",function(data){ 
 		if (data.query.userinfo.id === 0) {
 			$("#pesaerrors").html("You need to be logged in to submit an activity. Click <a href='/?title=Special:UserLogin' target='_blank'>here </a> to login");
 			$("#pesaform").hide();
@@ -63,7 +64,7 @@ $ ( document ).ready ( function() {
 
 		$("#pesaform").html("Processing your submission...");			
 
-		$.post("/api.php", submitData, function( data ) {
+		$.post(wgScriptPath+"/api.php", submitData, function( data ) {
 				if (!data.pesubmit) {
 					if ( data.error.code === "notloggedin") {
 						$("#pesaform").html("Looks like you have logged out from another tab or your session has expired. Please login before you continue.");
