@@ -49,3 +49,5 @@ $wgAPIModules['pevaluate'] = 'pevaluate';
 
 // Enable Foo
 #$wgPeerEvaluationEnableFoo = true;
+
+$wgPeerEvaluationHomedirPath = "/extensions/PeerEvaluation";

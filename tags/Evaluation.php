@@ -14,7 +14,8 @@ class Evaluation {
 
 	static function evaluationRender( $input, array $args, Parser $parser ) {
 
-		$ret = '<script src="/extensions/PeerEvaluation/resources/evaluations.js"></script>';
+		global $wgPeerEvaluationHomedirPath;
+		$ret = '<script src="'.$wgPeerEvaluationHomedirPath.'/resources/evaluations.js"></script>';
 
 		$ret .= "<div id='peEvalform' style='visibility:hidden' >";
 		$ret .= "<span id='peEvalactDetails'></span>";

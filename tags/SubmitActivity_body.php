@@ -11,7 +11,9 @@ class TagSubmitActivity {
 				return true;
 		}
 		static function submitactivityRender( $input, array $args, Parser $parser ) {
-			$ret='<script src="/extensions/PeerEvaluation/resources/submitactivity.js"></script>';
+
+			global $wgPeerEvaluationHomedirPath;
+			$ret='<script src="'.$wgPeerEvaluationHomedirPath.'/resources/submitactivity.js"></script>';
 
 			$activityPage=$args['activity'];
 

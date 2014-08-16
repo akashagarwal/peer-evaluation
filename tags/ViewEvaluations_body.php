@@ -16,7 +16,9 @@ class TagViewEvaluations {
 
 
 	static function viewevaluationsRender( $input, array $args, Parser $parser ) {
-		$ret='<script src="/extensions/PeerEvaluation/resources/viewevaluations.js"></script>';
+
+		global $wgPeerEvaluationHomedirPath;
+		$ret='<script src="'.$wgPeerEvaluationHomedirPath.'/resources/viewevaluations.js"></script>';
 
         $activity=$args['activity'];
 
