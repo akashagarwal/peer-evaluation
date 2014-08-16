@@ -40,6 +40,10 @@ class pesubmit extends ApiQueryBase {
 		}
 
 		$text = $revision->getText( Revision::FOR_PUBLIC );
+		$idPos = strrpos( $text,"id=" );
+		$idEnd = strrpos( $text, "-->");
+
+		$id = substr( $text, $idPos+3, $idEnd-$idPos-3);
 
 		$end = strpos( $text, '|}' );
 
@@ -50,11 +54,12 @@ class pesubmit extends ApiQueryBase {
 		$entry .= "|" . ( filter_var( $params['peoptin'], FILTER_SANITIZE_STRING ) == 'true' ? "Yes" : "No" ) . "\n";
 		$entry .= "|" . date( 'Y-m-d H:i:s' ) . "\n";
 		$entry .= "|0\n";
+		$entry .= "<!--id=" . strval( intval( $id ) + 1 ) . "-->\n\n";
 
 
 		$pre = substr( $text, 0 , $end );
 		$post = substr( $text, $end );
-		$this->editArticle( $pre . $entry . $post, "Test edit of article", $activityPage );
+		$this->editArticle( $pre . $entry . $post, "Addition of a submission through pesubmit API", $activityPage );
 
 
 		$result->addValue( null, $this->getModuleName(), array( 'success' => "

@@ -7,7 +7,7 @@
  */
 
 class pevaluate extends ApiQueryBase {
-	
+
 	public function __construct( $query, $moduleName ) {
 		parent :: __construct( $query, $moduleName, '' );
 	}
@@ -37,6 +37,28 @@ class pevaluate extends ApiQueryBase {
 			$options = array()
 		);
 
+		$title = Title::newFromText( ':' . $activityPage );
+		$revision = Revision::newFromTitle ( $title );
+
+		if ( $revision == null ) {
+			$this->dieUsage( 'pagedoesnotexest' , 'activity page does not exist' );
+		}
+
+		$text = $revision->getText( Revision::FOR_PUBLIC );
+
+		$idPos = strpos( $text, "id=".$id );
+		$idPos -= 15;
+
+		$ntext = substr( $text, $idPos );		
+		$noPosSt = strpos( $ntext, "|" );
+		$ntext = substr( $ntext, $noPosSt + 1 );
+		$noPosEnd = strpos( $ntext, "\n" );
+
+		$numEval = substr( $ntext, 0, $noPosEnd);
+
+		$this->editArticle( substr( $text, 0, $idPos + $noPosSt +1 ) . strval( intval( $numEval ) + 1 ) . substr( $text, $idPos + $noPosSt + 1 +  $noPosEnd ) , "Update of number of evaluation through pevaluate API", $activityPage );
+
+
 		$result->addValue( null, $this->getModuleName(), array( 'success' => "
 			Evaluation successfully processed" ) );
 
@@ -45,6 +67,13 @@ class pevaluate extends ApiQueryBase {
 
 	protected function getDB() {
 		return wfGetDB( DB_MASTER );
+	}
+
+	protected function editArticle ( $text, $summary, $title ) {
+
+		$wgTitle = Title::newFromText( $title );
+		$wgArticle = new Article( $wgTitle );
+		$wgArticle->doEdit( $text, $summary, ( 0 ) | ( 0 ) | ( 0 ) | ( 0 ) );
 	}
 
 	public function getAllowedParams() {

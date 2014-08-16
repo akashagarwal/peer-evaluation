@@ -229,7 +229,7 @@ $ ( document ).ready ( function() {
 
 							if ( evaluation.related === 0 ) {
 								submitData.peid=data.evaluations[id].id;
-								submitData.peactivity=activity
+								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
 								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
