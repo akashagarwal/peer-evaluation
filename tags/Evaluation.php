@@ -17,6 +17,7 @@ class Evaluation {
 		$ret = '<script src="/extensions/PeerEvaluation/resources/evaluations.js"></script>';
 
 		$ret .= "<div id='form' style='visibility:hidden' >";
+		$ret .= "<span id='actDetails'></span>";
 		$rubric = filter_var( $args[ 'rubric' ], FILTER_SANITIZE_STRING );
 		global $wgUser;
 
@@ -240,7 +241,7 @@ class Evaluation {
 			$ret .= '</div>';
 
 		}
-		
+
 		$ret .= '<span id="submitError"></span>';
 		$ret .= '<input type="button" id="submit" value="Submit"></input>';
 		$ret .= '</div>';

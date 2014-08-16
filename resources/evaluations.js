@@ -57,9 +57,17 @@ $ ( document ).ready ( function() {
 					$("#form").show();
 					$("#form").css("visibility","visible");
 
+
 					var id=$(this).attr("id");
 					var evaluation={};
 					evaluation.activity={ title: data.evaluations[id].title, userName: data.evaluations[id].userName, url:data.evaluations[id].url , comment:data.evaluations[id].comment , optedIn:data.evaluations[id].optedIn , timeStamp:data.evaluations[id].timeStamp };
+
+					var $actdata = "<h3> Activity Details </h3>";
+					$actdata += "<b> Title : </b>" + data.evaluations[id].title + "<br>";    
+					$actdata += "<b> Comment : </b>" + data.evaluations[id].comment + "<br>";
+					$actdata += "<b> URL : </b> <a href='" + data.evaluations[id].url +"' target='_blank'>" + data.evaluations[id].url +"</a><br>";
+
+					$("#actDetails").html($actdata);
 
 					$("#formcontent").hide();
 
