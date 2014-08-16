@@ -105,7 +105,7 @@ $ ( document ).ready ( function() {
 
 							if ( evaluation.related === 0 ) {
 								submitData.peid=data.evaluations[id].id;
-								submitData.peactivity="User:Test/sampleactivity";
+								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 
 								$("#peEvalform").html("Processing Evaluation");
@@ -141,7 +141,7 @@ $ ( document ).ready ( function() {
 									return;
 								}
 								submitData.peid=data.evaluations[id].id;
-								submitData.peactivity="User:Test/sampleactivity";
+								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 
 								$("#peEvalform").html("Processing Evaluation");
@@ -168,7 +168,7 @@ $ ( document ).ready ( function() {
 								evaluation.comment = overallComment;
 							if ( evaluation.related === 0 ) {
 								submitData.peid=data.evaluations[id].id;
-								submitData.peactivity="User:Test/sampleactivity";
+								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
 								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
@@ -203,7 +203,7 @@ $ ( document ).ready ( function() {
 								}
 
 								submitData.peid=data.evaluations[id].id;
-								submitData.peactivity="User:Test/sampleactivity";
+								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
 								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
@@ -229,7 +229,7 @@ $ ( document ).ready ( function() {
 
 							if ( evaluation.related === 0 ) {
 								submitData.peid=data.evaluations[id].id;
-								submitData.peactivity="User:Test/sampleactivity";
+								submitData.peactivity=activity
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
 								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
@@ -268,7 +268,7 @@ $ ( document ).ready ( function() {
 									return;
 								}
 								submitData.peid=data.evaluations[id].id;
-								submitData.peactivity="User:Test/sampleactivity";
+								submitData.peactivity=activity;
 								submitData.pevaluation=JSON.stringify(evaluation);
 								$("#peEvalform").html("Processing Evaluation");
 								$.post("/api.php?action=pevaluate&format=json",submitData,function(data){
