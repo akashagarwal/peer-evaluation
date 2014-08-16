@@ -10,7 +10,7 @@
 
 $ ( document ).ready ( function() {
 
-	var activity=$("#activityPage").attr("activity");
+	var activity=$("#peVEactivityPage").attr("activity");
 
 	$.get("/api.php?action=evaluations&evactivities="+activity+"&evprop=evaluations&format=json",function(data) {
 
@@ -39,7 +39,7 @@ $ ( document ).ready ( function() {
 			";
 		}
 
-		$("#t1content").html($table);
+		$("#peVEt1content").html($table);
 	});
 
 });

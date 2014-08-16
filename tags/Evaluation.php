@@ -16,8 +16,8 @@ class Evaluation {
 
 		$ret = '<script src="/extensions/PeerEvaluation/resources/evaluations.js"></script>';
 
-		$ret .= "<div id='form' style='visibility:hidden' >";
-		$ret .= "<span id='actDetails'></span>";
+		$ret .= "<div id='peEvalform' style='visibility:hidden' >";
+		$ret .= "<span id='peEvalactDetails'></span>";
 		$rubric = filter_var( $args[ 'rubric' ], FILTER_SANITIZE_STRING );
 		global $wgUser;
 
@@ -34,13 +34,13 @@ class Evaluation {
 		$type = substr( $text, $pos + 4 , 1 );
 		$text = substr( $text , $pos + 9 );
 
-		$ret .= "<span id='type' value='" . $type . "' activity='" . $activity . "' ></span>";
+		$ret .= "<span id='peEvaltype' value='" . $type . "' activity='" . $activity . "' ></span>";
 
 		$ret .=  '<form>
 			Is the content of the post specified in the above URL related to the desired activity ?
-			<input type="radio" name="Related" value="1" class="Related" id="relatedy"> <label for="relatedy">Yes</label>
-			<input type="radio" name="Related" value="0" class="Related" id="relatedn"> <label for="relatedn">No</label> <br>
-			<span id="relatedError"></span>
+			<input type="radio" name="peEvalRelated" value="1" class="peEvalRelated" id="peEvalrelatedy"> <label for="peEvalrelatedy">Yes</label>
+			<input type="radio" name="peEvalRelated" value="0" class="peEvalRelated" id="peEvalrelatedn"> <label for="peEvalrelatedn">No</label> <br>
+			<span id="peEvalrelatedError"></span>
 			<br>';
 
 		if ( $type == 1 ) {
@@ -83,7 +83,7 @@ class Evaluation {
 				$nestedcheck = $text[1];
 			}
 
-			$ret .= '<div id="formcontent">';
+			$ret .= '<div id="peEvalformcontent">';
 			foreach ( $arr as $key => $value ) {
 				$ret .= '<span type="q" qid="a' . $key . '" name="a">' . $value . ' </span>  <br>';
 				$ret .= '
@@ -91,7 +91,7 @@ class Evaluation {
 					<input type="radio" name="a' . $key . '" id="a' . $key . 'yes" value="1">
 					<label for="a' . $key . 'no">No</label>
 					<input type="radio" name="a' . $key . '" id="a' . $key . 'no" value="0"><br>
-					<span id="errora' . $key . '"></span>
+					<span id="peEvalerrora' . $key . '"></span>
 				';
 			}
 
@@ -102,8 +102,8 @@ class Evaluation {
 					<label for="b' . $key . 'yes">Yes</label>
 					<input type="radio" name="b' . $key . '" id="b' . $key . 'yes" value="1">
 					<label for="b' . $key . 'no">No</label>
-					<input type="radio" name="b' . $key . '" id="b' . $key . 'no" value="0"><br>					<span id="errora' . $key . '"></span>
-					<span id="errorb' . $key . '"></span>
+					<input type="radio" name="b' . $key . '" id="b' . $key . 'no" value="0"><br>
+					<span id="peEvalerrorb' . $key . '"></span>
 				';
 			}
 			$ret .= '</div>';
@@ -169,7 +169,7 @@ class Evaluation {
 					}
 				}
 			}
-			$ret .= '<div id="formcontent">';
+			$ret .= '<div id="peEvalformcontent">';
 			for ( $i = 0;  $i < $nos ;  $i++ ) {
 				$ret .= '<span type="q" qid="b' . $i . '" name="b" q="' . $q[$i] . '"">  <br>';
 				$ret .= 'Question ' . ( $i + 1 ) . ' : <b>' . $q[$i] . '</b><br><br></span>';
@@ -188,7 +188,7 @@ class Evaluation {
 					</td></tr>
 					';
 				$ret .= '</table>';
-				$ret .= '<span id="errorb' . $i . '"></span>';
+				$ret .= '<span id="peEvalerrorb' . $i . '"></span>';
 
 			}
 			$ret .= '</div>';
@@ -227,7 +227,7 @@ class Evaluation {
 				$qdescription[] = $content;
 
 			}
-			$ret .= '<div id="formcontent">';
+			$ret .= '<div id="peEvalformcontent">';
 
 			for ( $i = 0;  $i < $nos ;  $i++ ) {
 
@@ -235,18 +235,18 @@ class Evaluation {
 				$ret .= '
 					<label for="description' . $i . '">' . $qdescription[$i] . '</label>
 					Your Rating (1-5) : <input type="text" q="' . $q[$i] . '" name="rating' . $i . '" id="description' . $i . '"> <br><br>'; 
-				$ret .= '<span id="errorrating' . $i . '"></span>';
+				$ret .= '<span id="peEvalerrorrating' . $i . '"></span>';
 			}
 
 			$ret .= '</div>';
 
 		}
 
-		$ret .= '<textarea id="overallComment" placeholder="Enter your comments here"></textarea>';
-		$ret .= '<span id="submitError"></span>';
-		$ret .= '<input type="button" id="submit" value="Submit"></input>';
+		$ret .= '<textarea id="peEvaloverallComment" placeholder="Enter your comments here"></textarea>';
+		$ret .= '<span id="peEvalsubmitError"></span>';
+		$ret .= '<input type="button" id="peEvalsubmit" value="Submit"></input>';
 		$ret .= '</div>';
-		$ret .= '<div id="table"></div>';
+		$ret .= '<div id="peEvaltable"></div>';
 
 		return $ret;
 	}

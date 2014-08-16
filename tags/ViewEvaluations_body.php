@@ -20,13 +20,13 @@ class TagViewEvaluations {
 
         $activity=$args['activity'];
 
-        $ret.="<span id='activityPage' activity='".$activity."' ></span>";
+        $ret.="<span id='peVEactivityPage' activity='".$activity."' ></span>";
        
-		$ret .='<span id="mcontent">
-			<span id="t1content">
+		$ret .='<span id="peVEmcontent">
+			<span id="peVEt1content">
 			</span>
 			</span>
-			<span id="bcontent"></span>';
+			<span id="peVEbcontent"></span>';
 		return $ret;
 	}
 
