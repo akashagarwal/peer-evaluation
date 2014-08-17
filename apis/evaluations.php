@@ -83,7 +83,7 @@ class evaluations extends ApiQueryBase {
 				$entry['optedIn'] = $optedIn;
 
 				$pos = strpos( $text, "|" );
-				$timeStamp = substr( $text, 0, $pos - 1);
+				$timeStamp = substr( $text, 0, $pos - 1 );
 				$text = substr( $text, $pos + 1 );
 				$entry['timeStamp'] = $timeStamp;
 

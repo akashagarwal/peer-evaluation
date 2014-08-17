@@ -15,39 +15,39 @@ $wgExtensionCredits['other'][] = array(
         'name' => 'PeerEvaluation',
         'author' => array(
                 '[http://wikieducator.org/User:Akash_Agarwal Akash Agarwal]',
-        ),  
-        'version'  => '0.1 Alpha',
+        ),
+        'version'  => '0.2',
         'url' => 'http://wikieducator.org/Extension:PeerEvaluation',
         'description' => 'Prototype extension for PeerEvaluation',
 );
 
-//Tags
+// Tags
 
-$wgAutoloadClasses['TagSubmitActivity'] = dirname(__FILE__). '/tags/SubmitActivity_body.php';
+$wgAutoloadClasses['TagSubmitActivity'] = dirname( __FILE__ ) . '/tags/SubmitActivity_body.php';
 $wgHooks['ParserFirstCallInit'][] = 'TagSubmitActivity::onParserInit';
 
-$wgAutoloadClasses['TagViewEvaluations'] = dirname(__FILE__). '/tags/ViewEvaluations_body.php';
+$wgAutoloadClasses['TagViewEvaluations'] = dirname( __FILE__ ) . '/tags/ViewEvaluations_body.php';
 $wgHooks['ParserFirstCallInit'][] = 'TagViewEvaluations::onParserInit';
 
-$wgAutoloadClasses['Evaluation'] = dirname(__FILE__). '/tags/Evaluation.php';
+$wgAutoloadClasses['Evaluation'] = dirname( __FILE__ ) . '/tags/Evaluation.php';
 $wgHooks['ParserFirstCallInit'][] = 'Evaluation::onParserInit';
 
-//API's 
+// API's
 
 
-$wgAutoloadClasses['pesubmit'] = dirname(__FILE__). '/apis/pesubmit.php';
+$wgAutoloadClasses['pesubmit'] = dirname( __FILE__ ) . '/apis/pesubmit.php';
 $wgAPIModules['pesubmit'] = 'pesubmit';
 
-$wgAutoloadClasses['evaluations'] = dirname(__FILE__). '/apis/evaluations.php';
+$wgAutoloadClasses['evaluations'] = dirname( __FILE__ ) . '/apis/evaluations.php';
 $wgAPIModules['evaluations'] = 'evaluations';
 
-$wgAutoloadClasses['pevaluate'] = dirname(__FILE__). '/apis/pevaluate.php';
+$wgAutoloadClasses['pevaluate'] = dirname( __FILE__ ) . '/apis/pevaluate.php';
 $wgAPIModules['pevaluate'] = 'pevaluate';
 
 
 /* Configuration */
 
 // Enable Foo
-#$wgPeerEvaluationEnableFoo = true;
+# $wgPeerEvaluationEnableFoo = true;
 
 $wgPeerEvaluationHomedirPath = "/extensions/PeerEvaluation";

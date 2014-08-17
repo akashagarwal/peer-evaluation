@@ -40,7 +40,7 @@ $ ( document ).ready ( function() {
 			  </tr> \
 			";
 
-			var j;
+			var j,answers;
 			if ( data.evaluations[i].evaluation.related === 0 ) {
 				evalDetails[i]="The evaluator said that the post is not related.<br>";
 				if (data.evaluations[i].evaluation.comment) {
@@ -75,7 +75,7 @@ $ ( document ).ready ( function() {
 			}
 
 			else if ( data.evaluations[i].evaluation.type === "2" ) {
-				var answers =  data.evaluations[i].evaluation.submission;
+				answers =  data.evaluations[i].evaluation.submission;
 
 				evalDetails[i] = "<b> Details: </b> <br><br>";
 				for (j = 0; j < answers.length ; j++) { 
@@ -91,7 +91,7 @@ $ ( document ).ready ( function() {
 			}
 
 			else if ( data.evaluations[i].evaluation.type === "3" ) {
-				var answers =  data.evaluations[i].evaluation.submission;
+				answers =  data.evaluations[i].evaluation.submission;
 
 				evalDetails[i] = "<b> Details: </b> <br><br>";
 				for (j = 0; j < answers.length ; j++) { 

@@ -15,7 +15,7 @@ class Evaluation {
 	static function evaluationRender( $input, array $args, Parser $parser ) {
 
 		global $wgPeerEvaluationHomedirPath;
-		$ret = '<script src="'.$wgPeerEvaluationHomedirPath.'/resources/evaluations.js"></script>';
+		$ret = '<script src="' . $wgPeerEvaluationHomedirPath . '/resources/evaluations.js"></script>';
 
 		$ret .= "<div id='peEvalform' style='visibility:hidden' >";
 		$ret .= "<span id='peEvalactDetails'></span>";
@@ -235,7 +235,7 @@ class Evaluation {
 				$ret .= 'Question ' . ( $i + 1 ) . ' : <b>' . $q[$i] . '</b><br><br>';
 				$ret .= '
 					<label for="description' . $i . '">' . $qdescription[$i] . '</label>
-					Your Rating (1-5) : <input type="text" q="' . $q[$i] . '" name="rating' . $i . '" id="description' . $i . '"> <br><br>'; 
+					Your Rating (1-5) : <input type="text" q="' . $q[$i] . '" name="rating' . $i . '" id="description' . $i . '"> <br><br>';
 				$ret .= '<span id="peEvalerrorrating' . $i . '"></span>';
 			}
 

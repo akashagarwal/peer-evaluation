@@ -18,14 +18,14 @@ class TagViewEvaluations {
 	static function viewevaluationsRender( $input, array $args, Parser $parser ) {
 
 		global $wgPeerEvaluationHomedirPath;
-		$ret='<script src="'.$wgPeerEvaluationHomedirPath.'/resources/viewevaluations.js"></script>';
+		$ret = '<script src="' . $wgPeerEvaluationHomedirPath . '/resources/viewevaluations.js"></script>';
 		$ret .= '<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>';
 		$ret .= '<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">';
-        $activity=$args['activity'];
+        $activity = $args['activity'];
 
-        $ret.="<span id='peVEactivityPage' activity='".$activity."' ></span>";
-       
-		$ret .='<span id="peVEmcontent">
+        $ret .= "<span id='peVEactivityPage' activity='" . $activity . "' ></span>";
+
+		$ret .= '<span id="peVEmcontent">
 			<span id="peVEt1content">
 			</span>
 			</span>

@@ -13,24 +13,24 @@ class TagSubmitActivity {
 		static function submitactivityRender( $input, array $args, Parser $parser ) {
 
 			global $wgPeerEvaluationHomedirPath;
-			$ret='<script src="'.$wgPeerEvaluationHomedirPath.'/resources/submitactivity.js"></script>';
+			$ret = '<script src="' . $wgPeerEvaluationHomedirPath . '/resources/submitactivity.js"></script>';
 
-			$activityPage=$args['activity'];
+			$activityPage = $args['activity'];
 
-			$ret.="<span id='pesaerrors'></span><div id='pesat1content'>";
+			$ret .= "<span id='pesaerrors'></span><div id='pesat1content'>";
 /*
 			$title = Title::newFromText( ':' . $activityPage );
 			$revision = Revision::newFromTitle ( $title );
 
 			if ( $revision == null )
 			  return "Page does not exist";
-			$text = $revision->getText( Revision::FOR_PUBLIC );            
+			$text = $revision->getText( Revision::FOR_PUBLIC );
 
 			$ret.=$text;
 */
-			$ret .=' <div id="pesaform">';
+			$ret .= ' <div id="pesaform">';
 
-			$ret.='
+			$ret .= '
 </select>
 <label for="pesaurl"><b>URL</b> of the submission ( Blog post/Wiki Page ) : </label><input type="text" name="pesaURL" id="pesaurl" size="50"><br/><br/>
 <b id="pesaurlerror" > </b>
@@ -39,7 +39,7 @@ class TagSubmitActivity {
 <b id="pesatitleerror" ></b>
 <label for="pesacomment">Comment : </label><textarea name="pesaComment" id="pesacomment"></textarea><br/>
 <input type="checkbox" name="pesaOptedIn" value="true" id="pesaoptin"> <label for="pesaoptin"><b>Opt in</b> for Peer Evaluation</label><br/><br/>
-<input type="hidden" id="pesaactivityPage" name="pesaactivityPage" value="'.$activityPage.'">
+<input type="hidden" id="pesaactivityPage" name="pesaactivityPage" value="' . $activityPage . '">
 <input type="submit" value="Submit" id="pesa_submit" >
 </div>
 </div>';

@@ -18,10 +18,10 @@ class pesubmit extends ApiQueryBase {
 		$result = $this->getResult();
 		$params = $this->extractRequestParams();
 
-		if (!$wgUser->isLoggedIn()) {
-            $this->dieUsage('must be logged in',
-                'notloggedin');
-        };
+		if ( !$wgUser->isLoggedIn() ) {
+            $this->dieUsage( 'must be logged in',
+                'notloggedin' );
+        } ;
 
 
 		$data = '';
@@ -40,10 +40,10 @@ class pesubmit extends ApiQueryBase {
 		}
 
 		$text = $revision->getText( Revision::FOR_PUBLIC );
-		$idPos = strrpos( $text,"id=" );
-		$idEnd = strrpos( $text, "-->");
+		$idPos = strrpos( $text, "id=" );
+		$idEnd = strrpos( $text, "-->" );
 
-		$id = substr( $text, $idPos+3, $idEnd-$idPos-3);
+		$id = substr( $text, $idPos + 3, $idEnd -$idPos -3 );
 
 		$end = strpos( $text, '|}' );
 

@@ -18,15 +18,15 @@ class pevaluate extends ApiQueryBase {
 
 		$result = $this->getResult();
 		$params = $this->extractRequestParams();
-		
-        if (!$wgUser->isLoggedIn()) {
-            $this->dieUsage('must be logged in',
-                'notloggedin');
-        };
+
+        if ( !$wgUser->isLoggedIn() ) {
+            $this->dieUsage( 'must be logged in',
+                'notloggedin' );
+        } ;
 
 		$activityPage = filter_var( $params['peactivity'], FILTER_SANITIZE_STRING );
 		$id = filter_var( $params['peid'], FILTER_SANITIZE_NUMBER_INT );
-		$evaluation = filter_var($params['pevaluation'],FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+		$evaluation = filter_var( $params['pevaluation'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES );
 
 		$dbw = $this->getDB();
 
@@ -46,17 +46,17 @@ class pevaluate extends ApiQueryBase {
 
 		$text = $revision->getText( Revision::FOR_PUBLIC );
 
-		$idPos = strpos( $text, "id=".$id );
+		$idPos = strpos( $text, "id=" . $id );
 		$idPos -= 15;
 
-		$ntext = substr( $text, $idPos );		
+		$ntext = substr( $text, $idPos );
 		$noPosSt = strpos( $ntext, "|" );
 		$ntext = substr( $ntext, $noPosSt + 1 );
 		$noPosEnd = strpos( $ntext, "\n" );
 
-		$numEval = substr( $ntext, 0, $noPosEnd);
+		$numEval = substr( $ntext, 0, $noPosEnd );
 
-		$this->editArticle( substr( $text, 0, $idPos + $noPosSt +1 ) . strval( intval( $numEval ) + 1 ) . substr( $text, $idPos + $noPosSt + 1 +  $noPosEnd ) , "Update of number of evaluation through pevaluate API", $activityPage );
+		$this->editArticle( substr( $text, 0, $idPos + $noPosSt + 1 ) . strval( intval( $numEval ) + 1 ) . substr( $text, $idPos + $noPosSt + 1 +  $noPosEnd ) , "Update of number of evaluation through pevaluate API", $activityPage );
 
 
 		$result->addValue( null, $this->getModuleName(), array( 'success' => "
