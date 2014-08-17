@@ -9,7 +9,7 @@ Installation instructions
 ### Download the extension
 
 You may do this by directly cloning this repository using,  <pre> git clone https://gitorious.org/peer-evaluation/peer-evaluation.git </pre> inside the "*$IP/extensions/*" folder. Note: *$IP* stands for the root directory of your MediaWiki installation, the same directory that holds [LocalSettings.php](http://www.mediawiki.org/wiki/Manual:LocalSettings.php).
-or, [download the latest stable version as a tar.gz](https://gitorious.org/peer-evaluation/peer-evaluation/archive/c764422fd5bfbc1b53fb78d7ea31ece2e832ba4c.tar.gz) .
+or, [download the latest stable version as a tar.gz](https://gitorious.org/peer-evaluation/peer-evaluation/archive/0cee2767fd005dbc9de40448a6344d28116412d5.tar.gz) .
 
 In case you have downloaded the archive, create a subdirectory at "*$IP/extensions/*"  named PeerEvaluation and extract the contents in this directory.
 
