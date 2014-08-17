@@ -64,27 +64,25 @@ Create a page somewhere in the wiki, where you would want the submissions to be 
 !No of evaluations
 
 |}
-
 </pre>
-
-Let the URL of the page created with the above content, relative to the home page be urlofActivities. We will require this URL in the later steps to accept submissions and also to view submissions available for evaluation.
+Let the URL of the page created with the above content, relative to the home page be *urlofActivities*. We will require this URL in the later steps to accept submissions and also to view submissions available for evaluation.
 
 #### Creation of a rubric
 
 Now, create a wiki page which contains rubrics on which you would like to Peer Evaluate. 
 [Reference for the Rubric Format](http://wikieducator.org/Extension:PeerEvaluation/RubricFormat)
 
-We assume the URL of this page is urlofRubric just like that of an Activity submissions page.
+We assume the URL of this page is *urlofRubric* just like that of an Activity submissions page.
 
 #### Tag to accept submissions
 
-Place the tag, <pre><submitactivity activity="urlofActivities" /> </pre> anywhere in the wiki where you would like to accept submissions for an activity which is to be Peer evaluated. The submissions need to be a URL to a blog page/wiki page. Please specify this to your learners so that they can put whatever are the deliverables for an activity at a blog post where everyone else can see it and go on to evaluate.
+Place the tag, <pre><code><submitactivity activity="urlofActivities" /> </code></pre> anywhere in the wiki where you would like to accept submissions for an activity which is to be Peer evaluated. The submissions need to be a URL to a blog page/wiki page. Please specify this to your learners so that they can put whatever are the deliverables for an activity at a blog post where everyone else can see it and go on to evaluate.
 This can be a part of some page with some content as well. You will just need to make sure two submitactivity tags are not placed on the same page.
 
 #### Tag for displaying submissions available for evaluation
 
-To accept evaluations on a wiki page, place the following tag on the page where you would want to accept the submissions , <pre> <evaluation rubric="urlofRubric" activity="urlofActivities" /> </pre>
+To accept evaluations on a wiki page, place the following tag on the page where you would want to accept the submissions , <pre><code> <evaluation rubric="urlofRubric" activity="urlofActivities" /> </code></pre>
 
 #### Viewing submitted evaluations
 
-The following tag can be used to view the submitted evaluations. <pre> <viewevaluations activity="urlofActivities" /> </pre>
+The following tag can be used to view the submitted evaluations. <pre><code> <viewevaluations activity="urlofActivities" /> </code></pre>
