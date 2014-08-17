@@ -20,6 +20,7 @@ class TagViewEvaluations {
 		global $wgPeerEvaluationHomedirPath;
 		$ret='<script src="'.$wgPeerEvaluationHomedirPath.'/resources/viewevaluations.js"></script>';
 		$ret .= '<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>';
+		$ret .= '<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">';
         $activity=$args['activity'];
 
         $ret.="<span id='peVEactivityPage' activity='".$activity."' ></span>";
