@@ -76,13 +76,13 @@ We assume the URL of this page is *urlofRubric* just like that of an Activity su
 
 #### Tag to accept submissions
 
-Place the tag, <pre><code><submitactivity activity="urlofActivities" /> </code></pre> anywhere in the wiki where you would like to accept submissions for an activity which is to be Peer evaluated. The submissions need to be a URL to a blog page/wiki page. Please specify this to your learners so that they can put whatever are the deliverables for an activity at a blog post where everyone else can see it and go on to evaluate.
+Place the tag, <pre><code>&lt;submitactivity activity="urlofActivities" /&gt; </code></pre> anywhere in the wiki where you would like to accept submissions for an activity which is to be Peer evaluated. The submissions need to be a URL to a blog page/wiki page. Please specify this to your learners so that they can put whatever are the deliverables for an activity at a blog post where everyone else can see it and go on to evaluate.
 This can be a part of some page with some content as well. You will just need to make sure two submitactivity tags are not placed on the same page.
 
 #### Tag for displaying submissions available for evaluation
 
-To accept evaluations on a wiki page, place the following tag on the page where you would want to accept the submissions , <pre><code> <evaluation rubric="urlofRubric" activity="urlofActivities" /> </code></pre>
+To accept evaluations on a wiki page, place the following tag on the page where you would want to accept the submissions , <pre><code> &lt;evaluation rubric="urlofRubric" activity="urlofActivities" /&gt; </code></pre>
 
 #### Viewing submitted evaluations
 
-The following tag can be used to view the submitted evaluations. <pre><code> <viewevaluations activity="urlofActivities" /> </code></pre>
+The following tag can be used to view the submitted evaluations. <pre><code> &lt;viewevaluations activity="urlofActivities" /&gt; </code></pre>
