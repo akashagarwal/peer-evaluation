@@ -96,8 +96,9 @@ class evaluations extends ApiQueryBase {
 				$id = substr( $text, 6, $pos -6 );
 				$entry['id'] = $id;
 
-				if ( $optedIn == "Yes" )
+				if ( $optedIn == "Yes" ) {
 					$entries['entry' . $num] = $entry;
+				}
 
 				$num++;
 				$startpos = strpos( $text, '|-' );
