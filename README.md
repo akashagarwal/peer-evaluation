@@ -8,7 +8,7 @@ Installation instructions
 
 ### Download the extension
 
-You may do this by directly cloning this repository using,  <pre> git clone https://gitorious.org/peer-evaluation/peer-evaluation.git </pre> inside the "*$IP/extensions/*" folder. Note: *$IP* stands for the root directory of your MediaWiki installation, the same directory that holds [LocalSettings.php](http://www.mediawiki.org/wiki/Manual:LocalSettings.php).
+You may do this by directly cloning this repository using,  <pre> git clone https://gitorious.org/peer-evaluation/peer-evaluation.git PeerEvaluation </pre> inside the "*$IP/extensions/*" folder. Note: *$IP* stands for the root directory of your MediaWiki installation, the same directory that holds [LocalSettings.php](http://www.mediawiki.org/wiki/Manual:LocalSettings.php).
 or, [download the latest stable version as a tar.gz](https://gitorious.org/peer-evaluation/peer-evaluation/archive/0cee2767fd005dbc9de40448a6344d28116412d5.tar.gz) .
 
 In case you have downloaded the archive, create a subdirectory at "*$IP/extensions/*"  named PeerEvaluation and extract the contents in this directory.
@@ -20,7 +20,7 @@ At the end of the [LocalSettings.php](http://www.mediawiki.org/wiki/Manual:Local
 
 <pre>require_once "$IP/extensions/PeerEvaluation/PeerEvaluation.php"; </pre>
 
-If the name of your folder or path where you downloaded the extension if different from above, please change the line accordingly.
+If the name of your folder or path where you downloaded the extension is different from above, please change the line accordingly.
 
 #### Step 2
 
@@ -33,7 +33,7 @@ You may use [the update.php script](http://www.mediawiki.org/wiki/Manual:Update.
 
 Now you are good to go. You may follow the below quick start guide to use peer evaluation now.
 
-Quick Start Quide
+Quick Start Guide
 =================
 
 [This wiki page contains a detailed version of the guide](http://wikieducator.org/Extension:PeerEvaluation/How_to_use_Peer_Evaluation)
